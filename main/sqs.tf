@@ -28,9 +28,11 @@ resource "aws_sqs_queue_policy" "beekeeper" {
             "Statement": [
               {
                 "Effect": "Allow",
-                "Principal": "*",
+                "Principal": {
+                  "AWS": "*"
+                },
                 "Action": "sqs:SendMessage",
-                "Resource": "${aws_sqs_queue.beekeeper-dead-letter.arn}",
+                "Resource": "${aws_sqs_queue.beekeeper.arn}",
                 "Condition": {
                   "ArnEquals": {
                     "aws:SourceArn": "${var.apiary-metastore-listener-arn}"
