@@ -3,7 +3,7 @@ resource "aws_sns_topic" "beekeeper-sqs-dlq" {
   tags = "${var.tags}"
 }
 
-resource "aws_sns_topic_subscription" "beekeeper-sqs-dlq" {
+resource "aws_sns_topic_subscription" "beekeeper-sns-alerts-lambda" {
   topic_arn = "${aws_sns_topic.beekeeper-sqs-dlq.arn}"
   protocol  = "lambda"
   endpoint  = "${aws_lambda_function.beekeeper-slack-notifier.arn}"

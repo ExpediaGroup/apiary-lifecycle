@@ -5,7 +5,7 @@ data "aws_vpc" "vpc" {
   }
 }
 
-data "aws_subnet_ids" "backend_subnets" {
+data "aws_subnet_ids" "subent-ids" {
   filter {
     name   = "tag:Name"
     values = "${var.subnet-names}"
@@ -14,7 +14,7 @@ data "aws_subnet_ids" "backend_subnets" {
   vpc_id = "${data.aws_vpc.vpc.id}"
 }
 
-data "aws_security_group" "sg_expedia" {
+data "aws_security_group" "security-groups" {
   filter {
     name   = "tag:Name"
     values = "${var.security-group-names}"

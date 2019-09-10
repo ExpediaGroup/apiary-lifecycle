@@ -11,8 +11,8 @@ resource "aws_ecs_service" "beekeeper-path-scheduler-apiary" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = ["${data.aws_security_group.sg_expedia.id}"]
-    subnets         = ["${data.aws_subnet_ids.backend_subnets.ids}"]
+    security_groups = ["${data.aws_security_group.security-groups.id}"]
+    subnets         = ["${data.aws_subnet_ids.subent-ids.ids}"]
   }
 }
 
@@ -24,8 +24,8 @@ resource "aws_ecs_service" "beekeeper-cleanup" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = ["${data.aws_security_group.sg_expedia.id}"]
-    subnets         = ["${data.aws_subnet_ids.backend_subnets.ids}"]
+    security_groups = ["${data.aws_security_group.security-groups.id}"]
+    subnets         = ["${data.aws_subnet_ids.subent-ids.ids}"]
   }
 }
 
