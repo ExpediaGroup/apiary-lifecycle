@@ -86,7 +86,7 @@ variable "password" {
 
 variable "queue-name" {
   description = "Queue name."
-  default     = "beekeeper-apiary-listener"
+  default     = "apiary-beekeeper"
   type        = "string"
 }
 
