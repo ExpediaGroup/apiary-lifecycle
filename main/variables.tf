@@ -79,7 +79,6 @@ variable "username" {
 
 variable "password" {
   description = "RDS password."
-  default     = "Ch4ll3ng3"
   type        = "string"
 }
 
