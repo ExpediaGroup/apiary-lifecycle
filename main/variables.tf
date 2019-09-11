@@ -35,9 +35,9 @@ variable "security-group-names" {
 
 # RDS specific
 
-variable "subnet-group-name" {
+variable "rds-subnet-group-name" {
   description = "RDS subnet group name."
-  default     = "bdp-db-subnet-group"
+  default     = "beekeeper-subnet-group"
   type        = "string"
 }
 
@@ -73,7 +73,7 @@ variable "parameter-group-name" {
 
 variable "username" {
   description = "RDS username."
-  default     = "bdp"
+  default     = "user"
   type        = "string"
 }
 

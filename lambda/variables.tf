@@ -30,6 +30,6 @@ variable "slack-webhook-url" {
 
 variable "queue-name" {
   description = "Name of the Beekeeper Apiary listener queue."
-  default     = "beekeeper-apiary-listener"
+  default     = "apiary-beekeeper"
   type        = "string"
 }
