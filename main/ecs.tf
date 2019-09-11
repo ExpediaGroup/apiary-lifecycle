@@ -12,7 +12,7 @@ resource "aws_ecs_service" "beekeeper-path-scheduler-apiary" {
 
   network_configuration {
     security_groups = ["${data.aws_security_group.security-groups.id}"]
-    subnets         = ["${data.aws_subnet_ids.subent-ids.ids}"]
+    subnets         = ["${data.aws_subnet_ids.subnet-ids.ids}"]
   }
 }
 
@@ -25,7 +25,7 @@ resource "aws_ecs_service" "beekeeper-cleanup" {
 
   network_configuration {
     security_groups = ["${data.aws_security_group.security-groups.id}"]
-    subnets         = ["${data.aws_subnet_ids.subent-ids.ids}"]
+    subnets         = ["${data.aws_subnet_ids.subnet-ids.ids}"]
   }
 }
 
