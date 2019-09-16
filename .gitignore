@@ -1,3 +1,6 @@
+# AWS credentials
+*.pem
+
 # Eclipse files
 .classpath
 .settings
@@ -16,11 +19,11 @@
 # Netbeans files
 nbactions.xml
 
+# MAC stuff
+.DS_Store
+
 # Maven target folder
 target/
-
-# MAC stuff
-.DS_Stor
 
 # Terraform
 **/creds
