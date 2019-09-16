@@ -1,0 +1,35 @@
+# AWS credentials
+*.pem
+
+# Eclipse files
+.classpath
+.settings
+.project
+.springBeans
+
+# Checkstyle and findbugs eclipse plugins
+*/.checkstyle
+*/.fbExcludeFilterFile
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Netbeans files
+nbactions.xml
+
+# MAC stuff
+.DS_Store
+
+# Maven target folder
+target/
+
+# Terraform
+**/creds
+**/.terraform
+**/errored.tfstate
+# .tfstate files
+*.tfstate
+*.tfstate.*
+**.zip
