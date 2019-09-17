@@ -203,3 +203,8 @@ variable "db-password-key" {
   description = "Key to acquire the database password for the strategy specified."
   type        = "string"
 }
+
+variable "cleanup-buckets" {
+  description = "Buckets which Beekeeper is allowed to do work in."
+  type        = "string"
+}

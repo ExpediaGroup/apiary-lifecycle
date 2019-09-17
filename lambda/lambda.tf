@@ -30,7 +30,3 @@ data "archive_file" "lambda" {
   source_file = "${path.module}/slack-notifier.py"
   output_path = "${path.cwd}/slack-notifier.zip"
 }
-
-data "aws_iam_role" "beekeeper-slack-notifier-lambda" {
-  name = "beekeeper-slack-notifier-lambda-${var.region}"
-}
