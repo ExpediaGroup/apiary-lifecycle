@@ -1,6 +1,4 @@
-####################################################
-# Beekeeper ECS execution role
-####################################################
+# ECS execution role
 
 resource "aws_iam_role" "beekeeper-ecs-task-exec" {
   name = "beekeeper-ecs-task-exec-${var.region}"
@@ -45,13 +43,7 @@ resource "aws_iam_role_policy_attachment" "beekeeper-ecs-task-exec" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-####################################################
-# End of Beekeeper ECS execution role
-####################################################
-
-###############################################################
-# Beekeeper Path Scheduler ECS task role
-###############################################################
+# Path Scheduler ECS task role
 
 resource "aws_iam_role" "beekeeper-path-scheduler-ecs-task" {
   name = "beekeeper-path-scheduler-ecs-task-${var.region}"
@@ -100,13 +92,7 @@ resource "aws_iam_role_policy" "beekeeper-path-scheduler-ecs-sqs" {
 EOF
 }
 
-###############################################################
-# End of Beekeeper Path Scheduler Apiary ECS task role
-###############################################################
-
-####################################################
-# Beekeeper Cleanup ECS roles
-####################################################
+# Cleanup ECS task role
 
 resource "aws_iam_role" "beekeeper-cleanup-ecs-task" {
   name = "beekeeper-cleanup-ecs-task-${var.region}"
@@ -154,7 +140,3 @@ resource "aws_iam_role_policy" "beekeeper-cleanup-ecs-s3" {
 }
 EOF
 }
-
-####################################################
-# End of Beekeeper Cleanup ECS roles
-####################################################
