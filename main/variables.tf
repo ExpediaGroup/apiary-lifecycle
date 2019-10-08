@@ -11,6 +11,11 @@ variable "region" {
   type        = "string"
 }
 
+variable "account_id" {
+  description = "AWS account id"
+  type        = "string"
+}
+
 variable "tags" {
   description = "A map of tags to apply to resources."
   type        = "map"

@@ -31,8 +31,8 @@ resource "aws_ecs_service" "beekeeper-cleanup" {
 
 resource "aws_ecs_task_definition" "beekeeper-path-scheduler-apiary" {
   family                   = "beekeeper"
-  execution_role_arn       = "${data.aws_iam_role.beekeeper-ecs-task-exec.arn}"
-  task_role_arn            = "${data.aws_iam_role.beekeeper-path-scheduler-apiary-ecs-task.arn}"
+  execution_role_arn       = "${aws_iam_role.beekeeper-ecs-task-exec.arn}"
+  task_role_arn            = "${aws_iam_role.beekeeper-path-scheduler-apiary-ecs-task.arn}"
   container_definitions    = "${data.template_file.beekeeper-path-scheduler-apiary-container-definition.rendered}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["EC2", "FARGATE"]
@@ -43,8 +43,8 @@ resource "aws_ecs_task_definition" "beekeeper-path-scheduler-apiary" {
 
 resource "aws_ecs_task_definition" "beekeeper-cleanup" {
   family                   = "beekeeper"
-  execution_role_arn       = "${data.aws_iam_role.beekeeper-ecs-task-exec.arn}"
-  task_role_arn            = "${data.aws_iam_role.beekeeper-cleanup-ecs-task.arn}"
+  execution_role_arn       = "${aws_iam_role.beekeeper-ecs-task-exec.arn}"
+  task_role_arn            = "${aws_iam_role.beekeeper-cleanup-ecs-task.arn}"
   container_definitions    = "${data.template_file.beekeeper-cleanup-container-definition.rendered}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["EC2", "FARGATE"]
