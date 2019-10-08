@@ -65,8 +65,8 @@ resource "aws_iam_role" "beekeeper-path-scheduler-ecs-task" {
 EOF
 }
 
-resource "aws_iam_role_policy" "beekeeper-path-scheduler-ecs-sqs" {
-  name = "beekeeper-path-scheduler-ecs-sqs"
+resource "aws_iam_role_policy" "beekeeper-path-scheduler-ecs-task" {
+  name = "beekeeper-path-scheduler-ecs-task-${var.region}"
   role = "${aws_iam_role.beekeeper-path-scheduler-ecs-task.id}"
 
   policy = <<EOF
@@ -114,8 +114,8 @@ resource "aws_iam_role" "beekeeper-cleanup-ecs-task" {
 EOF
 }
 
-resource "aws_iam_role_policy" "beekeeper-cleanup-ecs-s3" {
-  name = "beekeeper-cleanup-ecs-s3"
+resource "aws_iam_role_policy" "beekeeper-cleanup-ecs-task" {
+  name = "beekeeper-cleanup-ecs-task-${var.region}"
   role = "${aws_iam_role.beekeeper-cleanup-ecs-task.id}"
 
   policy = <<EOF
