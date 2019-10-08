@@ -210,6 +210,6 @@ variable "db-password-key" {
 }
 
 variable "cleanup-buckets" {
-  description = "Buckets which Beekeeper is allowed to do work in."
+  description = "Comma separated list of bucket ARNs which Beekeeper is allowed to do work in."
   type        = "string"
 }
