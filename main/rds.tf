@@ -7,7 +7,7 @@ resource "aws_db_instance" "beekeeper-mysql" {
   identifier                = "${var.tags["Name"]}"
   name                      = "beekeeper"
   username                  = "${var.username}"
-  password                  = "${var.password}"
+  password                  = "${data.aws_secretsmanager_secret.beekeeper-db}"
   parameter_group_name      = "${var.parameter-group-name}"
   db_subnet_group_name      = "${var.rds-subnet-group-name}"
   vpc_security_group_ids    = ["${data.aws_security_group.security-groups.id}"]

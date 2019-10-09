@@ -20,3 +20,7 @@ data "aws_security_group" "security-groups" {
     values = "${var.security-group-names}"
   }
 }
+
+data "aws_secretsmanager_secret" "beekeeper-db" {
+  name        = "${var.db-password-key}"	
+}

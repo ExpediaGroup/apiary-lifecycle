@@ -82,11 +82,6 @@ variable "username" {
   type        = "string"
 }
 
-variable "password" {
-  description = "RDS password."
-  type        = "string"
-}
-
 # SQS specific
 
 variable "queue-name" {

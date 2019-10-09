@@ -1,6 +1,9 @@
 # Overview
 Terraform deployment scripts for [Beekeeper](https://github.com/ExpediaGroup/beekeeper).
 
+## Dependencies
+If the chosen `db-password-strategy` is `aws-secrets-manager`, this terraform module will not create the database password automatically. The secret will need to be created in Secrets Manager separately with the specified `db-password-key`.
+
 ## Variables
 
 | Name | Description | Type | Default | Required |
@@ -21,7 +24,6 @@ Terraform deployment scripts for [Beekeeper](https://github.com/ExpediaGroup/bee
 | instance-class | RDS instance class. | string | `"db.t2.micro"` | no |
 | message-retention-seconds | SQS message retention (s). | string | `"604800"` | no |
 | parameter-group-name | RDS parameter group name. | string | `"default.mysql8.0"` | no |
-| password | RDS password. | string | n/a | yes |
 | path-scheduler-apiary-cpu | The amount of CPU used to allocate for the Beekeeper Path Scheduler Apiary ECS task. See [docs](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html) for valid values. | string | `"2048"` | no |
 | path-scheduler-apiary-docker-image-url | URL to the Beekeeper path-scheduler image. | string | n/a | yes |
 | path-scheduler-apiary-memory | The amount of memory (in MiB) used to allocate for the Beekeeper Path Scheduler Apiary container. See [docs](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html) for valid values. | string | `"4096"` | no |
