@@ -22,5 +22,11 @@ data "aws_security_group" "security-groups" {
 }
 
 data "aws_secretsmanager_secret" "beekeeper-db" {
+  count = "${var.db-password-strategy == "aws-secrets-manager" ? 1 : 0 }"
   name = "${var.db-password-key}"	
+}
+
+data "aws_secretsmanager_secret_version" "beekeeper-db" {
+  count = "${var.db-password-strategy == "aws-secrets-manager" ? 1 : 0 }"
+  secret_id = "${data.aws_secretsmanager_secret.beekeeper-db.id}"
 }
