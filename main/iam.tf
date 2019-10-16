@@ -20,24 +20,6 @@ resource "aws_iam_role" "beekeeper-ecs-task-exec" {
 EOF
 }
 
-resource "aws_iam_role_policy" "beekeeper-ecs-task-exec-secrets" {
-  name = "beekeeper-ecs-task-exec-secrets"
-  role = "${aws_iam_role.beekeeper-ecs-task-exec.id}"
-
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [ 
-      {
-        "Effect": "Allow",
-        "Action": "secretsmanager:GetSecretValue",
-        "Resource": "arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:bdp-beekeeper-*"
-      }
-    ]
-}
-EOF
-}
-
 resource "aws_iam_role_policy_attachment" "beekeeper-ecs-task-exec" {
   role       = "${aws_iam_role.beekeeper-ecs-task-exec.id}"
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
@@ -65,9 +47,8 @@ resource "aws_iam_role" "beekeeper-path-scheduler-ecs-task" {
 EOF
 }
 
-resource "aws_iam_role_policy" "beekeeper-path-scheduler-ecs-task" {
-  name = "beekeeper-path-scheduler-ecs-task-${var.region}"
-  role = "${aws_iam_role.beekeeper-path-scheduler-ecs-task.id}"
+resource "aws_iam_policy" "beekeeper-path-scheduler" {
+  name = "beekeeper-path-scheduler-${var.region}"
 
   policy = <<EOF
 {
@@ -92,6 +73,11 @@ resource "aws_iam_role_policy" "beekeeper-path-scheduler-ecs-task" {
 EOF
 }
 
+resource "aws_iam_role_policy_attachment" "beekeeper-path-scheduler" {
+  role       = "${aws_iam_role.beekeeper-path-scheduler-ecs-task.id}"
+  policy_arn = "${aws_iam_policy.beekeeper-path-scheduler.arn}"
+}
+
 # Cleanup ECS task role
 
 resource "aws_iam_role" "beekeeper-cleanup-ecs-task" {
@@ -114,9 +100,8 @@ resource "aws_iam_role" "beekeeper-cleanup-ecs-task" {
 EOF
 }
 
-resource "aws_iam_role_policy" "beekeeper-cleanup-ecs-task" {
-  name = "beekeeper-cleanup-ecs-task-${var.region}"
-  role = "${aws_iam_role.beekeeper-cleanup-ecs-task.id}"
+resource "aws_iam_policy" "beekeeper-cleanup" {
+  name = "beekeeper-cleanup-${var.region}"
 
   policy = <<EOF
 {
@@ -139,4 +124,9 @@ resource "aws_iam_role_policy" "beekeeper-cleanup-ecs-task" {
     ]
 }
 EOF
+}
+
+resource "aws_iam_role_policy_attachment" "beekeeper-cleanup" {
+  role       = "${aws_iam_role.beekeeper-cleanup-ecs-task.id}"
+  policy_arn = "${aws_iam_policy.beekeeper-cleanup.arn}"
 }
