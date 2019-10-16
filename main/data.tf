@@ -22,5 +22,5 @@ data "aws_security_group" "security-groups" {
 }
 
 data "aws_secretsmanager_secret" "beekeeper-db" {
-  name        = "${var.db-password-key}"	
+  name = "${var.db-password-key}"	
 }
