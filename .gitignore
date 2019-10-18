@@ -32,4 +32,4 @@ target/
 # .tfstate files
 *.tfstate
 *.tfstate.*
-**.zip
+*.zip

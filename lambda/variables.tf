@@ -1,35 +1,42 @@
-# Global
+/**
+ * Copyright (C) 2018-2019 Expedia Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 
-variable "profile" {
-  description = "AWS Profile to use."
+variable "instance_name" {
+  description = "Beekeeper instance name to identify resources in multi-instance deployments."
   type        = "string"
+  default     = ""
 }
 
-variable "region" {
-  description = "AWS Region name"
-  default     = "us-west-2"
-  type        = "string"
+variable "subnets" {
+  description = "Subnets in which Lambda will have access to."
+  type        = "list"
 }
 
-variable "tags" {
-  description = "A map of tags to apply to resources."
-  type        = "map"
+variable "security_groups" {
+  description = "Security groups in which Lambda will have access to."
+  type        = "list"
 }
 
-# Lambda
-
-variable "slack-channel" {
+variable "slack_channel" {
   description = "Slack channel to which alerts about messages landing on the dead letter queue should be sent."
   type        = "string"
 }
 
-variable "slack-webhook-url" {
+variable "slack_webhook_url" {
   description = "Slack URL to which alerts about messages landing on the dead letter queue should be sent."
   type        = "string"
 }
 
-variable "queue-name" {
+variable "queue_name" {
   description = "Name of the Beekeeper Apiary listener queue."
   default     = "apiary-beekeeper"
   type        = "string"
+}
+
+variable "beekeeper_tags" {
+  description = "A map of tags to apply to resources."
+  type        = "map"
 }

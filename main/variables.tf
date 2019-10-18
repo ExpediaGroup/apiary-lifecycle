@@ -1,135 +1,159 @@
+/**
+ * Copyright (C) 2018-2019 Expedia Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
+
 # Global
 
-variable "profile" {
-  description = "AWS Profile to use."
+variable "instance_name" {
+  description = "Beekeeper instance name to identify resources in multi-instance deployments."
+  type        = "string"
+  default     = ""
+}
+
+variable "aws_region" {
+  description = "AWS region to use for resources."
   type        = "string"
 }
 
-variable "region" {
-  description = "AWS Region name"
-  default     = "us-west-2"
+variable "vpc_id" {
+  description = "VPC in which to install Beekeeper."
   type        = "string"
 }
 
-variable "account_id" {
-  description = "AWS account id"
-  type        = "string"
+variable "subnets" {
+  description = "Subnets in which to install Beekeeper."
+  type        = "list"
 }
 
-variable "tags" {
+variable "beekeeper_tags" {
   description = "A map of tags to apply to resources."
   type        = "map"
 }
 
-# Networking
-
-variable "vpc-name" {
-  description = "Name of the VPC in which to install Beekeeper."
-  type        = "string"
-}
-
-variable "subnet-names" {
-  description = "Names of the subnets in which to install Beekeeper."
-  type        = "list"
-}
-
-variable "security-group-names" {
-  description = "Names of the security groups in which to install Beekeeper ECS."
-  type        = "list"
-}
-
 # RDS specific
 
-variable "rds-subnet-group-name" {
-  description = "RDS subnet group name."
-  default     = "beekeeper-subnet-group"
-  type        = "string"
+variable "rds_subnets" {
+  description = "Subnets in which to provision Beekeeper RDS DB."
+  type        = "list"
 }
 
-variable "allocated-storage" {
-  description = "RDS allocated storage."
+variable "rds_allocated_storage" {
+  description = "RDS allocated storage in GBs."
   default     = 10
   type        = "string"
 }
 
-variable "storage-type" {
+variable "rds_max_allocated_storage" {
+  description = "RDS max allocated storage (autoscaling) in GBs."
+  default     = 100
+  type        = "string"
+}
+
+variable "rds_storage_type" {
   description = "RDS storage type."
   default     = "gp2"
   type        = "string"
 }
 
-variable "instance-class" {
+variable "rds_instance_class" {
   description = "RDS instance class."
   default     = "db.t2.micro"
   type        = "string"
 }
 
-variable "engine-version" {
+variable "rds_engine_version" {
   description = "RDS engine version."
   default     = "8.0"
   type        = "string"
 }
 
-variable "parameter-group-name" {
-  description = "RDS parameter group name."
+variable "rds_parameter_group_name" {
+  description = "RDS parameter group."
   default     = "default.mysql8.0"
   type        = "string"
 }
 
-variable "username" {
-  description = "RDS username."
-  default     = "user"
+variable "db_username" {
+  description = "Username for the master DB user."
+  default     = "beekeeper"
   type        = "string"
+}
+
+variable "db_password_strategy" {
+  description = "Strategy to acquire the password for the RDS instance. Supported strategies: aws-secrets-manager."
+  default     = "aws-secrets-manager"
+  type        = "string"
+}
+
+variable "db_password_key" {
+  description = "Key to acquire the database password for the strategy specified."
+  type        = "string"
+}
+
+variable "db_backup_retention" {
+  description = "The number of days to retain backups for the RDS Beekeeper DB."
+  type        = "string"
+  default     = 10
+}
+
+variable "db_backup_window" {
+  description = "Preferred backup window for the RDS Beekeeper DB in UTC."
+  type        = "string"
+  default     = "02:00-03:00"
+}
+
+variable "db_maintenance_window" {
+  description = "Preferred maintenance window for the RDS Beekeeper DB in UTC."
+  type        = "string"
+  default     = "wed:03:00-wed:04:00"
 }
 
 # SQS specific
 
-variable "queue-name" {
-  description = "Queue name."
+variable "queue_name" {
+  description = "Beekeeper SQS Queue name."
+  type        = "string"
   default     = "apiary-beekeeper"
-  type        = "string"
 }
 
-variable "message-retention-seconds" {
+variable "message_retention_seconds" {
   description = "SQS message retention (s)."
+  type        = "string"
   default     = "604800"
-  type        = "string"
 }
 
-variable "receive-wait-time-seconds" {
+variable "receive_wait_time_seconds" {
   description = "SQS receive wait time (s)."
-  default     = "20"
   type        = "string"
+  default     = "20"
 }
 
-variable "apiary-metastore-listener-arn" {
+variable "apiary_metastore_listener_arn" {
   description = "ARN of the Apiary Metastore Listener."
   type        = "string"
 }
 
+variable "queue_stale_messages_timeout" {
+  description = "Beekeeper SQS Queue Cloudwatch Alert timeout for messages older than this number of seconds."
+  type        = "string"
+  default     = "1209600"
+}
+
 # ECS specific
 
-variable "path-scheduler-apiary-docker-image-url" {
-  description = "URL to the Beekeeper path-scheduler image."
+variable "path_scheduler_docker_image" {
+  description = "Beekeeper path-scheduler image."
   type        = "string"
 }
 
-variable "cleanup-docker-image-url" {
-  description = "URL to the Beekeeper cleanup image."
+variable "path_scheduler_docker_image_version" {
+  description = "Beekeeper path-scheduler image version."
   type        = "string"
 }
 
-variable "path-scheduler-apiary-memory" {
-  description = <<EOF
-The amount of memory (in MiB) used to allocate for the Beekeeper Path Scheduler Apiary container.
-Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
-EOF
-
-  default = "4096"
-  type    = "string"
-}
-
-variable "path-scheduler-apiary-cpu" {
+variable "path_scheduler_ecs_cpu" {
   description = <<EOF
 The amount of CPU used to allocate for the Beekeeper Path Scheduler Apiary ECS task.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
@@ -139,9 +163,9 @@ EOF
   type    = "string"
 }
 
-variable "cleanup-memory" {
+variable "path_scheduler_ecs_memory" {
   description = <<EOF
-The amount of memory (in MiB) used to allocate for the Beekeeper Cleanup container.
+The amount of memory (in MiB) used to allocate for the Beekeeper Path Scheduler Apiary container.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
@@ -149,7 +173,17 @@ EOF
   type    = "string"
 }
 
-variable "cleanup-cpu" {
+variable "cleanup_docker_image" {
+  description = "Beekeeper cleanup docker image."
+  type        = "string"
+}
+
+variable "cleanup_docker_image_version" {
+  description = "Beekeeper cleanup docker image version."
+  type        = "string"
+}
+
+variable "cleanup_ecs_cpu" {
   description = <<EOF
 The amount of CPU used to allocate for the Beekeeper Cleanup ECS task.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
@@ -159,52 +193,65 @@ EOF
   type    = "string"
 }
 
-variable "graphite-enabled" {
-  description = "Enable to produce Graphite metrics - true or false."
-  default     = "false"
-  type        = "string"
+variable "cleanup_ecs_memory" {
+  description = <<EOF
+The amount of memory (in MiB) used to allocate for the Beekeeper Cleanup container.
+Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
+EOF
+
+  default = "4096"
+  type    = "string"
 }
 
-variable "graphite-host" {
-  description = "Graphite metrics host."
+variable "docker_registry_auth_secret_name" {
+  description = "Docker Registry authentication SecretManager secret name."
   type        = "string"
+  default     = ""
 }
 
-variable "graphite-prefix" {
-  description = "Prefix for Graphite metrics."
-  type        = "string"
+# Application specific
+
+variable "allowed_s3_buckets" {
+  description = "List of S3 Buckets to which Beekeeper will have read-write access."
+  type        = "list"
+  default     = ["*"]
 }
 
-variable "graphite-port" {
-  description = "Graphite port."
-  default     = "2003"
-  type        = "string"
-}
-
-variable "scheduler-delay-ms" {
+variable "scheduler_delay_ms" {
   description = "Delay between each cleanup job that is scheduled in milliseconds."
-  default     = "300000"
   type        = "string"
+  default     = "300000"
 }
 
-variable "dry-run-enabled" {
+variable "dry_run_enabled" {
   description = "Enable to perform dry runs of deletions only."
   default     = "false"
   type        = "string"
 }
 
-variable "db-password-strategy" {
-  description = "Strategy to acquire the password for the RDS instance. Supported strategies: aws-secrets-manager."
-  default     = "aws-secrets-manager"
+
+# Monitoring
+
+variable "graphite_enabled" {
+  description = "Enable to produce Graphite metrics - true or false."
+  default     = "false"
   type        = "string"
 }
 
-variable "db-password-key" {
-  description = "Key to acquire the database password for the strategy specified."
+variable "graphite_host" {
+  description = "Graphite metrics host."
   type        = "string"
 }
 
-variable "cleanup-buckets" {
-  description = "Comma separated list of bucket ARNs which Beekeeper is allowed to do work in."
+variable "graphite_prefix" {
+  description = "Prefix for Graphite metrics."
   type        = "string"
 }
+
+variable "graphite_port" {
+  description = "Graphite port."
+  default     = "2003"
+  type        = "string"
+}
+
+

@@ -1,60 +1,75 @@
-data "template_file" "beekeeper-path-scheduler-apiary-container-definition" {
+/**
+ * Copyright (C) 2018-2019 Expedia Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
+
+data "template_file" "beekeeper_path_scheduler_container_definition" {
   template = "${file("${path.module}/ecs-config/container-definition.json")}"
 
   vars {
-    db-password-strategy  = "${var.db-password-strategy}"
-    db-password-key       = "${var.db-password-key}"
-    docker-image-url      = "${var.path-scheduler-apiary-docker-image-url}"
-    beekeeper-config-yaml = "${base64encode(data.template_file.beekeeper-path-scheduler-apiary-config.rendered)}"
-    log-group             = "${aws_cloudwatch_log_group.beekeeper-path-scheduler-apiary.name}"
-    memory                = "${var.path-scheduler-apiary-memory}"
-    name                  = "beekeeper-path-scheduler-apiary"
+    db_password_strategy  = "${var.db_password_strategy}"
+    db_password_key       = "${var.db_password_key}"
+    docker_image          = "${var.path_scheduler_docker_image}"
+    docker_version        = "${var.path_scheduler_docker_image_version}"
+    beekeeper_config_yaml = "${base64encode(data.template_file.beekeeper_path_scheduler_config.rendered)}"
+    log_group             = "${aws_cloudwatch_log_group.beekeeper_path_scheduler.name}"
+    memory                = "${var.path_scheduler_ecs_memory}"
+    name                  = "${local.instance_alias}-path-scheduler"
     port                  = 8080
-    region                = "${var.region}"
+    region                = "${var.aws_region}"
+
+    #to instruct ECS to use repositoryCredentials for private docker registry
+    docker_auth = "${var.docker_registry_auth_secret_name == "" ? "" : format("\"repositoryCredentials\" :{\n \"credentialsParameter\":\"%s\"\n},", join("", data.aws_secretsmanager_secret.docker_registry.*.arn))}"
   }
 }
 
-data "template_file" "beekeeper-cleanup-container-definition" {
+data "template_file" "beekeeper_path_scheduler_config" {
+  template = "${file("${path.module}/ecs-config/beekeeper-path-scheduler-config.yml")}"
+
+  vars {
+    db_endpoint      = "${aws_db_instance.beekeeper.endpoint}"
+    db_username      = "${aws_db_instance.beekeeper.username}"
+    queue            = "${aws_sqs_queue.beekeeper.id}"
+    graphite_enabled = "${var.graphite_enabled}"
+    graphite_host    = "${var.graphite_host}"
+    graphite_prefix  = "${var.graphite_prefix}"
+    graphite_port    = "${var.graphite_port}"
+  }
+}
+
+
+data "template_file" "beekeeper_cleanup_container_definition" {
   template = "${file("${path.module}/ecs-config/container-definition.json")}"
 
   vars {
-    db-password-strategy  = "${var.db-password-strategy}"
-    db-password-key       = "${var.db-password-key}"
-    docker-image-url      = "${var.cleanup-docker-image-url}"
-    beekeeper-config-yaml = "${base64encode(data.template_file.beekeeper-cleanup-config.rendered)}"
-    log-group             = "${aws_cloudwatch_log_group.beekeeper-cleanup.name}"
-    memory                = "${var.cleanup-memory}"
-    name                  = "beekeeper-cleanup"
+    db_password_strategy  = "${var.db_password_strategy}"
+    db_password_key       = "${var.db_password_key}"
+    docker_image          = "${var.cleanup_docker_image}"
+    docker_image_version  = "${var.cleanup_docker_image_version}"
+    beekeeper_config_yaml = "${base64encode(data.template_file.beekeeper_cleanup_config.rendered)}"
+    log_group             = "${aws_cloudwatch_log_group.beekeeper_cleanup.name}"
+    memory                = "${var.cleanup_ecs_memory}"
+    name                  = "${local.instance_alias}-cleanup"
     port                  = 8008
-    region                = "${var.region}"
+    region                = "${var.aws_region}"
+
+    #to instruct ECS to use repositoryCredentials for private docker registry
+    docker_auth = "${var.docker_registry_auth_secret_name == "" ? "" : format("\"repositoryCredentials\" :{\n \"credentialsParameter\":\"%s\"\n},", join("", data.aws_secretsmanager_secret.docker_registry.*.arn))}"
   }
 }
 
-data "template_file" "beekeeper-path-scheduler-apiary-config" {
-  template = "${file("${path.module}/ecs-config/beekeeper-path-scheduler-apiary-config.yml")}"
-
-  vars {
-    endpoint         = "${aws_db_instance.beekeeper-mysql.endpoint}"
-    username         = "${aws_db_instance.beekeeper-mysql.username}"
-    queue            = "${aws_sqs_queue.beekeeper.id}"
-    graphite-enabled = "${var.graphite-enabled}"
-    graphite-host    = "${var.graphite-host}"
-    graphite-prefix  = "${var.graphite-prefix}"
-    graphite-port    = "${var.graphite-port}"
-  }
-}
-
-data "template_file" "beekeeper-cleanup-config" {
+data "template_file" "beekeeper_cleanup_config" {
   template = "${file("${path.module}/ecs-config/beekeeper-cleanup-config.yml")}"
 
   vars {
-    endpoint           = "${aws_db_instance.beekeeper-mysql.endpoint}"
-    username           = "${aws_db_instance.beekeeper-mysql.username}"
-    graphite-enabled   = "${var.graphite-enabled}"
-    graphite-host      = "${var.graphite-host}"
-    graphite-prefix    = "${var.graphite-prefix}"
-    graphite-port      = "${var.graphite-port}"
-    scheduler-delay-ms = "${var.scheduler-delay-ms}"
-    dry-run-enabled    = "${var.dry-run-enabled}"
+    db_endpoint        = "${aws_db_instance.beekeeper.endpoint}"
+    db_username        = "${aws_db_instance.beekeeper.username}"
+    graphite_enabled   = "${var.graphite_enabled}"
+    graphite_host      = "${var.graphite_host}"
+    graphite_prefix    = "${var.graphite_prefix}"
+    graphite_port      = "${var.graphite_port}"
+    scheduler_delay_ms = "${var.scheduler_delay_ms}"
+    dry_run_enabled    = "${var.dry_run_enabled}"
   }
 }
