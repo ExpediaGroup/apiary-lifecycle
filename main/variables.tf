@@ -12,6 +12,12 @@ variable "instance_name" {
   default     = ""
 }
 
+variable "instance_type" {
+  description = "Service to run Beekeeper on. Supported services: ecs (default). Override to deploy manually."
+  type        = "string"
+  default     = "ecs"
+}
+
 variable "aws_region" {
   description = "AWS region to use for resources."
   type        = "string"

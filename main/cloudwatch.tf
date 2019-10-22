@@ -103,6 +103,7 @@ EOF
 }
 
 resource "aws_cloudwatch_dashboard" "beekeeper" {
+  count = "${var.instance_type == "ecs" ? 1 : 0}"
   dashboard_name = "${local.instance_alias}-${var.aws_region}"
 
   dashboard_body = <<EOF
@@ -164,7 +165,7 @@ locals {
 }
 
 resource "aws_cloudwatch_metric_alarm" "beekeeper_alert" {
-  count               = "${length(local.alerts)}"
+  count               = "${var.instance_type == "ecs" ? length(local.alerts) : 0}"
   alarm_name          = "${lookup(local.alerts[count.index], "alarm_name")}"
   comparison_operator = "${lookup(local.alerts[count.index], "comparison_operator", "GreaterThanOrEqualToThreshold")}"
   metric_name         = "${lookup(local.alerts[count.index], "metric_name")}"
