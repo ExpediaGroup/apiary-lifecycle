@@ -1,9 +1,3 @@
-/**
- * Copyright (C) 2018-2019 Expedia Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
-
 # This function was originally derived from the AWS blueprint named cloudwatch-alarm-to-slack-python.
 # Please see here for details: https://aws.amazon.com/blogs/aws/new-slack-integration-blueprints-for-aws-lambda/.
 import boto3
