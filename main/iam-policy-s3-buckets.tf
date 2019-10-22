@@ -4,9 +4,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 
-resource "aws_iam_role_policy" "beekeeper_cleanup_ecs_task_s3" {
-  name = "${local.instance_alias}-cleanup-ecs-task-s3"
-  role = "${aws_iam_role.beekeeper_cleanup_ecs_task.id}"
+resource "aws_iam_policy" "beekeeper_s3" {
+  name = "${local.instance_alias}-s3"
 
   policy = <<EOF
 {
@@ -32,4 +31,3 @@ resource "aws_iam_role_policy" "beekeeper_cleanup_ecs_task_s3" {
 }
 EOF
 }
-
