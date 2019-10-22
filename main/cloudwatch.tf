@@ -129,7 +129,7 @@ locals {
       namespace   = "AWS/ECS"
       metric_name = "MemoryUtilization"
       threshold   = "80"
-    }
+    },
     {
       alarm_name  = "${local.instance_alias}-cleanup-cpu"
       namespace   = "AWS/ECS"
@@ -152,7 +152,7 @@ locals {
     {
       ClusterName = "${local.instance_alias}"
       ServiceName = "${local.instance_alias}-path-scheduler-service"
-    }
+    },
     {
       ClusterName = "${local.instance_alias}"
       ServiceName = "${local.instance_alias}-cleanup-service"
