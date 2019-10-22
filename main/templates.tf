@@ -5,7 +5,7 @@
  */
 
 data "template_file" "beekeeper_path_scheduler_container_definition" {
-  template = "${file("${path.module}/ecs-config/container-definition.json")}"
+  template = "${file("${path.module}/files/container-definition.json")}"
 
   vars {
     db_password_strategy  = "${var.db_password_strategy}"
@@ -25,7 +25,7 @@ data "template_file" "beekeeper_path_scheduler_container_definition" {
 }
 
 data "template_file" "beekeeper_path_scheduler_config" {
-  template = "${file("${path.module}/ecs-config/beekeeper-path-scheduler-config.yml")}"
+  template = "${file("${path.module}/files/beekeeper-path-scheduler-config.yml")}"
 
   vars {
     db_endpoint      = "${aws_db_instance.beekeeper.endpoint}"
@@ -40,7 +40,7 @@ data "template_file" "beekeeper_path_scheduler_config" {
 
 
 data "template_file" "beekeeper_cleanup_container_definition" {
-  template = "${file("${path.module}/ecs-config/container-definition.json")}"
+  template = "${file("${path.module}/files/container-definition.json")}"
 
   vars {
     db_password_strategy  = "${var.db_password_strategy}"
@@ -60,7 +60,7 @@ data "template_file" "beekeeper_cleanup_container_definition" {
 }
 
 data "template_file" "beekeeper_cleanup_config" {
-  template = "${file("${path.module}/ecs-config/beekeeper-cleanup-config.yml")}"
+  template = "${file("${path.module}/files/beekeeper-cleanup-config.yml")}"
 
   vars {
     db_endpoint        = "${aws_db_instance.beekeeper.endpoint}"

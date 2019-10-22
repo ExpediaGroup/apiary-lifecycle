@@ -146,11 +146,13 @@ variable "queue_stale_messages_timeout" {
 variable "path_scheduler_docker_image" {
   description = "Beekeeper path-scheduler image."
   type        = "string"
+  default     = "expediagroup/beekeeper-path-scheduler-apiary"
 }
 
 variable "path_scheduler_docker_image_version" {
   description = "Beekeeper path-scheduler image version."
   type        = "string"
+  default     = "latest"
 }
 
 variable "path_scheduler_ecs_cpu" {
@@ -176,11 +178,13 @@ EOF
 variable "cleanup_docker_image" {
   description = "Beekeeper cleanup docker image."
   type        = "string"
+  default     = "expediagroup/beekeeper-cleanup"
 }
 
 variable "cleanup_docker_image_version" {
   description = "Beekeeper cleanup docker image version."
   type        = "string"
+  default     = "latest"
 }
 
 variable "cleanup_ecs_cpu" {
@@ -229,7 +233,6 @@ variable "dry_run_enabled" {
   type        = "string"
 }
 
-
 # Monitoring
 
 variable "graphite_enabled" {
@@ -253,5 +256,3 @@ variable "graphite_port" {
   default     = "2003"
   type        = "string"
 }
-
-

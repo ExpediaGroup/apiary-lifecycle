@@ -45,8 +45,8 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
              "metrics": [
-                 [ "AWS/SQS", "NumberOfMessagesSent", "QueueName", "${local.instance_alias}-sqs-queue" ],
-                 [ "AWS/SQS", "NumberOfMessagesReceived", "QueueName", "${local.instance_alias}-sqs-queue" ]
+                 [ "AWS/SQS", "NumberOfMessagesSent", "QueueName", "${var.queue_name}" ],
+                 [ "AWS/SQS", "NumberOfMessagesReceived", "QueueName", "${var.queue_name}" ]
              ],
              "period":300,
              "stat":"Average",
@@ -60,9 +60,9 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
         	 "metrics": [
-               [ "AWS/SQS", "ApproximateNumberOfMessagesVisible", "QueueName", "${local.instance_alias}-sqs-queue" ],
-               [ "AWS/SQS", "ApproximateNumberOfMessagesDelayed", "QueueName", "${local.instance_alias}-sqs-queue" ],
-               [ "AWS/SQS", "ApproximateNumberOfMessagesNotVisible", "QueueName", "${local.instance_alias}-sqs-queue" ]
+               [ "AWS/SQS", "ApproximateNumberOfMessagesVisible", "QueueName", "${var.queue_name}" ],
+               [ "AWS/SQS", "ApproximateNumberOfMessagesDelayed", "QueueName", "${var.queue_name}" ],
+               [ "AWS/SQS", "ApproximateNumberOfMessagesNotVisible", "QueueName", "${var.queue_name}" ]
               ],
              "period":300,
              "stat":"Average",
@@ -76,7 +76,7 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
              "metrics": [
-               [ "AWS/SQS", "NumberOfMessagesDeleted", "QueueName", "${local.instance_alias}-sqs-queue" ]
+               [ "AWS/SQS", "NumberOfMessagesDeleted", "QueueName", "${var.queue_name}" ]
              ],
              "period":300,
              "stat":"Average",
@@ -90,7 +90,7 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
              "metrics": [
-                 [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "${local.instance_alias}-sqs-queue" ]
+                 [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "${var.queue_name}" ]
              ],
              "period":300,
              "stat":"Average",
@@ -118,13 +118,25 @@ ${join("", data.template_file.sqs_widgets.*.rendered)}
 locals {
   alerts = [
     {
-      alarm_name  = "${local.instance_alias}-cpu"
+      alarm_name  = "${local.instance_alias}-path-scheduler-cpu"
       namespace   = "AWS/ECS"
       metric_name = "CPUUtilization"
       threshold   = "90"
     },
     {
-      alarm_name  = "${local.instance_alias}-memory"
+      alarm_name  = "${local.instance_alias}-path-scheduler-memory"
+      namespace   = "AWS/ECS"
+      metric_name = "MemoryUtilization"
+      threshold   = "80"
+    }
+    {
+      alarm_name  = "${local.instance_alias}-cleanup-cpu"
+      namespace   = "AWS/ECS"
+      metric_name = "CPUUtilization"
+      threshold   = "90"
+    },
+    {
+      alarm_name  = "${local.instance_alias}-cleanup-memory"
       namespace   = "AWS/ECS"
       metric_name = "MemoryUtilization"
       threshold   = "80"
@@ -134,11 +146,19 @@ locals {
   dimensions = [
     {
       ClusterName = "${local.instance_alias}"
-      ServiceName = "${local.instance_alias}-service"
+      ServiceName = "${local.instance_alias}-path-scheduler-service"
     },
     {
       ClusterName = "${local.instance_alias}"
-      ServiceName = "${local.instance_alias}-service"
+      ServiceName = "${local.instance_alias}-path-scheduler-service"
+    }
+    {
+      ClusterName = "${local.instance_alias}"
+      ServiceName = "${local.instance_alias}-cleanup-service"
+    },
+    {
+      ClusterName = "${local.instance_alias}"
+      ServiceName = "${local.instance_alias}-cleanup-service"
     }
   ]
 }
