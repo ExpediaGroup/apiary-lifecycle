@@ -11,7 +11,7 @@ data "template_file" "beekeeper_path_scheduler_container_definition" {
     db_password_strategy  = "${var.db_password_strategy}"
     db_password_key       = "${var.db_password_key}"
     docker_image          = "${var.path_scheduler_docker_image}"
-    docker_version        = "${var.path_scheduler_docker_image_version}"
+    docker_image_version  = "${var.path_scheduler_docker_image_version}"
     beekeeper_config_yaml = "${base64encode(data.template_file.beekeeper_path_scheduler_config.rendered)}"
     log_group             = "${aws_cloudwatch_log_group.beekeeper_path_scheduler.name}"
     memory                = "${var.path_scheduler_ecs_memory}"
