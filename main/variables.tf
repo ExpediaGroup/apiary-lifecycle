@@ -224,7 +224,6 @@ variable "docker_registry_auth_secret_name" {
 variable "allowed_s3_buckets" {
   description = "List of S3 Buckets to which Beekeeper will have read-write access."
   type        = "list"
-  default     = ["*"]
 }
 
 variable "scheduler_delay_ms" {
