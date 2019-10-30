@@ -19,8 +19,17 @@ resource "aws_iam_policy" "beekeeper_s3" {
         "s3:DeleteObject",
         "s3:DeleteObjectVersion"
       ],
-      "Resource": ["*"] 
+      "Resource": "${jsonencode(distinct(compact(
+                        split(",",
+                                contains(var.allowed_s3_buckets, "*") || length(compact(var.allowed_s3_buckets)) == 0
+                                ? "*"
+                                : join(",", concat(
+                                    formatlist("%s%s", "arn:aws:s3:::", var.allowed_s3_buckets),
+                                    formatlist("%s%s/*", "arn:aws:s3:::", var.allowed_s3_buckets)
+                                  ))
+                            ))))}"
     }
   ]
 }
 EOF
+}
