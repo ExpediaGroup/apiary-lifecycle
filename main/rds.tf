@@ -6,7 +6,7 @@
 
 resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
   name        = "beekeeper-db-subnet-group"
-  subnet_ids  = ["${var.rds_subnets}"]
+  subnet_ids  = "${var.rds_subnets}"
   description = "Beekeeper DB Subnet Group"
 
   tags = "${merge(var.beekeeper_tags,

@@ -7,11 +7,11 @@
 data "template_file" "beekeeper_path_scheduler_container_definition" {
   template = "${file("${path.module}/files/container-definition.json")}"
 
-  vars {
+  vars = {
     db_password_strategy  = "${var.db_password_strategy}"
     db_password_key       = "${var.db_password_key}"
     docker_image          = "${var.path_scheduler_docker_image}"
-    docker_version        = "${var.path_scheduler_docker_image_version}"
+    docker_image_version  = "${var.path_scheduler_docker_image_version}"
     beekeeper_config_yaml = "${base64encode(data.template_file.beekeeper_path_scheduler_config.rendered)}"
     log_group             = "${aws_cloudwatch_log_group.beekeeper_path_scheduler.name}"
     memory                = "${var.path_scheduler_ecs_memory}"
@@ -27,7 +27,7 @@ data "template_file" "beekeeper_path_scheduler_container_definition" {
 data "template_file" "beekeeper_path_scheduler_config" {
   template = "${file("${path.module}/files/beekeeper-path-scheduler-config.yml")}"
 
-  vars {
+  vars = {
     db_endpoint      = "${aws_db_instance.beekeeper.endpoint}"
     db_username      = "${aws_db_instance.beekeeper.username}"
     queue            = "${aws_sqs_queue.beekeeper.id}"
@@ -42,7 +42,7 @@ data "template_file" "beekeeper_path_scheduler_config" {
 data "template_file" "beekeeper_cleanup_container_definition" {
   template = "${file("${path.module}/files/container-definition.json")}"
 
-  vars {
+  vars = {
     db_password_strategy  = "${var.db_password_strategy}"
     db_password_key       = "${var.db_password_key}"
     docker_image          = "${var.cleanup_docker_image}"
@@ -62,7 +62,7 @@ data "template_file" "beekeeper_cleanup_container_definition" {
 data "template_file" "beekeeper_cleanup_config" {
   template = "${file("${path.module}/files/beekeeper-cleanup-config.yml")}"
 
-  vars {
+  vars = {
     db_endpoint        = "${aws_db_instance.beekeeper.endpoint}"
     db_username        = "${aws_db_instance.beekeeper.username}"
     graphite_enabled   = "${var.graphite_enabled}"
