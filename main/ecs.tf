@@ -13,8 +13,8 @@ resource "aws_ecs_cluster" "beekeeper" {
 resource "aws_ecs_service" "beekeeper_path_scheduler" {
   count           = "${var.instance_type == "ecs" ? 1 : 0}"
   name            = "${local.instance_alias}-path-scheduler"
-  cluster         = "${aws_ecs_cluster.beekeeper.id}"
-  task_definition = "${aws_ecs_task_definition.beekeeper_path_scheduler.arn}"
+  cluster         = "${aws_ecs_cluster.beekeeper.*.id[0]}"
+  task_definition = "${aws_ecs_task_definition.beekeeper_path_scheduler.*.arn[0]}"
   desired_count   = 1
   launch_type     = "FARGATE"
 
@@ -27,8 +27,8 @@ resource "aws_ecs_service" "beekeeper_path_scheduler" {
 resource "aws_ecs_service" "beekeeper_cleanup" {
   count           = "${var.instance_type == "ecs" ? 1 : 0}"
   name            = "beekeeper_cleanup"
-  cluster         = "${aws_ecs_cluster.beekeeper.id}"
-  task_definition = "${aws_ecs_task_definition.beekeeper_cleanup.arn}"
+  cluster         = "${aws_ecs_cluster.beekeeper.*.id[0]}"
+  task_definition = "${aws_ecs_task_definition.beekeeper_cleanup.*.arn[0]}"
   desired_count   = 1
   launch_type     = "FARGATE"
 
