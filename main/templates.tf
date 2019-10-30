@@ -13,7 +13,7 @@ data "template_file" "beekeeper_path_scheduler_container_definition" {
     docker_image          = "${var.path_scheduler_docker_image}"
     docker_image_version  = "${var.path_scheduler_docker_image_version}"
     beekeeper_config_yaml = "${base64encode(data.template_file.beekeeper_path_scheduler_config.rendered)}"
-    log_group             = "${aws_cloudwatch_log_group.beekeeper_path_scheduler.name}"
+    log_group             = "${aws_cloudwatch_log_group.beekeeper_path_scheduler.*.name[0]}"
     memory                = "${var.path_scheduler_ecs_memory}"
     name                  = "${local.instance_alias}-path-scheduler"
     port                  = 8080
@@ -48,7 +48,7 @@ data "template_file" "beekeeper_cleanup_container_definition" {
     docker_image          = "${var.cleanup_docker_image}"
     docker_image_version  = "${var.cleanup_docker_image_version}"
     beekeeper_config_yaml = "${base64encode(data.template_file.beekeeper_cleanup_config.rendered)}"
-    log_group             = "${aws_cloudwatch_log_group.beekeeper_cleanup.name}"
+    log_group             = "${aws_cloudwatch_log_group.beekeeper_cleanup.*.name[0]}"
     memory                = "${var.cleanup_ecs_memory}"
     name                  = "${local.instance_alias}-cleanup"
     port                  = 8008
