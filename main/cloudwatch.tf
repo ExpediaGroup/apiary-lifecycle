@@ -177,5 +177,5 @@ resource "aws_cloudwatch_metric_alarm" "beekeeper_alert" {
 
   insufficient_data_actions = []
   dimensions                = "${local.dimensions[count.index]}"
-  alarm_actions             = ["${aws_sns_topic.beekeeper_ops_sns.arn}"]
+  alarm_actions             = ["${aws_sns_topic.beekeeper_ops_sns.*.arn[0]}"]
 }
