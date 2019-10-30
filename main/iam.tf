@@ -33,7 +33,7 @@ resource "aws_iam_role_policy_attachment" "beekeeper_ecs_task_exec" {
 resource "aws_iam_role_policy_attachment" "beekeeper_ecs_task_docker_secrets" {
   count      = "${var.docker_registry_auth_secret_name != "" ? 1 : 0}"
   role       = "${aws_iam_role.beekeeper_path_scheduler_ecs_task.id}"
-  policy_arn = "${aws_iam_policy.beekeeper_ecs_task_exec_docker_registry.arn}"
+  policy_arn = "${aws_iam_policy.beekeeper_ecs_task_exec_docker_registry.*.arn[0]}"
 }
 
 # Path Scheduler ECS task role
