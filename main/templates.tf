@@ -5,6 +5,7 @@
  */
 
 data "template_file" "beekeeper_path_scheduler_container_definition" {
+  count    = "${var.instance_type == "ecs" ? 1 : 0}"
   template = "${file("${path.module}/files/container-definition.json")}"
 
   vars = {
@@ -40,6 +41,7 @@ data "template_file" "beekeeper_path_scheduler_config" {
 
 
 data "template_file" "beekeeper_cleanup_container_definition" {
+  count    = "${var.instance_type == "ecs" ? 1 : 0}"
   template = "${file("${path.module}/files/container-definition.json")}"
 
   vars = {
