@@ -10,6 +10,11 @@ variable "instance_name" {
   default     = ""
 }
 
+variable "aws_region" {
+  description = "AWS region to use for resources."
+  type        = "string"
+}
+
 variable "subnets" {
   description = "Subnets in which Lambda will have access to."
   type        = "list"

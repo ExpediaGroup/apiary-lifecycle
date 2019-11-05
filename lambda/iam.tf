@@ -6,7 +6,7 @@
 
 
 resource "aws_iam_role" "beekeeper_slack_notifier_lambda" {
-  name  = "${local.instance_alias}-slack-notifier-lambda"
+  name  = "${local.instance_alias}-slack-notifier-lambda-${var.aws_region}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -25,7 +25,7 @@ EOF
 }
 
 resource "aws_iam_policy" "beekeeper_lambda_vpc_access" {
-  name        = "${local.instance_alias}-lambda-vpc-access"
+  name        = "${local.instance_alias}-lambda-vpc-access-${var.aws_region}"
   description = "VPC and CloudWatch access for Beekeeper Slack Notifier Lambda function"
 
   policy = <<EOF
