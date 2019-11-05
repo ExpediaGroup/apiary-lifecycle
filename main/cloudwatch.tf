@@ -17,7 +17,7 @@ data "template_file" "ecs_widgets" {
              "period":300,
              "stat":"Average",
              "region":"${var.aws_region}",
-             "title":"Shunting Yard ECS CPU Utilization"
+             "title":"Beekeeper ECS CPU Utilization"
           }
        },
        {
@@ -31,7 +31,7 @@ data "template_file" "ecs_widgets" {
              "period":300,
              "stat":"Average",
              "region":"${var.aws_region}",
-             "title":"Shunting Yard ECS Memory Utilization"
+             "title":"Beekeeper ECS Memory Utilization"
           }
        },
 EOF
@@ -51,7 +51,7 @@ data "template_file" "sqs_widgets" {
              "period":300,
              "stat":"Average",
              "region": "${var.aws_region}",
-             "title": "Shunting Yard SQS Sent & Received Messages"
+             "title": "Beekeeper SQS Sent & Received Messages"
            }
        },
        {
@@ -67,7 +67,7 @@ data "template_file" "sqs_widgets" {
              "period":300,
              "stat":"Average",
              "region": "${var.aws_region}",
-             "title": "Shunting Yard SQS Queue Size Metrics"
+             "title": "Beekeeper SQS Queue Size Metrics"
            }
        },
        {
@@ -81,7 +81,7 @@ data "template_file" "sqs_widgets" {
              "period":300,
              "stat":"Average",
              "region": "${var.aws_region}",
-             "title": "Shunting Yard SQS Deleted Messages"
+             "title": "Beekeeper SQS Deleted Messages"
           }
        },
        {
@@ -96,7 +96,7 @@ data "template_file" "sqs_widgets" {
              "stat":"Average",
              "view": "singleValue",
              "region": "${var.aws_region}",
-             "title": "Shunting Yard SQS Age of Oldest Message (s)"
+             "title": "Beekeeper SQS Age of Oldest Message (s)"
            }
        }  
 EOF
