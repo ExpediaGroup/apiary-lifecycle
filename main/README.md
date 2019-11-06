@@ -8,7 +8,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| allowed\_s3\_buckets | List of S3 Buckets to which Beekeeper will have read-write access. | list | `<list>` | no |
+| allowed\_s3\_buckets | List of S3 Buckets to which Beekeeper will have read-write access. | list | n/a | yes |
 | apiary\_metastore\_listener\_arn | ARN of the Apiary Metastore Listener. | string | n/a | yes |
 | aws\_region | AWS region to use for resources. | string | n/a | yes |
 | beekeeper\_tags | A map of tags to apply to resources. | map | n/a | yes |
@@ -29,7 +29,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | graphite\_port | Graphite port. | string | `"2003"` | no |
 | graphite\_prefix | Prefix for Graphite metrics. | string | n/a | yes |
 | instance\_name | Beekeeper instance name to identify resources in multi-instance deployments. | string | `""` | no |
-| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default). Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create the required roles. | string | `"ecs"` | no |
+| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default). Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS. | string | `"ecs"` | no |
 | message\_retention\_seconds | SQS message retention (s). | string | `"604800"` | no |
 | path\_scheduler\_docker\_image | Beekeeper path-scheduler image. | string | `"expediagroup/beekeeper-path-scheduler-apiary"` | no |
 | path\_scheduler\_docker\_image\_version | Beekeeper path-scheduler image version. | string | `"latest"` | no |
@@ -53,10 +53,11 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 
 | Name | Description |
 |------|-------------|
-| beekeeper\_cleanup\_config | Rendered Spring config for Cleanup application. |
-| beekeeper\_path\_scheduler\_config | Rendered Spring config for Path Scheduler application. |
+| cleanup\_config | Rendered Spring config for Cleanup application. |
+| path\_scheduler\_config | Rendered Spring config for Path Scheduler application. |
 | s3\_policy\_arn | ARN for Path Scheduler IAM policy. |
 | secrets\_policy\_arn | ARN for Cleanup IAM policy. |
+| sg | ID of Beekeeper SG. |
 | sqs\_policy\_arn | ARN for Cleanup IAM policy. |
 
 # Contact

@@ -13,7 +13,7 @@ variable "instance_name" {
 }
 
 variable "instance_type" {
-  description = "Service to run Beekeeper on. Supported services: `ecs` (default). Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create the required roles."
+  description = "Service to run Beekeeper on. Supported services: `ecs` (default). Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS."
   type        = "string"
   default     = "ecs"
 }
