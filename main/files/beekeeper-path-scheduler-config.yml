@@ -1,0 +1,10 @@
+spring.datasource:
+  url: jdbc:mysql://${db_endpoint}/beekeeper?useSSL=false
+  username: ${db_username}
+properties:
+  apiary.queue-url: ${queue}
+graphite:
+  enabled: ${graphite_enabled}
+  host: ${graphite_host}
+  prefix: ${graphite_prefix}
+  port: ${graphite_port}

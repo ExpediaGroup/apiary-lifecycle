@@ -1,12 +1,13 @@
 [
     {
         "name": "${name}",
-        "image": "${docker-image-url}",
+        "image": "${docker_image}:${docker_image_version}",
+        ${docker_auth}
         "memory": ${memory},
         "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
-                "awslogs-group": "${log-group}",
+                "awslogs-group": "${log_group}",
                 "awslogs-region": "${region}",
                 "awslogs-stream-prefix": "/"
             }
@@ -20,15 +21,15 @@
         "environment":  [
             {
                 "name": "BEEKEEPER_CONFIG",
-                "value": "${beekeeper-config-yaml}"
+                "value": "${beekeeper_config_yaml}"
             },
             {
                 "name": "DB_PASSWORD_STRATEGY",
-                "value": "${db-password-strategy}"
+                "value": "${db_password_strategy}"
             },
             {
                 "name": "DB_PASSWORD_KEY",
-                "value": "${db-password-key}"
+                "value": "${db_password_key}"
             }
         ]
     }
