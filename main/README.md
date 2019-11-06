@@ -8,7 +8,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| allowed\_s3\_buckets | List of S3 Buckets to which Beekeeper will have read-write access. | list | n/a | yes |
+| allowed\_s3\_buckets | List of S3 Buckets to which Beekeeper will have read-write access. | list | `<list>` | no |
 | apiary\_metastore\_listener\_arn | ARN of the Apiary Metastore Listener. | string | n/a | yes |
 | aws\_region | AWS region to use for resources. | string | n/a | yes |
 | beekeeper\_tags | A map of tags to apply to resources. | map | n/a | yes |
