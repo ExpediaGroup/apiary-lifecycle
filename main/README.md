@@ -52,7 +52,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 
 ## Mailing List
 If you would like to ask any questions about or discuss Apiary please join our mailing list at
-
+https://groups.google.com/forum/#!forum/apiary-user
 
 # Legal
 This project is available under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
