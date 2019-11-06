@@ -12,6 +12,12 @@ variable "instance_name" {
   default     = ""
 }
 
+variable "instance_type" {
+  description = "Service to run Beekeeper on. Supported services: `ecs` (default). Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS."
+  type        = "string"
+  default     = "ecs"
+}
+
 variable "aws_region" {
   description = "AWS region to use for resources."
   type        = "string"
@@ -218,6 +224,7 @@ variable "docker_registry_auth_secret_name" {
 variable "allowed_s3_buckets" {
   description = "List of S3 Buckets to which Beekeeper will have read-write access."
   type        = "list"
+  default     = []
 }
 
 variable "scheduler_delay_ms" {

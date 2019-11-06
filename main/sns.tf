@@ -5,5 +5,6 @@
  */
 
 resource "aws_sns_topic" "beekeeper_ops_sns" {
-  name = "${local.instance_alias}-operational-events"
+  count = "${var.instance_type == "ecs" ? 1 : 0}"
+  name  = "${local.instance_alias}-operational-events"
 }

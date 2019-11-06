@@ -5,14 +5,16 @@
  */
 
 resource "aws_ecs_cluster" "beekeeper" {
-  name = "${local.instance_alias}"
-  tags = "${var.beekeeper_tags}"
+  count = "${var.instance_type == "ecs" ? 1 : 0}"
+  name  = "${local.instance_alias}"
+  tags  = "${var.beekeeper_tags}"
 }
 
 resource "aws_ecs_service" "beekeeper_path_scheduler" {
+  count           = "${var.instance_type == "ecs" ? 1 : 0}"
   name            = "${local.instance_alias}-path-scheduler"
-  cluster         = "${aws_ecs_cluster.beekeeper.id}"
-  task_definition = "${aws_ecs_task_definition.beekeeper_path_scheduler.arn}"
+  cluster         = "${aws_ecs_cluster.beekeeper.*.id[0]}"
+  task_definition = "${aws_ecs_task_definition.beekeeper_path_scheduler.*.arn[0]}"
   desired_count   = 1
   launch_type     = "FARGATE"
 
@@ -23,9 +25,10 @@ resource "aws_ecs_service" "beekeeper_path_scheduler" {
 }
 
 resource "aws_ecs_service" "beekeeper_cleanup" {
+  count           = "${var.instance_type == "ecs" ? 1 : 0}"
   name            = "beekeeper_cleanup"
-  cluster         = "${aws_ecs_cluster.beekeeper.id}"
-  task_definition = "${aws_ecs_task_definition.beekeeper_cleanup.arn}"
+  cluster         = "${aws_ecs_cluster.beekeeper.*.id[0]}"
+  task_definition = "${aws_ecs_task_definition.beekeeper_cleanup.*.arn[0]}"
   desired_count   = 1
   launch_type     = "FARGATE"
 
@@ -36,10 +39,11 @@ resource "aws_ecs_service" "beekeeper_cleanup" {
 }
 
 resource "aws_ecs_task_definition" "beekeeper_path_scheduler" {
+  count                    = "${var.instance_type == "ecs" ? 1 : 0}"
   family                   = "${local.instance_alias}"
-  execution_role_arn       = "${aws_iam_role.beekeeper_ecs_task_exec.arn}"
-  task_role_arn            = "${aws_iam_role.beekeeper_path_scheduler_ecs_task.arn}"
-  container_definitions    = "${data.template_file.beekeeper_path_scheduler_container_definition.rendered}"
+  execution_role_arn       = "${aws_iam_role.beekeeper_ecs_task_exec.*.arn[0]}"
+  task_role_arn            = "${aws_iam_role.beekeeper_path_scheduler_ecs_task.*.arn[0]}"
+  container_definitions    = "${data.template_file.beekeeper_path_scheduler_container_definition.*.rendered[0]}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["EC2", "FARGATE"]
   cpu                      = "${var.path_scheduler_ecs_cpu}"
@@ -48,10 +52,11 @@ resource "aws_ecs_task_definition" "beekeeper_path_scheduler" {
 }
 
 resource "aws_ecs_task_definition" "beekeeper_cleanup" {
+  count                    = "${var.instance_type == "ecs" ? 1 : 0}"
   family                   = "${local.instance_alias}"
-  execution_role_arn       = "${aws_iam_role.beekeeper_ecs_task_exec.arn}"
-  task_role_arn            = "${aws_iam_role.beekeeper_cleanup_ecs_task.arn}"
-  container_definitions    = "${data.template_file.beekeeper_cleanup_container_definition.rendered}"
+  execution_role_arn       = "${aws_iam_role.beekeeper_ecs_task_exec.*.arn[0]}"
+  task_role_arn            = "${aws_iam_role.beekeeper_cleanup_ecs_task.*.arn[0]}"
+  container_definitions    = "${data.template_file.beekeeper_cleanup_container_definition.*.rendered[0]}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["EC2", "FARGATE"]
   cpu                      = "${var.cleanup_ecs_cpu}"
@@ -60,11 +65,13 @@ resource "aws_ecs_task_definition" "beekeeper_cleanup" {
 }
 
 resource "aws_cloudwatch_log_group" "beekeeper_path_scheduler" {
-  name = "${local.instance_alias}-path-scheduler"
-  tags = "${var.beekeeper_tags}"
+  count = "${var.instance_type == "ecs" ? 1 : 0}"
+  name  = "${local.instance_alias}-path-scheduler"
+  tags  = "${var.beekeeper_tags}"
 }
 
 resource "aws_cloudwatch_log_group" "beekeeper_cleanup" {
-  name = "${local.instance_alias}-cleanup"
-  tags = "${var.beekeeper_tags}"
+  count = "${var.instance_type == "ecs" ? 1 : 0}"
+  name  = "${local.instance_alias}-cleanup"
+  tags  = "${var.beekeeper_tags}"
 }
