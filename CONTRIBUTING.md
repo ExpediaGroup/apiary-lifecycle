@@ -42,7 +42,6 @@ Push your changes to your branch and open a pull request against the parent repo
 
 Upon Pull Request submission, your code will be reviewed by the maintainers. They will confirm at least the following:
 
-- Tests run successfully (unit, coverage, integration, style).
 - Contribution policy has been followed.
 
 Two (human) reviewers will need to sign off on your Pull Request before it can be merged.
