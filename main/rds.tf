@@ -58,7 +58,7 @@ resource "aws_db_instance" "beekeeper" {
   instance_class            = "${var.rds_instance_class}"
   name                      = "beekeeper"
   username                  = "${var.db_username}"
-  password                  = "${data.aws_secretsmanager_secret_version.beekeeper_db.secret_string}"
+  password                  = "${chomp(data.aws_secretsmanager_secret_version.beekeeper_db.secret_string)}"
   parameter_group_name      = "${var.rds_parameter_group_name}"
   backup_retention_period   = "${var.db_backup_retention}"
   backup_window             = "${var.db_backup_window}"
