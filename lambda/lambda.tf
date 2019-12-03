@@ -23,7 +23,7 @@ resource "aws_lambda_function" "beekeeper_slack_notifier" {
   }
 
   vpc_config {
-    subnet_ids         = "${join(","var.subnets)}"
+    subnet_ids         = "${join(",",var.subnets)}"
     security_group_ids = "${var.security_groups}"
   }
 }
