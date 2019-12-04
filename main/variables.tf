@@ -12,6 +12,12 @@ variable "instance_name" {
   default     = ""
 }
 
+variable "existing_instance_name" {
+  description = "Name of a beekeeper db that has been deployed out of band."
+  type        = "string"
+  default     = ""
+}
+
 variable "instance_type" {
   description = "Service to run Beekeeper on. Supported services: `ecs` (default). Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS."
   type        = "string"

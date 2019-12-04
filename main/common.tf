@@ -6,6 +6,8 @@
 
 locals {
   instance_alias = "${ var.instance_name == "" ? "beekeeper" : format("beekeeper-%s",var.instance_name) }"
+  instance_alias = "${var.existing_instance_name}" ? var.already_existing_instance_name : local.instance_alias}"
+  ## to accommodate existing long db name eg. bdp-beekeeper-hcom-data-lab
 }
 
 data "aws_vpc" "vpc" {
