@@ -10,6 +10,12 @@ variable "instance_name" {
   default     = ""
 }
 
+variable "existing_instance_name" {
+  description = "Name of a beekeeper db that has been deployed out of band."
+  type        = "string"
+  default     = ""
+}
+
 variable "aws_region" {
   description = "AWS region to use for resources."
   type        = "string"
