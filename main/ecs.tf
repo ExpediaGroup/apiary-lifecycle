@@ -26,7 +26,7 @@ resource "aws_ecs_service" "beekeeper_path_scheduler" {
 
 resource "aws_ecs_service" "beekeeper_cleanup" {
   count           = "${var.instance_type == "ecs" ? 1 : 0}"
-  name            = "beekeeper_cleanup"
+  name            = "${local.instance_alias}-cleanup"
   cluster         = "${aws_ecs_cluster.beekeeper.*.id[0]}"
   task_definition = "${aws_ecs_task_definition.beekeeper_cleanup.*.arn[0]}"
   desired_count   = 1
