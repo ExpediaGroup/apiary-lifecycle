@@ -5,7 +5,7 @@
  */
 
 resource "aws_iam_policy" "beekeeper_s3" {
-  name = "${local.instance_alias}-s3"
+  name = "${local.instance_alias}-s3-${var.aws_region}"
 
   policy = <<EOF
 {
