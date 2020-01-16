@@ -18,19 +18,6 @@ resource "kubernetes_config_map" "beekeeper" {
     }
 }
 
-resource "kubernetes_secret" "beekeeper" {
-    count = var.instance_type == "k8s" ? 1 : 0
-    metadata {
-        name = var.k8s_app_name
-    }
-
-    type = "Opaque"
-
-    data = {
-        db_password = var.db_password_key
-    }
-}
-
 resource "kubernetes_ingress" "beekeeper" {
     count = var.instance_type == "k8s" && var.k8s_ingress_enabled == 1 ? 1 : 0
     metadata {

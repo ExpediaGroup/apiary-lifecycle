@@ -86,12 +86,7 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
 
           env {
             name = "DB_PASSWORD_KEY"
-            value_from {
-              secret_key_ref {
-                name = kubernetes_secret.beekeeper[count.index].metadata.name
-                key = "db_password"
-              }
-            }
+            value = var.db_password_key
           }
 
           env {
