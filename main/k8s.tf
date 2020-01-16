@@ -14,7 +14,7 @@ resource "kubernetes_config_map" "beekeeper" {
 
     data = {
         "${local.scheduler_name}.properties" = data.template_file.beekeeper_path_scheduler_config
-        "${local.cleaner_name}.properties" = data.template_file.beekeeper_cleanup_config
+        "${local.cleanup_name}.properties" = data.template_file.beekeeper_cleanup_config
     }
 }
 
@@ -51,8 +51,8 @@ resource "kubernetes_ingress" "beekeeper" {
                 path {
                     path = var.k8s_cleanup_ingress_path
                     backend {
-                        service_name = kubernetes_service.beekeeper_cleaner[count.index].metadata.name
-                        service_port = kubernetes_service.beekeeper_cleaner[count.index].spec.port.target_port
+                        service_name = kubernetes_service.beekeeper_cleanup[count.index].metadata.name
+                        service_port = kubernetes_service.beekeeper_cleanup[count.index].spec.port.target_port
                     }
                 }
             }
