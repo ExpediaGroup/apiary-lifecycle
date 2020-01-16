@@ -267,153 +267,153 @@ variable "graphite_port" {
 
 variable "k8s_app_name" {
   description = "Name to give to all kubernetes resources that are deployed"
-  default = "beekeeper"
-  type = string
+  default     = "beekeeper"
+  type        = string
 }
 
 variable "k8s_kiam_role_arn" {
   description = "KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions"
-  type = string
+  type        = string
 }
 
 variable "k8s_namespace" {
   description = "Namespace to deploy all kubernetes resources to."
-  default = "beekeeper"
-  type = "string"
+  default     = "beekeeper"
+  type        = "string"
 }
 
 variable "k8s_image_pull_secret" {
   description = "Name of the kubernetes docker secret to reference for pulling private images"
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }
 
 variable "k8s_image_pull_policy" {
   description = "Policy for the kubernetes orchestrator to pull images."
-  default = "Always"
-  type = string
+  default     = "Always"
+  type        = string
 }
 
 variable "k8s_node_affinity" {
   description = "Full node_affinity object as per terraform/kubernetes docs."
-  default = {}
-  type = object({})
+  default     = {}
+  type        = object({})
 }
 
 variable "k8s_node_selector" {
   description = "Full node_selector object as per terraform/kubernetes docs."
-  default = {}
-  type = object({})
+  default     = {}
+  type        = object({})
 }
 
 variable "k8s_node_tolerations" {
   description = "Full k8s_node_tolerations object as per terraform/kubernetes docs."
-  default = {}
-  type = object({})
+  default     = {}
+  type        = object({})
 }
 
 variable "k8s_ingress_enabled" {
   description = "Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on)"
-  default = 0
-  type = number
+  default     = 0
+  type        = number
 }
 
 variable "k8s_ingress_tls_hosts" {
   description = "List of hosts to apply TLS to the generated kubernetes ingress"
-  default = []
-  type = list(string)
+  default     = []
+  type        = list(string)
 }
 
 variable "k8s_ingress_tls_secret" {
   description = "Secret name for the generated ingress for TLS support"
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }
 
 # K8S - cleanup deployment
 
 variable "k8s_cleanup_name_replicas" {
   description = "Number of replicas to run for Beekeeper cleanup"
-  default = 3
-  type = number
+  default     = 3
+  type        = number
 }
 
 variable "k8s_cleanup_memory" {
   description = "Total memory to allot to the Beekeeper cleanup pod"
-  default = "2Gi"
-  type = string
+  default     = "2Gi"
+  type        = string
 }
 
 variable "k8s_cleanup_cpu" {
   description = "Total cpu to allot to the Beekeeper cleanup pod"
-  default = "500m"
-  type = string
+  default     = "500m"
+  type        = string
 }
 
 variable "k8s_cleanup_port" {
   description = "Internal port that the Beekeeper Cleanup service runs on"
-  default = 8080
-  type = number
+  default     = 8080
+  type        = number
 }
 
 variable "k8s_cleanup_liveness_delay" {
   description = "Liveness delay (in seconds) for the Beekeeper Cleanup service"
-  default = 60
-  type = number
+  default     = 60
+  type        = number
 }
 
 variable "k8s_cleanup_ingress_host" {
   description = "Ingress host name for Beekeeper cleanup"
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }
 
 variable "k8s_cleanup_ingress_path" {
   description = "Ingress path regex for Beekeeper cleanup"
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }
 
 # K8S - scheduler deployment
 
 variable "k8s_scheduler_name_replicas" {
   description = "Number of replicas to run for Beekeeper path scheduler"
-  default = 3
-  type = number
+  default     = 3
+  type        = number
 }
 
 variable "k8s_scheduler_memory" {
   description = "Total memory to allot to the Beekeeper scheduler pod"
-  default = "2Gi"
-  type = string
+  default     = "2Gi"
+  type        = string
 }
 
 variable "k8s_scheduler_cpu" {
   description = "Total cpu to allot to the Beekeeper scheduler pod"
-  default = "500m"
-  type = string
+  default     = "500m"
+  type        = string
 }
 
 variable "k8s_scheduler_port" {
   description = "Internal port that the Beekeeper Scheduler service runs on"
-  default = 8080
-  type = number
+  default     = 8080
+  type        = number
 }
 
 variable "k8s_scheduler_liveness_delay" {
   description = "Liveness delay (in seconds) for the Beekeeper Scheduling service"
-  default = 60
-  type = number
+  default     = 60
+  type        = number
 }
 
 variable "k8s_scheduler_ingress_host" {
   description = "Ingress host name for Beekeeper path-scheduler"
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }
 
 variable "k8s_scheduler_ingress_path" {
   description = "Ingress path regex for Beekeeper path-scheduler"
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }

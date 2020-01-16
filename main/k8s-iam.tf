@@ -1,6 +1,6 @@
 resource "aws_iam_role" "beekeeper_k8s_role" {
   count = var.instance_type == "k8s" ? 1 : 0
-  name = "beekeeper-${var.aws_region}"
+  name  = "beekeeper-${var.aws_region}"
 
   assume_role_policy = <<EOF
 {
@@ -28,19 +28,19 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "beekeeper_s3" {
-  count = var.instance_type == "k8s" ? 1 : 0
+  count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role[count.index].id
   policy_arn = aws_iam_policy.beekeeper_s3.arn
 }
 
 resource "aws_iam_role_policy_attachment" "beekeeper_sqs" {
-  count = var.instance_type == "k8s" ? 1 : 0
+  count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role[count.index].id
   policy_arn = aws_iam_policy.beekeeper_sqs.arn
 }
 
 resource "aws_iam_role_policy_attachment" "beekeeper_secrets" {
-  count = var.instance_type == "k8s" ? 1 : 0
+  count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role[count.index].id
   policy_arn = aws_iam_policy.beekeeper_secrets.arn
 }

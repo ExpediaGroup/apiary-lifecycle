@@ -1,14 +1,14 @@
 locals {
-  scheduler_name = "path-scheduler"
+  scheduler_name      = "path-scheduler"
   scheduler_full_name = "${var.k8s_app_name}-path-scheduler"
   scheduler_labels = {
-    "app.kubernetes.io/name" = "${var.k8s_app_name}-path-scheduler"
-    "app.kubernetes.io/instance" = "${var.k8s_app_name}-path-scheduler"
-    "app.kubernetes.io/version" = var.cleanup_docker_image_version
+    "app.kubernetes.io/name"       = "${var.k8s_app_name}-path-scheduler"
+    "app.kubernetes.io/instance"   = "${var.k8s_app_name}-path-scheduler"
+    "app.kubernetes.io/version"    = var.cleanup_docker_image_version
     "app.kubernetes.io/managed-by" = var.k8s_app_name
   }
   scheduler_label_name_instance = {
-    "app.kubernetes.io/name" = "${var.k8s_app_name}-path-scheduler"
+    "app.kubernetes.io/name"     = "${var.k8s_app_name}-path-scheduler"
     "app.kubernetes.io/instance" = "${var.k8s_app_name}-path-scheduler"
   }
 }
@@ -16,9 +16,9 @@ locals {
 resource "kubernetes_deployment" "beekeeper_scheduler" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name = local.scheduler_full_name
+    name      = local.scheduler_full_name
     namespace = var.k8s_namespace
-    labels = local.scheduler_labels
+    labels    = local.scheduler_labels
   }
 
   spec {
@@ -41,12 +41,12 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
         }
 
         container {
-          name = local.scheduler_full_name
-          image = "${var.path_scheduler_docker_image}:${var.path_scheduler_docker_image_version}"
+          name              = local.scheduler_full_name
+          image             = "${var.path_scheduler_docker_image}:${var.path_scheduler_docker_image_version}"
           image_pull_policy = var.k8s_image_pull_policy
 
           port {
-            name = local.scheduler_name
+            name           = local.scheduler_name
             container_port = var.k8s_cleanup_port
           }
 
@@ -61,31 +61,31 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
           resources {
             limits {
               memory = var.k8s_scheduler_memory
-              cpu = var.k8s_scheduler_cpu
+              cpu    = var.k8s_scheduler_cpu
             }
             requests {
               memory = var.k8s_scheduler_memory
-              cpu = var.k8s_scheduler_cpu
+              cpu    = var.k8s_scheduler_cpu
             }
           }
 
           env {
-            name = "AWS_REGION"
+            name  = "AWS_REGION"
             value = var.aws_region
           }
 
           env {
-            name = "AWS_DEFAULT_REGION"
+            name  = "AWS_DEFAULT_REGION"
             value = var.aws_region
           }
 
           env {
-            name = "DB_PASSWORD_STRATEGY"
+            name  = "DB_PASSWORD_STRATEGY"
             value = var.db_password_strategy
           }
 
           env {
-            name = "DB_PASSWORD_KEY"
+            name  = "DB_PASSWORD_KEY"
             value = var.db_password_key
           }
 
@@ -94,7 +94,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
             value_from {
               config_map_key_ref {
                 name = kubernetes_config_map.beekeeper[count.index].metadata.name
-                key = "${local.scheduler_full_name}.properties"
+                key  = "${local.scheduler_full_name}.properties"
               }
             }
           }
@@ -108,17 +108,17 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
 resource "kubernetes_service" "beekeeper_scheduler" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name = "beekeeper"
+    name   = "beekeeper"
     labels = local.scheduler_labels
   }
   spec {
     port {
-      name = local.scheduler_name
+      name        = local.scheduler_name
       target_port = local.scheduler_name
-      port = var.k8s_scheduler_port
+      port        = var.k8s_scheduler_port
     }
     selector = local.scheduler_label_name_instance
-    type = "ClusterIP"
+    type     = "ClusterIP"
   }
 }
 

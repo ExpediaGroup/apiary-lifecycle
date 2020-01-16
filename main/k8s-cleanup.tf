@@ -1,14 +1,14 @@
 locals {
-  cleanup_name = "cleanup"
+  cleanup_name      = "cleanup"
   cleanup_full_name = "${var.k8s_app_name}-cleanup"
   cleanup_labels = {
-    "app.kubernetes.io/name" = "${var.k8s_app_name}-cleanup"
-    "app.kubernetes.io/instance" = "${var.k8s_app_name}-cleanup"
-    "app.kubernetes.io/version" = var.path_scheduler_docker_image_version
+    "app.kubernetes.io/name"       = "${var.k8s_app_name}-cleanup"
+    "app.kubernetes.io/instance"   = "${var.k8s_app_name}-cleanup"
+    "app.kubernetes.io/version"    = var.path_scheduler_docker_image_version
     "app.kubernetes.io/managed-by" = var.k8s_app_name
   }
   cleanup_label_name_instance = {
-    "app.kubernetes.io/name" = "${var.k8s_app_name}-cleanup"
+    "app.kubernetes.io/name"     = "${var.k8s_app_name}-cleanup"
     "app.kubernetes.io/instance" = "${var.k8s_app_name}-cleanup"
   }
 }
@@ -16,9 +16,9 @@ locals {
 resource "kubernetes_deployment" "beekeeper_cleanup" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name = local.cleanup_full_name
+    name      = local.cleanup_full_name
     namespace = var.k8s_namespace
-    labels = local.cleanup_labels
+    labels    = local.cleanup_labels
   }
 
   spec {
@@ -41,12 +41,12 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
         }
 
         container {
-          name = local.cleanup_full_name
-          image = "${var.cleanup_docker_image}:${var.cleanup_docker_image_version}"
+          name              = local.cleanup_full_name
+          image             = "${var.cleanup_docker_image}:${var.cleanup_docker_image_version}"
           image_pull_policy = var.k8s_image_pull_policy
 
           port {
-            name = local.cleanup_name
+            name           = local.cleanup_name
             container_port = var.k8s_cleanup_port
           }
 
@@ -61,31 +61,31 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
           resources {
             limits {
               memory = var.k8s_cleanup_memory
-              cpu = var.k8s_cleanup_cpu
+              cpu    = var.k8s_cleanup_cpu
             }
             requests {
               memory = var.k8s_cleanup_memory
-              cpu = var.k8s_cleanup_cpu
+              cpu    = var.k8s_cleanup_cpu
             }
           }
 
           env {
-            name = "AWS_REGION"
+            name  = "AWS_REGION"
             value = var.aws_region
           }
 
           env {
-            name = "AWS_DEFAULT_REGION"
+            name  = "AWS_DEFAULT_REGION"
             value = var.aws_region
           }
 
           env {
-            name = "DB_PASSWORD_STRATEGY"
+            name  = "DB_PASSWORD_STRATEGY"
             value = var.db_password_strategy
           }
 
           env {
-            name = "DB_PASSWORD_KEY"
+            name  = "DB_PASSWORD_KEY"
             value = var.db_password_key
           }
 
@@ -94,7 +94,7 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
             value_from {
               config_map_key_ref {
                 name = kubernetes_config_map.beekeeper[count.index].metadata.name
-                key = "${local.cleanup_full_name}.properties"
+                key  = "${local.cleanup_full_name}.properties"
               }
             }
           }
@@ -108,19 +108,19 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
 resource "kubernetes_service" "beekeeper_cleanup" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name = "beekeeper"
+    name   = "beekeeper"
     labels = local.cleanup_labels
   }
 
   spec {
     port {
-      name = local.cleanup_name
+      name        = local.cleanup_name
       target_port = local.cleanup_name
-      port = var.k8s_cleanup_port
+      port        = var.k8s_cleanup_port
     }
 
     selector = local.cleanup_label_name_instance
-    type = "ClusterIP"
+    type     = "ClusterIP"
   }
 }
 
