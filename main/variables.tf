@@ -271,8 +271,8 @@ variable "k8s_app_name" {
   type = string
 }
 
-variable "k8s_iam_role" {
-  description = "IAM role to apply to Beekeeper path-scheduler and cleanup"
+variable "k8s_kiam_role_arn" {
+  description = "KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions"
   type = string
 }
 

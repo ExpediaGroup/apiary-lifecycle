@@ -31,7 +31,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
       metadata {
         labels = local.scheduler_label_name_instance
         annotations = {
-          "iam.amazonaws.com/role" = var.k8s_iam_role
+          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role[count.index].arn
         }
       }
 
