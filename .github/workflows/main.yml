@@ -12,8 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - working-directory: ${{ matrix.terraform_dir }}
       - name: "Terraform Init"
         run: terraform init
+        working-directory: ${{ matrix.terraform_dir }}
       - name: "Validate Terraform"
         run: terraform validate
+        working-directory: ${{ matrix.terraform_dir }}
