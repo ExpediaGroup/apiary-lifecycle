@@ -5,7 +5,7 @@
  */
 
 resource "aws_iam_policy" "beekeeper_ecs_task_exec_docker_registry" {
-  count = "${var.docker_registry_auth_secret_name != "" ? 1 : 0}"
+  count = var.docker_registry_auth_secret_name != "" ? 1 : 0
   name  = "${local.instance_alias}-ecs-task-exec-docker-registry"
 
   policy = <<EOF
