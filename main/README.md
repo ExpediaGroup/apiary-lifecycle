@@ -87,12 +87,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 
 | Name | Description |
 |------|-------------|
-| cleanup\_config | Rendered Spring config for Cleanup application. |
-| path\_scheduler\_config | Rendered Spring config for Path Scheduler application. |
-| s3\_policy\_arn | ARN for Path Scheduler IAM policy. |
-| secrets\_policy\_arn | ARN for Cleanup IAM policy. |
 | sg | ID of Beekeeper SG. |
-| sqs\_policy\_arn | ARN for Cleanup IAM policy. |
 
 
 
