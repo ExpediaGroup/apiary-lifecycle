@@ -10,7 +10,7 @@ resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
   description = "Beekeeper DB Subnet Group"
 
   tags = merge(var.beekeeper_tags,
-            map("Name","Beekeeper DB Subnet Group"))
+  map("Name", "Beekeeper DB Subnet Group"))
 }
 
 resource "aws_security_group" "beekeeper_db_sg" {

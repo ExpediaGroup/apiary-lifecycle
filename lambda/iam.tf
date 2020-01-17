@@ -6,7 +6,7 @@
 
 
 resource "aws_iam_role" "beekeeper_slack_notifier_lambda" {
-  name  = "${local.instance_alias}-slack-notifier-lambda-${var.aws_region}"
+  name               = "${local.instance_alias}-slack-notifier-lambda-${var.aws_region}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",

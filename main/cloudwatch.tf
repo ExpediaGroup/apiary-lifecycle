@@ -103,7 +103,7 @@ EOF
 }
 
 resource "aws_cloudwatch_dashboard" "beekeeper" {
-  count = var.instance_type == "ecs" ? 1 : 0
+  count          = var.instance_type == "ecs" ? 1 : 0
   dashboard_name = "${local.instance_alias}-${var.aws_region}"
 
   dashboard_body = <<EOF
@@ -177,5 +177,5 @@ resource "aws_cloudwatch_metric_alarm" "beekeeper_alert" {
 
   insufficient_data_actions = []
   dimensions                = local.dimensions[count.index]
-  alarm_actions             = [ aws_sns_topic.beekeeper_ops_sns.*.arn[0] ]
+  alarm_actions             = [aws_sns_topic.beekeeper_ops_sns.*.arn[0]]
 }
