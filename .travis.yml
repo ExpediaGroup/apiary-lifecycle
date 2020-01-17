@@ -5,7 +5,6 @@ sudo: false
 if: type = push
 
 env:
-  - TF_INPUT=false
   - TERRAFORM_DIR=main
   - TERRAFORM_DIR=lambda
 
@@ -13,9 +12,10 @@ env:
 before_install:
   - curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.12.19/terraform_0.12.19_linux_amd64.zip
   - unzip /tmp/terraform.zip -d /tmp
-  - mkdir ~/bin
+  - mkdir -p ~/bin
   - mv /tmp/terraform ~/bin
   - export PATH="~/bin:$PATH"
+  - export TF_INPUT=false
 
 script:
   - cd $TERRAFORM_DIR
