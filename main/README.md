@@ -38,7 +38,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | graphite\_port | Graphite port. | `string` | `"2003"` | no |
 | graphite\_prefix | Prefix for Graphite metrics. | `string` | n/a | yes |
 | instance\_name | Beekeeper instance name to identify resources in multi-instance deployments. | `string` | `""` | no |
-| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default). Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS. | `string` | `"ecs"` | no |
+| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS. | `string` | `"ecs"` | no |
 | k8s\_app\_name | Name to give to all kubernetes resources that are deployed | `string` | `"beekeeper"` | no |
 | k8s\_cleanup\_cpu | Total cpu to allot to the Beekeeper cleanup pod | `string` | `"500m"` | no |
 | k8s\_cleanup\_ingress\_host | Ingress host name for Beekeeper cleanup | `string` | `""` | no |
