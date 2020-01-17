@@ -103,7 +103,7 @@ EOF
 }
 
 resource "aws_cloudwatch_dashboard" "beekeeper" {
-  count = "${var.instance_type == "ecs" ? 1 : 0}"
+  count = var.instance_type == "ecs" ? 1 : 0
   dashboard_name = "${local.instance_alias}-${var.aws_region}"
 
   dashboard_body = <<EOF
