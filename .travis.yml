@@ -1,7 +1,4 @@
-
 dist: bionic
-
-if: type = push
 
 env:
   - TERRAFORM_DIR=main
