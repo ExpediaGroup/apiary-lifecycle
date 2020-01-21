@@ -31,7 +31,7 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
       metadata {
         labels = local.cleanup_label_name_instance
         annotations = {
-          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role[count.index].arn
+          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_cleanup_iam[count.index].arn
         }
       }
 
