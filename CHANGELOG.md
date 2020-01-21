@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.1.1] - TBD
 ### Changed
 - Update all terraform to be compliant with Terraform 0.12 and not throw warnings.
-- Run `terraform fmt` on all code to enforce style
+- Run `terraform fmt` on all code to enforce style.
 
 ## [1.1.0] - 2020-01-13
 ### Added
