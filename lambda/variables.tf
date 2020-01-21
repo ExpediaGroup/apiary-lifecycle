@@ -17,7 +17,7 @@ variable "aws_region" {
 
 variable "subnets" {
   description = "Subnets in which Lambda will have access to."
-  type        = "list"
+  type        = list(string)
 }
 
 variable "security_groups" {
