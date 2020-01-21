@@ -1,6 +1,5 @@
 
 dist: bionic
-sudo: false
 
 if: type = push
 
