@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Update all terraform to be compliant with Terraform 0.12 and not throw warnings.
 - Run `terraform fmt` on all code to enforce style.
+- 
+### Added
+- Add support for kubernetes by specifying `var.instance_type = "k8s"` 
+- Add Kubernetes deployment options for cleanup / path-scheduler.
+- Add KIAM role creation for k8s pods.
 
 ## [1.1.0] - 2020-01-13
 ### Added
