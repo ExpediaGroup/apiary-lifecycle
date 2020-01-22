@@ -65,4 +65,3 @@ resource "kubernetes_ingress" "beekeeper" {
     }
   }
 }
-

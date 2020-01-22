@@ -279,7 +279,7 @@ variable "k8s_kiam_role_arn" {
 variable "k8s_namespace" {
   description = "Namespace to deploy all kubernetes resources to."
   default     = "beekeeper"
-  type        = "string"
+  type        = string
 }
 
 variable "k8s_image_pull_secret" {

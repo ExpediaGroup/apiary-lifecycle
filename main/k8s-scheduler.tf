@@ -127,4 +127,3 @@ resource "kubernetes_service" "beekeeper_scheduler" {
     type     = "ClusterIP"
   }
 }
-

@@ -129,4 +129,3 @@ resource "kubernetes_service" "beekeeper_cleanup" {
     type     = "ClusterIP"
   }
 }
-
