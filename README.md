@@ -10,6 +10,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 
 | Name | Version |
 |------|---------|
+| archive | n/a |
 | aws | n/a |
 | kubernetes | n/a |
 | random | n/a |
@@ -19,14 +20,14 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| allowed\_s3\_buckets | List of S3 Buckets to which Beekeeper will have read-write access. | `list` | `[]` | no |
+| allowed\_s3\_buckets | List of S3 Buckets to which Beekeeper will have read-write access. | `list(string)` | `[]` | no |
 | apiary\_metastore\_listener\_arn | ARN of the Apiary Metastore Listener. | `string` | n/a | yes |
 | aws\_region | AWS region to use for resources. | `string` | n/a | yes |
-| beekeeper\_tags | A map of tags to apply to resources. | `map` | n/a | yes |
+| beekeeper\_tags | A map of tags to apply to resources. | `map(string)` | n/a | yes |
 | cleanup\_docker\_image | Beekeeper cleanup docker image. | `string` | `"expediagroup/beekeeper-cleanup"` | no |
 | cleanup\_docker\_image\_version | Beekeeper cleanup docker image version. | `string` | `"latest"` | no |
-| cleanup\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Cleanup ECS task. Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
-| cleanup\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Cleanup container. Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
+| cleanup\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Cleanup ECS task.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
+| cleanup\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Cleanup container.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
 | db\_backup\_retention | The number of days to retain backups for the RDS Beekeeper DB. | `string` | `10` | no |
 | db\_backup\_window | Preferred backup window for the RDS Beekeeper DB in UTC. | `string` | `"02:00-03:00"` | no |
 | db\_maintenance\_window | Preferred maintenance window for the RDS Beekeeper DB in UTC. | `string` | `"wed:03:00-wed:04:00"` | no |
@@ -40,37 +41,37 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | graphite\_port | Graphite port. | `string` | `"2003"` | no |
 | graphite\_prefix | Prefix for Graphite metrics. | `string` | n/a | yes |
 | instance\_name | Beekeeper instance name to identify resources in multi-instance deployments. | `string` | `""` | no |
-| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS. | `string` | `"ecs"` | no |
+| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxilliary components (e.g. RDS, SQS etc.). | `string` | `"ecs"` | no |
 | k8s\_app\_name | Name to give to all kubernetes resources that are deployed | `string` | `"beekeeper"` | no |
-| k8s\_cleanup\_cpu | Total cpu to allot to the Beekeeper cleanup pod | `string` | `"500m"` | no |
-| k8s\_cleanup\_ingress\_host | Ingress host name for Beekeeper cleanup | `string` | `""` | no |
-| k8s\_cleanup\_ingress\_path | Ingress path regex for Beekeeper cleanup | `string` | `""` | no |
-| k8s\_cleanup\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Cleanup service | `number` | `60` | no |
-| k8s\_cleanup\_memory | Total memory to allot to the Beekeeper cleanup pod | `string` | `"2Gi"` | no |
-| k8s\_cleanup\_name\_replicas | Number of replicas to run for Beekeeper cleanup | `number` | `3` | no |
-| k8s\_cleanup\_port | Internal port that the Beekeeper Cleanup service runs on | `number` | `8080` | no |
+| k8s\_cleanup\_cpu | Total cpu to allot to the Beekeeper cleanup pod. | `string` | `"500m"` | no |
+| k8s\_cleanup\_ingress\_host | Ingress host name for Beekeeper cleanup. | `string` | `""` | no |
+| k8s\_cleanup\_ingress\_path | Ingress path regex for Beekeeper cleanup. | `string` | `""` | no |
+| k8s\_cleanup\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Cleanup service. | `number` | `60` | no |
+| k8s\_cleanup\_memory | Total memory to allot to the Beekeeper cleanup pod. | `string` | `"2Gi"` | no |
+| k8s\_cleanup\_name\_replicas | Number of replicas to run for Beekeeper cleanup. | `number` | `3` | no |
+| k8s\_cleanup\_port | Internal port that the Beekeeper Cleanup service runs on. | `number` | `8080` | no |
 | k8s\_image\_pull\_policy | Policy for the kubernetes orchestrator to pull images. | `string` | `"Always"` | no |
 | k8s\_image\_pull\_secret | Name of the kubernetes docker secret to reference for pulling private images | `string` | `""` | no |
-| k8s\_ingress\_enabled | Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on) | `number` | `0` | no |
-| k8s\_ingress\_tls\_hosts | List of hosts to apply TLS to the generated kubernetes ingress | `list(string)` | `[]` | no |
-| k8s\_ingress\_tls\_secret | Secret name for the generated ingress for TLS support | `string` | `""` | no |
+| k8s\_ingress\_enabled | Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on). | `number` | `0` | no |
+| k8s\_ingress\_tls\_hosts | List of hosts to apply TLS to the generated kubernetes ingress. | `list(string)` | `[]` | no |
+| k8s\_ingress\_tls\_secret | Secret name for the generated ingress for TLS support. | `string` | `""` | no |
 | k8s\_kiam\_role\_arn | KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions | `string` | n/a | yes |
 | k8s\_namespace | Namespace to deploy all kubernetes resources to. | `string` | `"beekeeper"` | no |
 | k8s\_node\_affinity | Full node\_affinity object as per terraform/kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_node\_selector | Full node\_selector object as per terraform/kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_node\_tolerations | Full k8s\_node\_tolerations object as per terraform/kubernetes docs. | `object({})` | `{}` | no |
-| k8s\_scheduler\_cpu | Total cpu to allot to the Beekeeper scheduler pod | `string` | `"500m"` | no |
-| k8s\_scheduler\_ingress\_host | Ingress host name for Beekeeper path-scheduler | `string` | `""` | no |
-| k8s\_scheduler\_ingress\_path | Ingress path regex for Beekeeper path-scheduler | `string` | `""` | no |
-| k8s\_scheduler\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Scheduling service | `number` | `60` | no |
-| k8s\_scheduler\_memory | Total memory to allot to the Beekeeper scheduler pod | `string` | `"2Gi"` | no |
-| k8s\_scheduler\_name\_replicas | Number of replicas to run for Beekeeper path scheduler | `number` | `3` | no |
-| k8s\_scheduler\_port | Internal port that the Beekeeper Scheduler service runs on | `number` | `8080` | no |
+| k8s\_scheduler\_cpu | Total cpu to allot to the Beekeeper scheduler pod. | `string` | `"500m"` | no |
+| k8s\_scheduler\_ingress\_host | Ingress host name for Beekeeper path-scheduler. | `string` | `""` | no |
+| k8s\_scheduler\_ingress\_path | Ingress path regex for Beekeeper path-scheduler. | `string` | `""` | no |
+| k8s\_scheduler\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Scheduling service. | `number` | `60` | no |
+| k8s\_scheduler\_memory | Total memory to allot to the Beekeeper scheduler pod. | `string` | `"2Gi"` | no |
+| k8s\_scheduler\_name\_replicas | Number of replicas to run for Beekeeper path scheduler. | `number` | `3` | no |
+| k8s\_scheduler\_port | Internal port that the Beekeeper Scheduler service runs on. | `number` | `8080` | no |
 | message\_retention\_seconds | SQS message retention (s). | `string` | `"604800"` | no |
 | path\_scheduler\_docker\_image | Beekeeper path-scheduler image. | `string` | `"expediagroup/beekeeper-path-scheduler-apiary"` | no |
 | path\_scheduler\_docker\_image\_version | Beekeeper path-scheduler image version. | `string` | `"latest"` | no |
-| path\_scheduler\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Path Scheduler Apiary ECS task. Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
-| path\_scheduler\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Path Scheduler Apiary container. Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
+| path\_scheduler\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Path Scheduler Apiary ECS task.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
+| path\_scheduler\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Path Scheduler Apiary container.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
 | queue\_name | Beekeeper SQS Queue name. | `string` | `"apiary-beekeeper"` | no |
 | queue\_stale\_messages\_timeout | Beekeeper SQS Queue Cloudwatch Alert timeout for messages older than this number of seconds. | `string` | `"1209600"` | no |
 | rds\_allocated\_storage | RDS allocated storage in GBs. | `string` | `10` | no |
@@ -79,11 +80,18 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | rds\_max\_allocated\_storage | RDS max allocated storage (autoscaling) in GBs. | `string` | `100` | no |
 | rds\_parameter\_group\_name | RDS parameter group. | `string` | `"default.mysql8.0"` | no |
 | rds\_storage\_type | RDS storage type. | `string` | `"gp2"` | no |
-| rds\_subnets | Subnets in which to provision Beekeeper RDS DB. | `list` | n/a | yes |
+| rds\_subnets | Subnets in which to provision Beekeeper RDS DB. | `list(string)` | n/a | yes |
 | receive\_wait\_time\_seconds | SQS receive wait time (s). | `string` | `"20"` | no |
 | scheduler\_delay\_ms | Delay between each cleanup job that is scheduled in milliseconds. | `string` | `"300000"` | no |
-| subnets | Subnets in which to install Beekeeper. | `list` | n/a | yes |
+| slack\_channel | Slack channel to which alerts about messages landing on the dead letter queue should be sent. | `string` | `""` | no |
+| slack\_lambda\_enabled | Boolean flag to determine if Beekeeper should create a Slack notifying Lambda for the dead letter queue. (0 = off, 1 = on). | `number` | `0` | no |
+| slack\_webhook\_url | Slack URL to which alerts about messages landing on the dead letter queue should be sent. | `string` | `""` | no |
+| subnets | Subnets in which to install Beekeeper. | `list(string)` | n/a | yes |
 | vpc\_id | VPC in which to install Beekeeper. | `string` | n/a | yes |
+
+## Outputs
+
+No output.
 
 # Legal
 This project is available under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).

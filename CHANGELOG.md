@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [2.0.0] - TBD
 ### Changed
-- Refactored to remove modules.
+- Refactored to remove `main` and `lambda` modules.
 - Update all terraform to be compliant with Terraform 0.12 and not throw warnings.
 - Run `terraform fmt` on all code to enforce style.
 
@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Add support for kubernetes by specifying `var.instance_type = "k8s"` 
 - Add Kubernetes deployment options for cleanup / path-scheduler.
 - Add KIAM role creation for k8s pods.
+
+### Changed
+- Update all terraform to be compliant with Terraform 0.12 and not throw warnings.
+- Run `terraform fmt` on all code to enforce style.
 
 ## [1.1.0] - 2020-01-13
 ### Added

@@ -1,3 +1,9 @@
+/**
+ * Copyright (C) 2018-2019 Expedia, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
+ 
 locals {
   cleanup_name      = "cleanup"
   cleanup_full_name = "${var.k8s_app_name}-cleanup"
@@ -123,4 +129,3 @@ resource "kubernetes_service" "beekeeper_cleanup" {
     type     = "ClusterIP"
   }
 }
-
