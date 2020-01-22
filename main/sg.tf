@@ -6,14 +6,14 @@
 
 resource "aws_security_group" "beekeeper_sg" {
   name   = "${local.instance_alias}-sg"
-  vpc_id = "${var.vpc_id}"
-  tags   = "${var.beekeeper_tags}"
+  vpc_id = var.vpc_id
+  tags   = var.beekeeper_tags
 
   ingress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["${data.aws_vpc.vpc.cidr_block}"]
+    cidr_blocks = [data.aws_vpc.vpc.cidr_block]
   }
 
   egress {
