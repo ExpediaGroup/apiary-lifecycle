@@ -1,3 +1,9 @@
+/**
+ * Copyright (C) 2018-2019 Expedia, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
+
 output "path_scheduler_config" {
   value       = data.template_file.beekeeper_path_scheduler_config.rendered
   description = "Rendered Spring config for Path Scheduler application."
