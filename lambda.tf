@@ -5,6 +5,7 @@
  */
 
 resource "aws_lambda_function" "beekeeper_slack_notifier" {
+  count            = var.slack_lambda_enabled == 1 ? 1 : 0
   filename         = "slack-notifier.zip"
   source_code_hash = data.archive_file.lambda.output_base64sha256
   function_name    = "beekeeper-slack-notifier"
@@ -24,11 +25,12 @@ resource "aws_lambda_function" "beekeeper_slack_notifier" {
 
   vpc_config {
     subnet_ids         = var.subnets
-    security_group_ids = var.security_groups
+    security_group_ids = aws_security_group.beekeeper_sg.id
   }
 }
 
 resource "aws_lambda_permission" "beekeeper_slack_notifier" {
+  count         = var.slack_lambda_enabled == 1 ? 1 : 0
   statement_id  = "AllowExecutionFromSNS"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.beekeeper_slack_notifier.function_name
@@ -38,6 +40,6 @@ resource "aws_lambda_permission" "beekeeper_slack_notifier" {
 
 data "archive_file" "lambda" {
   type        = "zip"
-  source_file = "${path.module}/slack-notifier.py"
-  output_path = "${path.cwd}/slack-notifier.zip"
+  source_file = "${path.module}/files/slack-notifier.py"
+  output_path = "${path.cwd}/files/slack-notifier.zip"
 }

@@ -1,6 +1,8 @@
 # Overview
 Terraform deployment scripts for [Beekeeper](https://github.com/ExpediaGroup/beekeeper).
 
+Includes support for deploying Beekeeper on ECS and Kubernetes. Also includes deployment scripts for a Lambda which notifies Slack when Beekeeper's dead letter queue receives a message (this module is not required to run Beekeeper).
+
 ## Dependencies
 If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform module will not create the database password automatically. The secret will need to be created in Secrets Manager separately with the specified `db_password_key`.
 

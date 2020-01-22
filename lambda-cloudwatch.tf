@@ -5,6 +5,7 @@
  */
 
 resource "aws_cloudwatch_metric_alarm" "beekeeper_sqs_dlq" {
+  count               = var.slack_lambda_enabled == 1 ? 1 : 0
   alarm_name          = "${var.queue_name}-dlq-alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"

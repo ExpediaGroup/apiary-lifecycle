@@ -6,7 +6,7 @@
 
 data "template_file" "beekeeper_path_scheduler_container_definition" {
   count    = var.instance_type == "ecs" ? 1 : 0
-  template = file("${path.module}/files/container-definition.json")
+  template = file("${path.module}/files/ecs-container-definition.json")
 
   vars = {
     db_password_strategy  = var.db_password_strategy
@@ -42,7 +42,7 @@ data "template_file" "beekeeper_path_scheduler_config" {
 
 data "template_file" "beekeeper_cleanup_container_definition" {
   count    = var.instance_type == "ecs" ? 1 : 0
-  template = file("${path.module}/files/container-definition.json")
+  template = file("${path.module}/files/ecs-container-definition.json")
 
   vars = {
     db_password_strategy  = var.db_password_strategy
