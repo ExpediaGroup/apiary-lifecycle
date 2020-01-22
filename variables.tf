@@ -13,8 +13,8 @@ variable "instance_name" {
 }
 
 variable "instance_type" {
-  description = "Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will deploy auxilliary components (e.g. RDS, SQS etc.) and will output IAM policies which can used to create roles for your instance type, e.g. EKS."
-  type        = "string"
+  description = "Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxilliary components (e.g. RDS, SQS etc.)."
+  type        = string
   default     = "ecs"
 }
 
@@ -279,7 +279,7 @@ variable "k8s_kiam_role_arn" {
 variable "k8s_namespace" {
   description = "Namespace to deploy all kubernetes resources to."
   default     = "beekeeper"
-  type        = "string"
+  type        = string
 }
 
 variable "k8s_image_pull_secret" {
@@ -422,8 +422,8 @@ variable "k8s_scheduler_ingress_path" {
 
 variable "slack_lambda_enabled" {
   description = "Boolean flag to determine if Beekeeper should create a Slack notifying Lambda for the dead letter queue. (0 = off, 1 = on)."
-  type        = 0
-  default     = number
+  default     = 0
+  type        = number
 }
 
 variable "slack_channel" {

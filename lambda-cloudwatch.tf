@@ -15,7 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "beekeeper_sqs_dlq" {
   statistic           = "Sum"
   threshold           = "1"
   alarm_description   = "This alarm monitors the number of messages in the Beekeeper SQS dead letter queue."
-  alarm_actions       = [aws_sns_topic.beekeeper_sqs_dlq.arn]
+  alarm_actions       = [aws_sns_topic.beekeeper_sqs_dlq[count.index].arn]
   treat_missing_data  = "notBreaching"
   tags                = var.beekeeper_tags
 

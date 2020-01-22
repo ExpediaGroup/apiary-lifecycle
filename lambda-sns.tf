@@ -12,7 +12,7 @@ resource "aws_sns_topic" "beekeeper_sqs_dlq" {
 
 resource "aws_sns_topic_subscription" "beekeeper_sns_alerts_lambda" {
   count     = var.slack_lambda_enabled == 1 ? 1 : 0
-  topic_arn = aws_sns_topic.beekeeper_sqs_dlq.arn
+  topic_arn = aws_sns_topic.beekeeper_sqs_dlq[count.index].arn
   protocol  = "lambda"
-  endpoint  = aws_lambda_function.beekeeper_slack_notifier.arn
+  endpoint  = aws_lambda_function.beekeeper_slack_notifier[count.index].arn
 }

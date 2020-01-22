@@ -8,6 +8,8 @@ locals {
   instance_alias = var.instance_name == "" ? "beekeeper" : format("beekeeper-%s", var.instance_name)
 }
 
+data "aws_iam_account_alias" "current" {}
+
 data "aws_vpc" "vpc" {
   id = var.vpc_id
 }
