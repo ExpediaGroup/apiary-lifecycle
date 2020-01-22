@@ -1,3 +1,9 @@
+/**
+ * Copyright (C) 2018-2019 Expedia, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
+
 locals {
   scheduler_name      = "path-scheduler"
   scheduler_full_name = "${var.k8s_app_name}-path-scheduler"
