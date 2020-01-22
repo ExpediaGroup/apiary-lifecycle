@@ -1,0 +1,25 @@
+name: Terraform Validation
+
+on: [ push ]
+
+jobs:
+  test:
+    name: Verify Terraform is valid for ${{ matrix.terraform_dir }}
+    runs-on: ubuntu-18.04
+    timeout-minutes: 5
+    container:
+      image: hashicorp/terraform:0.12.19
+    env:
+      AWS_DEFAULT_REGION: us-east-1
+    strategy:
+      matrix:
+        terraform_dir: [main, lambda]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: "Terraform Init"
+        run: terraform init
+        working-directory: ${{ matrix.terraform_dir }}
+      - name: "Validate Terraform"
+        run: terraform validate
+        working-directory: ${{ matrix.terraform_dir }}

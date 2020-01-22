@@ -6,7 +6,7 @@
 
 
 resource "aws_iam_role" "beekeeper_slack_notifier_lambda" {
-  name  = "${local.instance_alias}-slack-notifier-lambda-${var.aws_region}"
+  name               = "${local.instance_alias}-slack-notifier-lambda-${var.aws_region}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -50,6 +50,6 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "beekeeper_slack_notifier_lambda" {
-  role       = "${aws_iam_role.beekeeper_slack_notifier_lambda.id}"
-  policy_arn = "${aws_iam_policy.beekeeper_lambda_vpc_access.arn}"
+  role       = aws_iam_role.beekeeper_slack_notifier_lambda.id
+  policy_arn = aws_iam_policy.beekeeper_lambda_vpc_access.arn
 }

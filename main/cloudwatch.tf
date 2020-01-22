@@ -103,7 +103,7 @@ EOF
 }
 
 resource "aws_cloudwatch_dashboard" "beekeeper" {
-  count = "${var.instance_type == "ecs" ? 1 : 0}"
+  count          = var.instance_type == "ecs" ? 1 : 0
   dashboard_name = "${local.instance_alias}-${var.aws_region}"
 
   dashboard_body = <<EOF
@@ -146,36 +146,36 @@ locals {
 
   dimensions = [
     {
-      ClusterName = "${local.instance_alias}"
+      ClusterName = local.instance_alias
       ServiceName = "${local.instance_alias}-path-scheduler-service"
     },
     {
-      ClusterName = "${local.instance_alias}"
+      ClusterName = local.instance_alias
       ServiceName = "${local.instance_alias}-path-scheduler-service"
     },
     {
-      ClusterName = "${local.instance_alias}"
+      ClusterName = local.instance_alias
       ServiceName = "${local.instance_alias}-cleanup-service"
     },
     {
-      ClusterName = "${local.instance_alias}"
+      ClusterName = local.instance_alias
       ServiceName = "${local.instance_alias}-cleanup-service"
     }
   ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "beekeeper_alert" {
-  count               = "${var.instance_type == "ecs" ? length(local.alerts) : 0}"
-  alarm_name          = "${lookup(local.alerts[count.index], "alarm_name")}"
-  comparison_operator = "${lookup(local.alerts[count.index], "comparison_operator", "GreaterThanOrEqualToThreshold")}"
-  metric_name         = "${lookup(local.alerts[count.index], "metric_name")}"
-  namespace           = "${lookup(local.alerts[count.index], "namespace")}"
-  period              = "${lookup(local.alerts[count.index], "period", "120")}"
-  evaluation_periods  = "${lookup(local.alerts[count.index], "evaluation_periods", "2")}"
+  count               = var.instance_type == "ecs" ? length(local.alerts) : 0
+  alarm_name          = lookup(local.alerts[count.index], "alarm_name")
+  comparison_operator = lookup(local.alerts[count.index], "comparison_operator", "GreaterThanOrEqualToThreshold")
+  metric_name         = lookup(local.alerts[count.index], "metric_name")
+  namespace           = lookup(local.alerts[count.index], "namespace")
+  period              = lookup(local.alerts[count.index], "period", "120")
+  evaluation_periods  = lookup(local.alerts[count.index], "evaluation_periods", "2")
   statistic           = "Average"
-  threshold           = "${lookup(local.alerts[count.index], "threshold")}"
+  threshold           = lookup(local.alerts[count.index], "threshold")
 
   insufficient_data_actions = []
-  dimensions                = "${local.dimensions[count.index]}"
-  alarm_actions             = ["${aws_sns_topic.beekeeper_ops_sns.*.arn[0]}"]
+  dimensions                = local.dimensions[count.index]
+  alarm_actions             = [aws_sns_topic.beekeeper_ops_sns.*.arn[0]]
 }
