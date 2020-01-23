@@ -13,7 +13,7 @@ variable "instance_name" {
 }
 
 variable "instance_type" {
-  description = "Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxilliary components (e.g. RDS, SQS etc.)."
+  description = "Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxiliary components (e.g. RDS, SQS etc.)."
   type        = string
   default     = "ecs"
 }
@@ -319,13 +319,13 @@ variable "k8s_ingress_enabled" {
 }
 
 variable "k8s_ingress_tls_hosts" {
-  description = "List of hosts to apply TLS to the generated kubernetes ingress."
+  description = "List of hosts for TLS configuration of a Kubernetes ingress."
   default     = []
   type        = list(string)
 }
 
 variable "k8s_ingress_tls_secret" {
-  description = "Secret name for the generated ingress for TLS support."
+  description = "Secret name for TLS configuration of Kubernetes ingress."
   default     = ""
   type        = string
 }
