@@ -325,7 +325,7 @@ variable "k8s_ingress_tls_hosts" {
 }
 
 variable "k8s_ingress_tls_secret" {
-  description = "Secret name for TLS configuration of Kubernetes ingress."
+  description = "Secret name for TLS configuration of a Kubernetes ingress."
   default     = ""
   type        = string
 }
