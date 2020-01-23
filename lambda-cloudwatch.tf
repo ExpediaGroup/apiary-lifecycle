@@ -1,10 +1,11 @@
 /**
- * Copyright (C) 2018-2019 Expedia, Inc.
+ * Copyright (C) 2019-2020 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 
 resource "aws_cloudwatch_metric_alarm" "beekeeper_sqs_dlq" {
+  count               = var.slack_lambda_enabled == 1 ? 1 : 0
   alarm_name          = "${var.queue_name}-dlq-alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
@@ -14,7 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "beekeeper_sqs_dlq" {
   statistic           = "Sum"
   threshold           = "1"
   alarm_description   = "This alarm monitors the number of messages in the Beekeeper SQS dead letter queue."
-  alarm_actions       = [aws_sns_topic.beekeeper_sqs_dlq.arn]
+  alarm_actions       = [aws_sns_topic.beekeeper_sqs_dlq[count.index].arn]
   treat_missing_data  = "notBreaching"
   tags                = var.beekeeper_tags
 
