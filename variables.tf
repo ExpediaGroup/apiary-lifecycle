@@ -334,7 +334,7 @@ variable "k8s_ingress_tls_secret" {
 
 variable "k8s_cleanup_name_replicas" {
   description = "Number of replicas to run for Beekeeper cleanup."
-  default     = 3
+  default     = 1
   type        = number
 }
 
@@ -378,7 +378,7 @@ variable "k8s_cleanup_ingress_path" {
 
 variable "k8s_scheduler_name_replicas" {
   description = "Number of replicas to run for Beekeeper path scheduler."
-  default     = 3
+  default     = 1
   type        = number
 }
 
