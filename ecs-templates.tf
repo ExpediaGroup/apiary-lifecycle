@@ -25,21 +25,6 @@ data "template_file" "beekeeper_path_scheduler_container_definition" {
   }
 }
 
-data "template_file" "beekeeper_path_scheduler_config" {
-  template = file("${path.module}/files/beekeeper-path-scheduler-config.yml")
-
-  vars = {
-    db_endpoint      = aws_db_instance.beekeeper.endpoint
-    db_username      = aws_db_instance.beekeeper.username
-    queue            = aws_sqs_queue.beekeeper.id
-    graphite_enabled = var.graphite_enabled
-    graphite_host    = var.graphite_host
-    graphite_prefix  = var.graphite_prefix
-    graphite_port    = var.graphite_port
-  }
-}
-
-
 data "template_file" "beekeeper_cleanup_container_definition" {
   count    = var.instance_type == "ecs" ? 1 : 0
   template = file("${path.module}/files/ecs-container-definition.json")
@@ -58,20 +43,5 @@ data "template_file" "beekeeper_cleanup_container_definition" {
 
     #to instruct ECS to use repositoryCredentials for private docker registry
     docker_auth = var.docker_registry_auth_secret_name == "" ? "" : format("\"repositoryCredentials\" :{\n \"credentialsParameter\":\"%s\"\n},", join("", data.aws_secretsmanager_secret.docker_registry.*.arn))
-  }
-}
-
-data "template_file" "beekeeper_cleanup_config" {
-  template = file("${path.module}/files/beekeeper-cleanup-config.yml")
-
-  vars = {
-    db_endpoint        = aws_db_instance.beekeeper.endpoint
-    db_username        = aws_db_instance.beekeeper.username
-    graphite_enabled   = var.graphite_enabled
-    graphite_host      = var.graphite_host
-    graphite_prefix    = var.graphite_prefix
-    graphite_port      = var.graphite_port
-    scheduler_delay_ms = var.scheduler_delay_ms
-    dry_run_enabled    = var.dry_run_enabled
   }
 }

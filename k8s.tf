@@ -12,18 +12,6 @@ locals {
   }
 }
 
-resource "kubernetes_config_map" "beekeeper" {
-  count = var.instance_type == "k8s" ? 1 : 0
-  metadata {
-    name = var.k8s_app_name
-  }
-
-  data = {
-    "${local.scheduler_name}.properties" = data.template_file.beekeeper_path_scheduler_config
-    "${local.cleanup_name}.properties"   = data.template_file.beekeeper_cleanup_config
-  }
-}
-
 resource "kubernetes_ingress" "beekeeper" {
   count = var.instance_type == "k8s" && var.k8s_ingress_enabled == 1 ? 1 : 0
   metadata {

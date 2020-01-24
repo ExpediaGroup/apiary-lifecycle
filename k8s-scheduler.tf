@@ -96,13 +96,8 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
           }
 
           env {
-            name = "BEEKEEPER_CONFIG"
-            value_from {
-              config_map_key_ref {
-                name = kubernetes_config_map.beekeeper[count.index].metadata.name
-                key  = "${local.scheduler_full_name}.properties"
-              }
-            }
+            name  = "BEEKEEPER_CONFIG"
+            value = base64encode(data.template_file.beekeeper_path_scheduler_config.rendered)
           }
         }
       }

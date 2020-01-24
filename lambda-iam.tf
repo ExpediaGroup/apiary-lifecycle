@@ -53,6 +53,6 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "beekeeper_slack_notifier_lambda" {
   count      = var.slack_lambda_enabled == 1 ? 1 : 0
-  role       = aws_iam_role.beekeeper_slack_notifier_lambda[count.index]
+  role       = aws_iam_role.beekeeper_slack_notifier_lambda[count.index].id
   policy_arn = aws_iam_policy.beekeeper_lambda_vpc_access[count.index].arn
 }
