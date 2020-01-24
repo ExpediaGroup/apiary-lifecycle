@@ -266,48 +266,48 @@ variable "graphite_port" {
 # K8S Configuration
 
 variable "k8s_app_name" {
-  description = "Name to give to all kubernetes resources that are deployed"
+  description = "Name to give to all Kubernetes resources that are deployed."
   default     = "beekeeper"
   type        = string
 }
 
 variable "k8s_kiam_role_arn" {
-  description = "KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions"
+  description = "KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions."
   type        = string
 }
 
 variable "k8s_namespace" {
-  description = "Namespace to deploy all kubernetes resources to."
+  description = "Namespace to deploy all Kubernetes resources to."
   default     = "beekeeper"
   type        = string
 }
 
 variable "k8s_image_pull_secret" {
-  description = "Name of the kubernetes docker secret to reference for pulling private images"
+  description = "Name of the Kubernetes docker secret to reference for pulling private images."
   default     = ""
   type        = string
 }
 
 variable "k8s_image_pull_policy" {
-  description = "Policy for the kubernetes orchestrator to pull images."
+  description = "Policy for the Kubernetes orchestrator to pull images."
   default     = "Always"
   type        = string
 }
 
 variable "k8s_node_affinity" {
-  description = "Full node_affinity object as per terraform/kubernetes docs."
+  description = "Full node_affinity object as per terraform/Kubernetes docs."
   default     = {}
   type        = object({})
 }
 
 variable "k8s_node_selector" {
-  description = "Full node_selector object as per terraform/kubernetes docs."
+  description = "Full node_selector object as per terraform/Kubernetes docs."
   default     = {}
   type        = object({})
 }
 
 variable "k8s_node_tolerations" {
-  description = "Full k8s_node_tolerations object as per terraform/kubernetes docs."
+  description = "Full k8s_node_tolerations object as per terraform/Kubernetes docs."
   default     = {}
   type        = object({})
 }
@@ -346,7 +346,7 @@ variable "k8s_cleanup_cpu" {
 
 variable "k8s_cleanup_port" {
   description = "Internal port that the Beekeeper Cleanup service runs on."
-  default     = 8080
+  default     = 8008
   type        = number
 }
 
