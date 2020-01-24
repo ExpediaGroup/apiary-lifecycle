@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
   }
 
   spec {
-    replicas = var.k8s_cleanup_name_replicas
+    replicas = 1
     selector {
       match_labels = local.cleanup_label_name_instance
     }

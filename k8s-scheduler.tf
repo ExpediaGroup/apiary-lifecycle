@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
   }
 
   spec {
-    replicas = var.k8s_scheduler_name_replicas
+    replicas = 1
     selector {
       match_labels = local.scheduler_label_name_instance
     }

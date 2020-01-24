@@ -332,12 +332,6 @@ variable "k8s_ingress_tls_secret" {
 
 # K8S - cleanup deployment
 
-variable "k8s_cleanup_name_replicas" {
-  description = "Number of replicas to run for Beekeeper cleanup."
-  default     = 1
-  type        = number
-}
-
 variable "k8s_cleanup_memory" {
   description = "Total memory to allot to the Beekeeper cleanup pod."
   default     = "2Gi"
@@ -375,12 +369,6 @@ variable "k8s_cleanup_ingress_path" {
 }
 
 # K8S - scheduler deployment
-
-variable "k8s_scheduler_name_replicas" {
-  description = "Number of replicas to run for Beekeeper path scheduler."
-  default     = 1
-  type        = number
-}
 
 variable "k8s_scheduler_memory" {
   description = "Total memory to allot to the Beekeeper scheduler pod."
