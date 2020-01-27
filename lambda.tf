@@ -41,5 +41,5 @@ resource "aws_lambda_permission" "beekeeper_slack_notifier" {
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "${path.module}/files/slack-notifier.py"
-  output_path = "${path.cwd}/files/slack-notifier.zip"
+  output_path = "${path.cwd}/slack-notifier.zip"
 }

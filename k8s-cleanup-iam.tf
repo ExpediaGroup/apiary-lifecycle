@@ -6,7 +6,7 @@
  
 resource "aws_iam_role" "beekeeper_k8s_role_cleanup_iam" {
   count = var.instance_type == "k8s" ? 1 : 0
-  name  = "beekeeper-${var.aws_region}"
+  name  = "${local.instance_alias}-cleanup-${var.aws_region}"
 
   assume_role_policy = <<EOF
 {
