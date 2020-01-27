@@ -28,7 +28,8 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
   }
 
   spec {
-    replicas = var.k8s_cleanup_name_replicas
+    # setting the number of replicas to greater than 1 is currently untested
+    replicas = 1
     selector {
       match_labels = local.cleanup_label_name_instance
     }
@@ -42,10 +43,6 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
       }
 
       spec {
-        image_pull_secrets {
-          name = var.k8s_image_pull_secret
-        }
-
         container {
           name              = local.cleanup_full_name
           image             = "${var.cleanup_docker_image}:${var.cleanup_docker_image_version}"
@@ -96,13 +93,8 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
           }
 
           env {
-            name = "BEEKEEPER_CONFIG"
-            value_from {
-              config_map_key_ref {
-                name = kubernetes_config_map.beekeeper[count.index].metadata.name
-                key  = "${local.cleanup_full_name}.properties"
-              }
-            }
+            name  = "BEEKEEPER_CONFIG"
+            value = base64encode(data.template_file.beekeeper_cleanup_config.rendered)
           }
         }
       }
@@ -114,7 +106,7 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
 resource "kubernetes_service" "beekeeper_cleanup" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name   = "beekeeper"
+    name   = local.cleanup_full_name
     labels = local.cleanup_labels
   }
 

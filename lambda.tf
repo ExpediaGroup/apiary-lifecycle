@@ -19,13 +19,13 @@ resource "aws_lambda_function" "beekeeper_slack_notifier" {
     variables = {
       slackChannel    = var.slack_channel
       slackWebhookUrl = var.slack_webhook_url
-      account         = data.aws_iam_account_alias.current.account_alias[count.index]
+      account         = data.aws_iam_account_alias.current.account_alias
     }
   }
 
   vpc_config {
     subnet_ids         = var.subnets
-    security_group_ids = aws_security_group.beekeeper_sg.id
+    security_group_ids = [aws_security_group.beekeeper_sg.id]
   }
 }
 
@@ -41,5 +41,5 @@ resource "aws_lambda_permission" "beekeeper_slack_notifier" {
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "${path.module}/files/slack-notifier.py"
-  output_path = "${path.cwd}/files/slack-notifier.zip"
+  output_path = "${path.cwd}/slack-notifier.zip"
 }
