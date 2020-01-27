@@ -48,7 +48,6 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | k8s\_cleanup\_ingress\_path | Ingress path regex for Beekeeper cleanup. | `string` | `""` | no |
 | k8s\_cleanup\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Cleanup service. | `number` | `60` | no |
 | k8s\_cleanup\_memory | Total memory to allot to the Beekeeper cleanup pod. | `string` | `"2Gi"` | no |
-| k8s\_cleanup\_name\_replicas | Number of replicas to run for Beekeeper cleanup. | `number` | `3` | no |
 | k8s\_cleanup\_port | Internal port that the Beekeeper Cleanup service runs on. | `number` | `8080` | no |
 | k8s\_image\_pull\_policy | Policy for the kubernetes orchestrator to pull images. | `string` | `"Always"` | no |
 | k8s\_image\_pull\_secret | Name of the kubernetes docker secret to reference for pulling private images | `string` | `""` | no |
@@ -65,7 +64,6 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | k8s\_scheduler\_ingress\_path | Ingress path regex for Beekeeper path-scheduler. | `string` | `""` | no |
 | k8s\_scheduler\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Scheduling service. | `number` | `60` | no |
 | k8s\_scheduler\_memory | Total memory to allot to the Beekeeper scheduler pod. | `string` | `"2Gi"` | no |
-| k8s\_scheduler\_name\_replicas | Number of replicas to run for Beekeeper path scheduler. | `number` | `3` | no |
 | k8s\_scheduler\_port | Internal port that the Beekeeper Scheduler service runs on. | `number` | `8080` | no |
 | message\_retention\_seconds | SQS message retention (s). | `string` | `"604800"` | no |
 | path\_scheduler\_docker\_image | Beekeeper path-scheduler image. | `string` | `"expediagroup/beekeeper-path-scheduler-apiary"` | no |
