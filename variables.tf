@@ -282,12 +282,6 @@ variable "k8s_namespace" {
   type        = string
 }
 
-variable "k8s_image_pull_secret" {
-  description = "Name of the Kubernetes docker secret to reference for pulling private images."
-  default     = ""
-  type        = string
-}
-
 variable "k8s_image_pull_policy" {
   description = "Policy for the Kubernetes orchestrator to pull images."
   default     = "Always"
