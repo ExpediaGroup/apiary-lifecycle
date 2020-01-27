@@ -41,24 +41,23 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | graphite\_port | Graphite port. | `string` | `"2003"` | no |
 | graphite\_prefix | Prefix for Graphite metrics. | `string` | n/a | yes |
 | instance\_name | Beekeeper instance name to identify resources in multi-instance deployments. | `string` | `""` | no |
-| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxilliary components (e.g. RDS, SQS etc.). | `string` | `"ecs"` | no |
-| k8s\_app\_name | Name to give to all kubernetes resources that are deployed | `string` | `"beekeeper"` | no |
+| instance\_type | Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxiliary components (e.g. RDS, SQS etc.). | `string` | `"ecs"` | no |
+| k8s\_app\_name | Name to give to all Kubernetes resources that are deployed. | `string` | `"beekeeper"` | no |
 | k8s\_cleanup\_cpu | Total cpu to allot to the Beekeeper cleanup pod. | `string` | `"500m"` | no |
 | k8s\_cleanup\_ingress\_host | Ingress host name for Beekeeper cleanup. | `string` | `""` | no |
 | k8s\_cleanup\_ingress\_path | Ingress path regex for Beekeeper cleanup. | `string` | `""` | no |
 | k8s\_cleanup\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Cleanup service. | `number` | `60` | no |
 | k8s\_cleanup\_memory | Total memory to allot to the Beekeeper cleanup pod. | `string` | `"2Gi"` | no |
-| k8s\_cleanup\_port | Internal port that the Beekeeper Cleanup service runs on. | `number` | `8080` | no |
-| k8s\_image\_pull\_policy | Policy for the kubernetes orchestrator to pull images. | `string` | `"Always"` | no |
-| k8s\_image\_pull\_secret | Name of the kubernetes docker secret to reference for pulling private images | `string` | `""` | no |
+| k8s\_cleanup\_port | Internal port that the Beekeeper Cleanup service runs on. | `number` | `8008` | no |
+| k8s\_image\_pull\_policy | Policy for the Kubernetes orchestrator to pull images. | `string` | `"Always"` | no |
 | k8s\_ingress\_enabled | Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on). | `number` | `0` | no |
-| k8s\_ingress\_tls\_hosts | List of hosts to apply TLS to the generated kubernetes ingress. | `list(string)` | `[]` | no |
-| k8s\_ingress\_tls\_secret | Secret name for the generated ingress for TLS support. | `string` | `""` | no |
-| k8s\_kiam\_role\_arn | KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions | `string` | n/a | yes |
-| k8s\_namespace | Namespace to deploy all kubernetes resources to. | `string` | `"beekeeper"` | no |
-| k8s\_node\_affinity | Full node\_affinity object as per terraform/kubernetes docs. | `object({})` | `{}` | no |
-| k8s\_node\_selector | Full node\_selector object as per terraform/kubernetes docs. | `object({})` | `{}` | no |
-| k8s\_node\_tolerations | Full k8s\_node\_tolerations object as per terraform/kubernetes docs. | `object({})` | `{}` | no |
+| k8s\_ingress\_tls\_hosts | List of hosts for TLS configuration of a Kubernetes ingress. | `list(string)` | `[]` | no |
+| k8s\_ingress\_tls\_secret | Secret name for TLS configuration of a Kubernetes ingress. | `string` | `""` | no |
+| k8s\_kiam\_role\_arn | KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions. | `string` | n/a | yes |
+| k8s\_namespace | Namespace to deploy all Kubernetes resources to. | `string` | `"beekeeper"` | no |
+| k8s\_node\_affinity | Full node\_affinity object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
+| k8s\_node\_selector | Full node\_selector object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
+| k8s\_node\_tolerations | Full k8s\_node\_tolerations object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_scheduler\_cpu | Total cpu to allot to the Beekeeper scheduler pod. | `string` | `"500m"` | no |
 | k8s\_scheduler\_ingress\_host | Ingress host name for Beekeeper path-scheduler. | `string` | `""` | no |
 | k8s\_scheduler\_ingress\_path | Ingress path regex for Beekeeper path-scheduler. | `string` | `""` | no |
