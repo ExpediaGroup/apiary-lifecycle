@@ -28,6 +28,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
   }
 
   spec {
+    # setting the number of replicas to greater than 1 is currently untested
     replicas = 1
     selector {
       match_labels = local.scheduler_label_name_instance
