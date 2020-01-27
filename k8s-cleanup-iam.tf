@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "beekeeper_s3" {
   policy_arn = aws_iam_policy.beekeeper_s3.arn
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_secrets" {
+resource "aws_iam_role_policy_attachment" "beekeeper_cleanup_secrets" {
   count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role_cleanup_iam[count.index].id
   policy_arn = aws_iam_policy.beekeeper_secrets.arn
