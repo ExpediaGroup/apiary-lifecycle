@@ -33,13 +33,13 @@ resource "aws_iam_role" "beekeeper_k8s_role_scheduler_iam" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_sqs" {
+resource "aws_iam_role_policy_attachment" "beekeeper_k8s_scheduler_sqs" {
   count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role_scheduler_iam[count.index].id
   policy_arn = aws_iam_policy.beekeeper_sqs.arn
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_scheduler_secrets" {
+resource "aws_iam_role_policy_attachment" "beekeeper_k8s_scheduler_secrets" {
   count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role_scheduler_iam[count.index].id
   policy_arn = aws_iam_policy.beekeeper_secrets.arn

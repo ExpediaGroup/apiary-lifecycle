@@ -33,13 +33,13 @@ resource "aws_iam_role" "beekeeper_k8s_role_cleanup_iam" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_s3" {
+resource "aws_iam_role_policy_attachment" "beekeeper_k8s_cleanup_s3" {
   count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role_cleanup_iam[count.index].id
   policy_arn = aws_iam_policy.beekeeper_s3.arn
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_cleanup_secrets" {
+resource "aws_iam_role_policy_attachment" "beekeeper_k8s_cleanup_secrets" {
   count      = var.instance_type == "k8s" ? 1 : 0
   role       = aws_iam_role.beekeeper_k8s_role_cleanup_iam[count.index].id
   policy_arn = aws_iam_policy.beekeeper_secrets.arn
