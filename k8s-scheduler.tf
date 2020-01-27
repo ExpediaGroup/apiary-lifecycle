@@ -109,7 +109,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
 resource "kubernetes_service" "beekeeper_scheduler" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name   = "beekeeper"
+    name   = local.scheduler_full_name
     labels = local.scheduler_labels
   }
   spec {

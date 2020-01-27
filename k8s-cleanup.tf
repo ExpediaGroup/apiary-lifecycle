@@ -109,7 +109,7 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
 resource "kubernetes_service" "beekeeper_cleanup" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name   = "beekeeper"
+    name   = local.cleanup_full_name
     labels = local.cleanup_labels
   }
 
