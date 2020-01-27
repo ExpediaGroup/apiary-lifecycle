@@ -42,10 +42,6 @@ resource "kubernetes_deployment" "beekeeper_cleanup" {
       }
 
       spec {
-        image_pull_secrets {
-          name = var.k8s_image_pull_secret
-        }
-
         container {
           name              = local.cleanup_full_name
           image             = "${var.cleanup_docker_image}:${var.cleanup_docker_image_version}"
