@@ -263,6 +263,12 @@ variable "graphite_port" {
   type        = string
 }
 
+variable "prometheus_enabled" {
+  description = "Enable to pull metrics using Prometheus - true or false."
+  default     = "false"
+  type        = string
+}
+
 # K8S Configuration
 
 variable "k8s_app_name" {
