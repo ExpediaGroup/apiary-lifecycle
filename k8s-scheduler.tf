@@ -39,6 +39,9 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
         labels = local.scheduler_label_name_instance
         annotations = {
           "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_scheduler_iam[count.index].arn
+          "prometheus.io/scrape": "true"
+          "prometheus.io/port": var.k8s_cleanup_port
+          "prometheus.io/path": "/actuator/prometheus"
         }
       }
 
