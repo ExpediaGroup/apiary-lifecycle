@@ -69,6 +69,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | path\_scheduler\_docker\_image\_version | Beekeeper path-scheduler image version. | `string` | `"latest"` | no |
 | path\_scheduler\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Path Scheduler Apiary ECS task.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
 | path\_scheduler\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Path Scheduler Apiary container.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
+| prometheus\_enabled | Enable to pull metrics using Prometheus - true or false. | `string` | `"false"` | no |
 | queue\_name | Beekeeper SQS Queue name. | `string` | `"apiary-beekeeper"` | no |
 | queue\_stale\_messages\_timeout | Beekeeper SQS Queue Cloudwatch Alert timeout for messages older than this number of seconds. | `string` | `"1209600"` | no |
 | rds\_allocated\_storage | RDS allocated storage in GBs. | `string` | `10` | no |
