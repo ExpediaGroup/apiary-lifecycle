@@ -22,7 +22,7 @@ data "template_file" "beekeeper_path_scheduler_config" {
     db_endpoint      = aws_db_instance.beekeeper.endpoint
     db_username      = aws_db_instance.beekeeper.username
     queue            = aws_sqs_queue.beekeeper.id
-    graphite_config  = var.graphite_enabled == false ? "" : data.template_file.beekeeper_graphite_config.rendered
+    graphite_config  = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }
 }
 
@@ -34,6 +34,6 @@ data "template_file" "beekeeper_cleanup_config" {
     db_username        = aws_db_instance.beekeeper.username
     scheduler_delay_ms = var.scheduler_delay_ms
     dry_run_enabled    = var.dry_run_enabled
-    graphite_config    = var.graphite_enabled == false ? "" : data.template_file.beekeeper_graphite_config.rendered
+    graphite_config    = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }
 }
