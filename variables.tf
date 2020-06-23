@@ -249,11 +249,13 @@ variable "graphite_enabled" {
 
 variable "graphite_host" {
   description = "Graphite metrics host."
+  default     = "localhost"
   type        = string
 }
 
 variable "graphite_prefix" {
   description = "Prefix for Graphite metrics."
+  default     = ""
   type        = string
 }
 

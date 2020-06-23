@@ -4,8 +4,4 @@ spring.datasource:
 properties:
   scheduler-delay-ms: ${scheduler_delay_ms}
   dry-run-enabled: ${dry_run_enabled}
-graphite:
-  enabled: ${graphite_enabled}
-  host: ${graphite_host}
-  port: ${graphite_port}
-  prefix: ${graphite_prefix}
+${graphite-config}
