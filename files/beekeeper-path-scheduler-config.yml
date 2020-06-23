@@ -3,4 +3,4 @@ spring.datasource:
   username: ${db_username}
 properties:
   apiary.queue-url: ${queue}
-${graphite-config}
+${graphite_config}
