@@ -37,7 +37,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | docker\_registry\_auth\_secret\_name | Docker Registry authentication SecretManager secret name. | `string` | `""` | no |
 | dry\_run\_enabled | Enable to perform dry runs of deletions only. | `string` | `"false"` | no |
 | graphite\_enabled | Enable to produce Graphite metrics - true or false. | `string` | `"false"` | no |
-| graphite\_host | Graphite metrics host. | `string` | `"localhost` | no |
+| graphite\_host | Graphite metrics host. | `string` | `"localhost"` | no |
 | graphite\_port | Graphite port. | `string` | `"2003"` | no |
 | graphite\_prefix | Prefix for Graphite metrics. | `string` | `""` | no |
 | instance\_name | Beekeeper instance name to identify resources in multi-instance deployments. | `string` | `""` | no |
