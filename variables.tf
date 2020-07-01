@@ -281,6 +281,7 @@ variable "k8s_app_name" {
 
 variable "k8s_kiam_role_arn" {
   description = "KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions."
+  default     = ""
   type        = string
 }
 
