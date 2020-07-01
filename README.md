@@ -53,7 +53,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | k8s\_ingress\_enabled | Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on). | `number` | `0` | no |
 | k8s\_ingress\_tls\_hosts | List of hosts for TLS configuration of a Kubernetes ingress. | `list(string)` | `[]` | no |
 | k8s\_ingress\_tls\_secret | Secret name for TLS configuration of a Kubernetes ingress. | `string` | `""` | no |
-| k8s\_kiam\_role\_arn | KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions. | `string` | n/a | yes |
+| k8s\_kiam\_role\_arn | KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions. | `string` | `""` | no |
 | k8s\_namespace | Namespace to deploy all Kubernetes resources to. | `string` | `"beekeeper"` | no |
 | k8s\_node\_affinity | Full node\_affinity object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_node\_selector | Full node\_selector object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
