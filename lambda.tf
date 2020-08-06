@@ -8,7 +8,7 @@ resource "aws_lambda_function" "beekeeper_slack_notifier" {
   count            = var.slack_lambda_enabled == 1 ? 1 : 0
   filename         = "slack-notifier.zip"
   source_code_hash = data.archive_file.lambda.output_base64sha256
-  function_name    = "beekeeper-slack-notifier"
+  function_name    = "${local.instance_alias}-slack-notifier"
   role             = aws_iam_role.beekeeper_slack_notifier_lambda[count.index].arn
   handler          = "slack-notifier.lambda_handler"
   runtime          = "python3.7"

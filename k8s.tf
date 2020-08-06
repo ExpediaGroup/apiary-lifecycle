@@ -6,16 +6,16 @@
 
 locals {
   labels = {
-    "app.kubernetes.io/name"       = var.k8s_app_name
-    "app.kubernetes.io/instance"   = var.k8s_app_name
-    "app.kubernetes.io/managed-by" = var.k8s_app_name
+    "app.kubernetes.io/name"       = var.k8s_app_alias
+    "app.kubernetes.io/instance"   = var.k8s_app_alias
+    "app.kubernetes.io/managed-by" = var.k8s_app_alias
   }
 }
 
 resource "kubernetes_ingress" "beekeeper" {
   count = var.instance_type == "k8s" && var.k8s_ingress_enabled == 1 ? 1 : 0
   metadata {
-    name        = var.k8s_app_name
+    name        = var.k8s_app_alias
     labels      = local.labels
     annotations = {}
   }
