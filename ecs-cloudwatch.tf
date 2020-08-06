@@ -45,8 +45,8 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
              "metrics": [
-                 [ "AWS/SQS", "NumberOfMessagesSent", "QueueName", "${var.queue_name}" ],
-                 [ "AWS/SQS", "NumberOfMessagesReceived", "QueueName", "${var.queue_name}" ]
+                 [ "AWS/SQS", "NumberOfMessagesSent", "QueueName", "${local.queue_alias}" ],
+                 [ "AWS/SQS", "NumberOfMessagesReceived", "QueueName", "${local.queue_alias}" ]
              ],
              "period":300,
              "stat":"Average",
@@ -60,9 +60,9 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
         	 "metrics": [
-               [ "AWS/SQS", "ApproximateNumberOfMessagesVisible", "QueueName", "${var.queue_name}" ],
-               [ "AWS/SQS", "ApproximateNumberOfMessagesDelayed", "QueueName", "${var.queue_name}" ],
-               [ "AWS/SQS", "ApproximateNumberOfMessagesNotVisible", "QueueName", "${var.queue_name}" ]
+               [ "AWS/SQS", "ApproximateNumberOfMessagesVisible", "QueueName", "${local.queue_alias}" ],
+               [ "AWS/SQS", "ApproximateNumberOfMessagesDelayed", "QueueName", "${local.queue_alias}" ],
+               [ "AWS/SQS", "ApproximateNumberOfMessagesNotVisible", "QueueName", "${local.queue_alias}" ]
               ],
              "period":300,
              "stat":"Average",
@@ -76,7 +76,7 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
              "metrics": [
-               [ "AWS/SQS", "NumberOfMessagesDeleted", "QueueName", "${var.queue_name}" ]
+               [ "AWS/SQS", "NumberOfMessagesDeleted", "QueueName", "${local.queue_alias}" ]
              ],
              "period":300,
              "stat":"Average",
@@ -90,7 +90,7 @@ data "template_file" "sqs_widgets" {
           "height":6,
           "properties":{
              "metrics": [
-                 [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "${var.queue_name}" ]
+                 [ "AWS/SQS", "ApproximateAgeOfOldestMessage", "QueueName", "${local.queue_alias}" ]
              ],
              "period":300,
              "stat":"Average",
@@ -98,7 +98,7 @@ data "template_file" "sqs_widgets" {
              "region": "${var.aws_region}",
              "title": "Beekeeper SQS Age of Oldest Message (s)"
            }
-       }  
+       }
 EOF
 }
 

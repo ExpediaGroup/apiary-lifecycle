@@ -6,6 +6,7 @@
 
 locals {
   instance_alias = var.instance_name == "" ? "beekeeper" : format("beekeeper-%s", var.instance_name)
+  queue_alias = var.instance_name == "" ? var.queue_name : "${var.queue_name}-${var.instance_name}"
 }
 
 data "aws_iam_account_alias" "current" {}

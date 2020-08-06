@@ -5,7 +5,7 @@
  */
 
 resource "aws_sqs_queue" "beekeeper" {
-  name                      = var.queue_name
+  name                      = local.queue_alias
   message_retention_seconds = var.message_retention_seconds
   receive_wait_time_seconds = var.receive_wait_time_seconds
   redrive_policy            = "{\"deadLetterTargetArn\":\"${aws_sqs_queue.beekeeper_dead_letter.arn}\",\"maxReceiveCount\":4}"
@@ -13,7 +13,7 @@ resource "aws_sqs_queue" "beekeeper" {
 }
 
 resource "aws_sqs_queue" "beekeeper_dead_letter" {
-  name                      = "${var.queue_name}-dead-letter"
+  name                      = "${local.queue_alias}-dead-letter"
   message_retention_seconds = var.message_retention_seconds
   receive_wait_time_seconds = var.receive_wait_time_seconds
   tags                      = var.beekeeper_tags
