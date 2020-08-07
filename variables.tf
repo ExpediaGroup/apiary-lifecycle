@@ -275,7 +275,7 @@ variable "prometheus_enabled" {
 
 variable "k8s_app_name" {
   description = "Name to give to all Kubernetes resources that are deployed."
-  default     = "beekeeper"
+  default     = ""
   type        = string
 }
 

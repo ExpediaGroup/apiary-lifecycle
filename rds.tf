@@ -5,16 +5,16 @@
  */
 
 resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
-  name        = "beekeeper-db-subnet-group"
+  name        = "${local.instance_alias}-db-subnet-group"
   subnet_ids  = var.rds_subnets
-  description = "Beekeeper DB Subnet Group"
+  description = "Beekeeper DB Subnet Group for ${local.instance_alias}"
 
   tags = merge(var.beekeeper_tags,
   map("Name", "Beekeeper DB Subnet Group"))
 }
 
 resource "aws_security_group" "beekeeper_db_sg" {
-  name   = "beekeeper-db"
+  name   = "${local.instance_alias}-db"
   vpc_id = var.vpc_id
   tags   = var.beekeeper_tags
 
@@ -56,13 +56,14 @@ resource "aws_db_instance" "beekeeper" {
   engine                    = "mysql"
   engine_version            = var.rds_engine_version
   instance_class            = var.rds_instance_class
-  name                      = "beekeeper"
+  // only alphanumeric char allowed in DB name, remove -
+  name                      = "${replace(local.instance_alias, "-", "")}"
   username                  = var.db_username
   password                  = chomp(data.aws_secretsmanager_secret_version.beekeeper_db.secret_string)
   parameter_group_name      = var.rds_parameter_group_name
   backup_retention_period   = var.db_backup_retention
   backup_window             = var.db_backup_window
   maintenance_window        = var.db_maintenance_window
-  final_snapshot_identifier = "beekeper-final-snapshot-${random_id.snapshot_id.hex}"
+  final_snapshot_identifier = "${local.instance_alias}-final-snapshot-${random_id.snapshot_id.hex}"
   tags                      = var.beekeeper_tags
 }

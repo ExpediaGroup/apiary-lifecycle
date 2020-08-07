@@ -6,16 +6,16 @@
  
 locals {
   cleanup_name      = "cleanup"
-  cleanup_full_name = "${var.k8s_app_name}-cleanup"
+  cleanup_full_name = "${local.k8s_app_alias}-cleanup"
   cleanup_labels = {
-    "app.kubernetes.io/name"       = "${var.k8s_app_name}-cleanup"
-    "app.kubernetes.io/instance"   = "${var.k8s_app_name}-cleanup"
+    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-cleanup"
+    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-cleanup"
     "app.kubernetes.io/version"    = var.cleanup_docker_image_version
-    "app.kubernetes.io/managed-by" = var.k8s_app_name
+    "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   cleanup_label_name_instance = {
-    "app.kubernetes.io/name"     = "${var.k8s_app_name}-cleanup"
-    "app.kubernetes.io/instance" = "${var.k8s_app_name}-cleanup"
+    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-cleanup"
+    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-cleanup"
   }
 }
 

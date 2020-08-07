@@ -6,16 +6,16 @@
 
 locals {
   scheduler_name      = "path-scheduler"
-  scheduler_full_name = "${var.k8s_app_name}-path-scheduler"
+  scheduler_full_name = "${local.k8s_app_alias}-path-scheduler"
   scheduler_labels = {
-    "app.kubernetes.io/name"       = "${var.k8s_app_name}-path-scheduler"
-    "app.kubernetes.io/instance"   = "${var.k8s_app_name}-path-scheduler"
+    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-path-scheduler"
+    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-path-scheduler"
     "app.kubernetes.io/version"    = var.path_scheduler_docker_image_version
-    "app.kubernetes.io/managed-by" = var.k8s_app_name
+    "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   scheduler_label_name_instance = {
-    "app.kubernetes.io/name"     = "${var.k8s_app_name}-path-scheduler"
-    "app.kubernetes.io/instance" = "${var.k8s_app_name}-path-scheduler"
+    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-path-scheduler"
+    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-path-scheduler"
   }
 }
 
