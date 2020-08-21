@@ -38,7 +38,7 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
       metadata {
         labels = local.metadata_cleanup_label_name_instance
         annotations = {
-          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_metadatacleanup_iam[count.index].arn
+          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_metadata_cleanup_iam[count.index].arn
           "prometheus.io/scrape": var.prometheus_enabled
           "prometheus.io/port": var.k8s_metadata_cleanup_port
           "prometheus.io/path": "/actuator/prometheus"

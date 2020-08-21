@@ -57,7 +57,7 @@ resource "aws_db_instance" "beekeeper" {
   engine_version            = var.rds_engine_version
   instance_class            = var.rds_instance_class
   // only alphanumeric char allowed in DB name, remove -
-  name                      = "${replace(local.instance_alias, "-", "")}"
+  name                      = replace(local.instance_alias, "-", "")
   username                  = var.db_username
   password                  = chomp(data.aws_secretsmanager_secret_version.beekeeper_db.secret_string)
   parameter_group_name      = var.rds_parameter_group_name
