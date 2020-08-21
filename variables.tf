@@ -149,21 +149,21 @@ variable "queue_stale_messages_timeout" {
 
 # ECS specific
 
-variable "path_scheduler_docker_image" {
-  description = "Beekeeper path-scheduler image."
+variable "scheduler_docker_image" {
+  description = "Beekeeper scheduler image."
   type        = string
-  default     = "expediagroup/beekeeper-path-scheduler-apiary"
+  default     = "expediagroup/beekeeper-scheduler-apiary"
 }
 
-variable "path_scheduler_docker_image_version" {
-  description = "Beekeeper path-scheduler image version."
+variable "scheduler_docker_image_version" {
+  description = "Beekeeper scheduler image version."
   type        = string
   default     = "latest"
 }
 
-variable "path_scheduler_ecs_cpu" {
+variable "scheduler_ecs_cpu" {
   description = <<EOF
-The amount of CPU used to allocate for the Beekeeper Path Scheduler Apiary ECS task.
+The amount of CPU used to allocate for the Beekeeper Scheduler Apiary ECS task.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
@@ -171,9 +171,9 @@ EOF
   type    = string
 }
 
-variable "path_scheduler_ecs_memory" {
+variable "scheduler_ecs_memory" {
   description = <<EOF
-The amount of memory (in MiB) used to allocate for the Beekeeper Path Scheduler Apiary container.
+The amount of memory (in MiB) used to allocate for the Beekeeper Scheduler Apiary container.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
@@ -181,21 +181,21 @@ EOF
   type    = string
 }
 
-variable "cleanup_docker_image" {
-  description = "Beekeeper cleanup docker image."
+variable "path_cleanup_docker_image" {
+  description = "Beekeeper Path Cleanup docker image."
   type        = string
-  default     = "expediagroup/beekeeper-cleanup"
+  default     = "expediagroup/beekeeper-path-cleanup"
 }
 
-variable "cleanup_docker_image_version" {
-  description = "Beekeeper cleanup docker image version."
+variable "path_cleanup_docker_image_version" {
+  description = "Beekeeper Path cleanup docker image version."
   type        = string
   default     = "latest"
 }
 
-variable "cleanup_ecs_cpu" {
+variable "path_cleanup_ecs_cpu" {
   description = <<EOF
-The amount of CPU used to allocate for the Beekeeper Cleanup ECS task.
+The amount of CPU used to allocate for the Beekeeper Path Cleanup ECS task.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
@@ -203,9 +203,9 @@ EOF
   type    = string
 }
 
-variable "cleanup_ecs_memory" {
+variable "path_cleanup_ecs_memory" {
   description = <<EOF
-The amount of memory (in MiB) used to allocate for the Beekeeper Cleanup container.
+The amount of memory (in MiB) used to allocate for the Beekeeper Path Cleanup container.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
@@ -271,6 +271,12 @@ variable "prometheus_enabled" {
   type        = string
 }
 
+variable "metastore_uri" {
+  description = "Metastore URI."
+  default     = ""
+  type        = string
+}
+
 # K8S Configuration
 
 variable "k8s_app_name" {
@@ -333,40 +339,78 @@ variable "k8s_ingress_tls_secret" {
   type        = string
 }
 
-# K8S - cleanup deployment
+# K8S - path cleanup deployment
 
-variable "k8s_cleanup_memory" {
-  description = "Total memory to allot to the Beekeeper cleanup pod."
+variable "k8s_path_cleanup_memory" {
+  description = "Total memory to allot to the Beekeeper Path Cleanup pod."
   default     = "2Gi"
   type        = string
 }
 
-variable "k8s_cleanup_cpu" {
-  description = "Total cpu to allot to the Beekeeper cleanup pod."
+variable "k8s_path_cleanup_cpu" {
+  description = "Total cpu to allot to the Beekeeper Path Cleanup pod."
   default     = "500m"
   type        = string
 }
 
-variable "k8s_cleanup_port" {
-  description = "Internal port that the Beekeeper Cleanup service runs on."
+variable "k8s_path_cleanup_port" {
+  description = "Internal port that the Beekeeper Path Cleanup service runs on."
   default     = 8008
   type        = number
 }
 
-variable "k8s_cleanup_liveness_delay" {
-  description = "Liveness delay (in seconds) for the Beekeeper Cleanup service."
+variable "k8s_path_cleanup_liveness_delay" {
+  description = "Liveness delay (in seconds) for the Beekeeper Path Cleanup service."
   default     = 60
   type        = number
 }
 
-variable "k8s_cleanup_ingress_host" {
-  description = "Ingress host name for Beekeeper cleanup."
+variable "k8s_path_cleanup_ingress_host" {
+  description = "Ingress host name for Beekeeper Path Cleanup."
   default     = ""
   type        = string
 }
 
-variable "k8s_cleanup_ingress_path" {
-  description = "Ingress path regex for Beekeeper cleanup."
+variable "k8s_path_cleanup_ingress_path" {
+  description = "Ingress path regex for Beekeeper Path Cleanup."
+  default     = ""
+  type        = string
+}
+
+# K8S - metadata cleanup deployment
+
+variable "k8s_metadata_cleanup_memory" {
+  description = "Total memory to allot to the Beekeeper Metadata Cleanup pod."
+  default     = "2Gi"
+  type        = string
+}
+
+variable "k8s_metadata_cleanup_cpu" {
+  description = "Total cpu to allot to the Beekeeper Metadata Cleanup pod."
+  default     = "500m"
+  type        = string
+}
+
+variable "k8s_metadata_cleanup_port" {
+  description = "Internal port that the Beekeeper Metadata Cleanup service runs on."
+  default     = 9008
+  type        = number
+}
+
+variable "k8s_metadata_cleanup_liveness_delay" {
+  description = "Liveness delay (in seconds) for the Beekeeper Metadata Cleanup service."
+  default     = 60
+  type        = number
+}
+
+variable "k8s_metadata_cleanup_ingress_host" {
+  description = "Ingress host name for Beekeeper Metadata Cleanup."
+  default     = ""
+  type        = string
+}
+
+variable "k8s_metadata_cleanup_ingress_path" {
+  description = "Ingress path regex for Beekeeper Metadata Cleanup."
   default     = ""
   type        = string
 }
@@ -398,13 +442,13 @@ variable "k8s_scheduler_liveness_delay" {
 }
 
 variable "k8s_scheduler_ingress_host" {
-  description = "Ingress host name for Beekeeper path-scheduler."
+  description = "Ingress host name for Beekeeper Scheduler."
   default     = ""
   type        = string
 }
 
 variable "k8s_scheduler_ingress_path" {
-  description = "Ingress path regex for Beekeeper path-scheduler."
+  description = "Ingress path regex for Beekeeper Scheduler."
   default     = ""
   type        = string
 }

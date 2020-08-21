@@ -119,25 +119,25 @@ ${join("", data.template_file.sqs_widgets.*.rendered)}
 locals {
   alerts = [
     {
-      alarm_name  = "${local.instance_alias}-path-scheduler-cpu"
+      alarm_name  = "${local.instance_alias}-scheduler-cpu"
       namespace   = "AWS/ECS"
       metric_name = "CPUUtilization"
       threshold   = "90"
     },
     {
-      alarm_name  = "${local.instance_alias}-path-scheduler-memory"
+      alarm_name  = "${local.instance_alias}-scheduler-memory"
       namespace   = "AWS/ECS"
       metric_name = "MemoryUtilization"
       threshold   = "80"
     },
     {
-      alarm_name  = "${local.instance_alias}-cleanup-cpu"
+      alarm_name  = "${local.instance_alias}-path-cleanup-cpu"
       namespace   = "AWS/ECS"
       metric_name = "CPUUtilization"
       threshold   = "90"
     },
     {
-      alarm_name  = "${local.instance_alias}-cleanup-memory"
+      alarm_name  = "${local.instance_alias}-path-cleanup-memory"
       namespace   = "AWS/ECS"
       metric_name = "MemoryUtilization"
       threshold   = "80"
@@ -147,19 +147,19 @@ locals {
   dimensions = [
     {
       ClusterName = local.instance_alias
-      ServiceName = "${local.instance_alias}-path-scheduler-service"
+      ServiceName = "${local.instance_alias}-scheduler-service"
     },
     {
       ClusterName = local.instance_alias
-      ServiceName = "${local.instance_alias}-path-scheduler-service"
+      ServiceName = "${local.instance_alias}-scheduler-service"
     },
     {
       ClusterName = local.instance_alias
-      ServiceName = "${local.instance_alias}-cleanup-service"
+      ServiceName = "${local.instance_alias}-path-cleanup-service"
     },
     {
       ClusterName = local.instance_alias
-      ServiceName = "${local.instance_alias}-cleanup-service"
+      ServiceName = "${local.instance_alias}-path-cleanup-service"
     }
   ]
 }

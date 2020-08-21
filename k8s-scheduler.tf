@@ -5,17 +5,17 @@
  */
 
 locals {
-  scheduler_name      = "path-scheduler"
-  scheduler_full_name = "${local.k8s_app_alias}-path-scheduler"
+  scheduler_name      = "scheduler"
+  scheduler_full_name = "${local.k8s_app_alias}-scheduler"
   scheduler_labels = {
-    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-path-scheduler"
-    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-path-scheduler"
-    "app.kubernetes.io/version"    = var.path_scheduler_docker_image_version
+    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-scheduler"
+    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-scheduler"
+    "app.kubernetes.io/version"    = var.scheduler_docker_image_version
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   scheduler_label_name_instance = {
-    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-path-scheduler"
-    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-path-scheduler"
+    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-scheduler"
+    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-scheduler"
   }
 }
 
@@ -48,7 +48,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
       spec {
         container {
           name              = local.scheduler_full_name
-          image             = "${var.path_scheduler_docker_image}:${var.path_scheduler_docker_image_version}"
+          image             = "${var.scheduler_docker_image}:${var.scheduler_docker_image_version}"
           image_pull_policy = var.k8s_image_pull_policy
 
           port {
@@ -97,7 +97,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler" {
 
           env {
             name  = "BEEKEEPER_CONFIG"
-            value = base64encode(data.template_file.beekeeper_path_scheduler_config.rendered)
+            value = base64encode(data.template_file.beekeeper_scheduler_config.rendered)
           }
         }
       }

@@ -27,13 +27,26 @@ resource "kubernetes_ingress" "beekeeper" {
     }
 
     rule {
-      host = var.k8s_cleanup_ingress_host
+      host = var.k8s_path_cleanup_ingress_host
       http {
         path {
-          path = var.k8s_cleanup_ingress_path
+          path = var.k8s_path_cleanup_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_cleanup[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_cleanup[count.index].spec.port.target_port
+            service_name = kubernetes_service.beekeeper_path_cleanup[count.index].metadata.name
+            service_port = kubernetes_service.beekeeper_path_cleanup[count.index].spec.port.target_port
+          }
+        }
+      }
+    }
+
+    rule {
+      host = var.k8s_metadata_cleanup_ingress_host
+      http {
+        path {
+          path = var.k8s_metadata_cleanup_ingress_path
+          backend {
+            service_name = kubernetes_service.beekeeper_metadata_cleanup[count.index].metadata.name
+            service_port = kubernetes_service.beekeeper_metadata_cleanup[count.index].spec.port.target_port
           }
         }
       }
