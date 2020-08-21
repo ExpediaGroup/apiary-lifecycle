@@ -188,7 +188,7 @@ variable "path_cleanup_docker_image" {
 }
 
 variable "path_cleanup_docker_image_version" {
-  description = "Beekeeper Path cleanup docker image version."
+  description = "Beekeeper Path Cleanup docker image version."
   type        = string
   default     = "latest"
 }
@@ -212,6 +212,19 @@ EOF
   default = "4096"
   type    = string
 }
+
+variable "metadata_cleanup_docker_image" {
+  description = "Beekeeper Metadata Cleanup docker image."
+  type        = string
+  default     = "expediagroup/beekeeper-metadata-cleanup"
+}
+
+variable "metadata_cleanup_docker_image_version" {
+  description = "Beekeeper Metadata Cleanup docker image version."
+  type        = string
+  default     = "latest"
+}
+
 
 variable "docker_registry_auth_secret_name" {
   description = "Docker Registry authentication SecretManager secret name."
