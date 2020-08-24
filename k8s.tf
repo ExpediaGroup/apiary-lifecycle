@@ -53,13 +53,13 @@ resource "kubernetes_ingress" "beekeeper" {
     }
 
     rule {
-      host = var.k8s_scheduler_ingress_host
+      host = var.k8s_scheduler_apiary_ingress_host
       http {
         path {
-          path = var.k8s_scheduler_ingress_path
+          path = var.k8s_scheduler_apiary_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_scheduler[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_scheduler[count.index].spec.port.target_port
+            service_name = kubernetes_service.beekeeper_scheduler_apiary_[count.index].metadata.name
+            service_port = kubernetes_service.beekeeper_scheduler_apiary_[count.index].spec.port.target_port
           }
         }
       }

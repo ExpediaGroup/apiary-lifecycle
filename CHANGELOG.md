@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 - Kubernetes deployment options for new Metadata Cleanup module. 
 ### Changed
-- Renamed `Cleanup` to `Path Cleanup`, and `Path Scheduler` to `Scheduler` to match name changes in Beekeeper.
+- Renamed `Cleanup` to `Path Cleanup`, and `Path Scheduler` to `Scheduler Apiary` to match name changes in Beekeeper.
 
 ## [2.1.3] - 2020-08-07
 ### Changed

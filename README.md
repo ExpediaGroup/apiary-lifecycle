@@ -65,17 +65,17 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | k8s\_node\_affinity | Full node\_affinity object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_node\_selector | Full node\_selector object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_node\_tolerations | Full k8s\_node\_tolerations object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
-| k8s\_scheduler\_cpu | Total cpu to allot to the Beekeeper Scheduler pod. | `string` | `"500m"` | no |
-| k8s\_scheduler\_ingress\_host | Ingress host name for Beekeeper Scheduler. | `string` | `""` | no |
-| k8s\_scheduler\_ingress\_path | Ingress path regex for Beekeeper Scheduler. | `string` | `""` | no |
-| k8s\_scheduler\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Scheduling service. | `number` | `60` | no |
-| k8s\_scheduler\_memory | Total memory to allot to the Beekeeper Scheduler pod. | `string` | `"2Gi"` | no |
-| k8s\_scheduler\_port | Internal port that the Beekeeper Scheduler service runs on. | `number` | `8080` | no |
+| k8s\_scheduler\_apiary\_cpu | Total cpu to allot to the Beekeeper Scheduler Apiary pod. | `string` | `"500m"` | no |
+| k8s\_scheduler\_apiary\_ingress\_host | Ingress host name for Beekeeper Scheduler Apiary. | `string` | `""` | no |
+| k8s\_scheduler\_apiary\_ingress\_path | Ingress path regex for Beekeeper Scheduler Apiary. | `string` | `""` | no |
+| k8s\_scheduler\_apiary\_liveness\_delay | Liveness delay (in seconds) for the Beekeeper Scheduling service. | `number` | `60` | no |
+| k8s\_scheduler\_apiary\_memory | Total memory to allot to the Beekeeper Scheduler Apiary pod. | `string` | `"2Gi"` | no |
+| k8s\_scheduler\_apiary\_port | Internal port that the Beekeeper Scheduler Apiary service runs on. | `number` | `8080` | no |
 | message\_retention\_seconds | SQS message retention (s). | `string` | `"604800"` | no |
-| scheduler\_docker\_image | Beekeeper Scheduler image. | `string` | `"expediagroup/beekeeper-scheduler-apiary"` | no |
-| scheduler\_docker\_image\_version | Beekeeper Scheduler image version. | `string` | `"latest"` | no |
-| scheduler\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Scheduler Apiary ECS task.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
-| scheduler\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Scheduler Apiary container.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
+| scheduler\_apiary\_docker\_image | Beekeeper Scheduler Apiary image. | `string` | `"expediagroup/beekeeper-scheduler-apiary"` | no |
+| scheduler\_apiary\_docker\_image\_version | Beekeeper Scheduler Apiary image version. | `string` | `"latest"` | no |
+| scheduler\_apiary\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Scheduler Apiary ECS task.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
+| scheduler\_apiary\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Scheduler Apiary container.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
 | prometheus\_enabled | Enable to pull metrics using Prometheus - true or false. | `string` | `"false"` | no |
 | queue\_name | Beekeeper SQS Queue name. | `string` | `"apiary-beekeeper"` | no |
 | queue\_stale\_messages\_timeout | Beekeeper SQS Queue Cloudwatch Alert timeout for messages older than this number of seconds. | `string` | `"1209600"` | no |
@@ -87,7 +87,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | rds\_storage\_type | RDS storage type. | `string` | `"gp2"` | no |
 | rds\_subnets | Subnets in which to provision Beekeeper RDS DB. | `list(string)` | n/a | yes |
 | receive\_wait\_time\_seconds | SQS receive wait time (s). | `string` | `"20"` | no |
-| scheduler\_delay\_ms | Delay between each cleanup job that is scheduled in milliseconds. | `string` | `"300000"` | no |
+| scheduler\_apiary\_delay\_ms | Delay between each cleanup job that is scheduled in milliseconds. | `string` | `"300000"` | no |
 | slack\_channel | Slack channel to which alerts about messages landing on the dead letter queue should be sent. | `string` | `""` | no |
 | slack\_lambda\_enabled | Boolean flag to determine if Beekeeper should create a Slack notifying Lambda for the dead letter queue. (0 = off, 1 = on). | `number` | `0` | no |
 | slack\_webhook\_url | Slack URL to which alerts about messages landing on the dead letter queue should be sent. | `string` | `""` | no |

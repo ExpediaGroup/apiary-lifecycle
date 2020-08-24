@@ -149,19 +149,19 @@ variable "queue_stale_messages_timeout" {
 
 # ECS specific
 
-variable "scheduler_docker_image" {
-  description = "Beekeeper scheduler image."
+variable "scheduler_apiary_docker_image" {
+  description = "Beekeeper Scheduler Apiary image."
   type        = string
   default     = "expediagroup/beekeeper-scheduler-apiary"
 }
 
-variable "scheduler_docker_image_version" {
-  description = "Beekeeper scheduler image version."
+variable "scheduler_apiary_docker_image_version" {
+  description = "Beekeeper Scheduler Apiary image version."
   type        = string
   default     = "latest"
 }
 
-variable "scheduler_ecs_cpu" {
+variable "scheduler_apiary_ecs_cpu" {
   description = <<EOF
 The amount of CPU used to allocate for the Beekeeper Scheduler Apiary ECS task.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
@@ -171,7 +171,7 @@ EOF
   type    = string
 }
 
-variable "scheduler_ecs_memory" {
+variable "scheduler_apiary_ecs_memory" {
   description = <<EOF
 The amount of memory (in MiB) used to allocate for the Beekeeper Scheduler Apiary container.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
@@ -240,7 +240,7 @@ variable "allowed_s3_buckets" {
   default     = []
 }
 
-variable "scheduler_delay_ms" {
+variable "scheduler_apiary_delay_ms" {
   description = "Delay between each cleanup job that is scheduled in milliseconds."
   type        = string
   default     = "300000"
@@ -428,40 +428,40 @@ variable "k8s_metadata_cleanup_ingress_path" {
   type        = string
 }
 
-# K8S - scheduler deployment
+# K8S - Scheduler Apiary deployment
 
-variable "k8s_scheduler_memory" {
-  description = "Total memory to allot to the Beekeeper scheduler pod."
+variable "k8s_scheduler_apiary_memory" {
+  description = "Total memory to allot to the Beekeeper Scheduler Apiary pod."
   default     = "2Gi"
   type        = string
 }
 
-variable "k8s_scheduler_cpu" {
-  description = "Total cpu to allot to the Beekeeper scheduler pod."
+variable "k8s_scheduler_apiary_cpu" {
+  description = "Total cpu to allot to the Beekeeper Scheduler Apiary pod."
   default     = "500m"
   type        = string
 }
 
-variable "k8s_scheduler_port" {
-  description = "Internal port that the Beekeeper Scheduler service runs on."
+variable "k8s_scheduler_apiary_port" {
+  description = "Internal port that the Beekeeper Scheduler Apiary service runs on."
   default     = 8080
   type        = number
 }
 
-variable "k8s_scheduler_liveness_delay" {
-  description = "Liveness delay (in seconds) for the Beekeeper Scheduling service."
+variable "k8s_scheduler_apiary_liveness_delay" {
+  description = "Liveness delay (in seconds) for the Beekeeper Scheduler Apiary service."
   default     = 60
   type        = number
 }
 
-variable "k8s_scheduler_ingress_host" {
-  description = "Ingress host name for Beekeeper Scheduler."
+variable "k8s_scheduler_apiary_ingress_host" {
+  description = "Ingress host name for Beekeeper Scheduler Apiary."
   default     = ""
   type        = string
 }
 
-variable "k8s_scheduler_ingress_path" {
-  description = "Ingress path regex for Beekeeper Scheduler."
+variable "k8s_scheduler_apiary_ingress_path" {
+  description = "Ingress path regex for Beekeeper Scheduler Apiary."
   default     = ""
   type        = string
 }

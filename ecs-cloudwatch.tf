@@ -119,13 +119,13 @@ ${join("", data.template_file.sqs_widgets.*.rendered)}
 locals {
   alerts = [
     {
-      alarm_name  = "${local.instance_alias}-scheduler-cpu"
+      alarm_name  = "${local.instance_alias}-scheduler-apiary-cpu"
       namespace   = "AWS/ECS"
       metric_name = "CPUUtilization"
       threshold   = "90"
     },
     {
-      alarm_name  = "${local.instance_alias}-scheduler-memory"
+      alarm_name  = "${local.instance_alias}-scheduler-apiary-memory"
       namespace   = "AWS/ECS"
       metric_name = "MemoryUtilization"
       threshold   = "80"
@@ -147,11 +147,11 @@ locals {
   dimensions = [
     {
       ClusterName = local.instance_alias
-      ServiceName = "${local.instance_alias}-scheduler-service"
+      ServiceName = "${local.instance_alias}-scheduler-apiary-service"
     },
     {
       ClusterName = local.instance_alias
-      ServiceName = "${local.instance_alias}-scheduler-service"
+      ServiceName = "${local.instance_alias}-scheduler-apiary-service"
     },
     {
       ClusterName = local.instance_alias

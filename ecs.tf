@@ -10,11 +10,11 @@ resource "aws_ecs_cluster" "beekeeper" {
   tags  = var.beekeeper_tags
 }
 
-resource "aws_ecs_service" "beekeeper_scheduler" {
+resource "aws_ecs_service" "beekeeper_scheduler_apiary" {
   count           = var.instance_type == "ecs" ? 1 : 0
-  name            = "${local.instance_alias}-scheduler"
+  name            = "${local.instance_alias}-scheduler-apiary"
   cluster         = aws_ecs_cluster.beekeeper.*.id[0]
-  task_definition = aws_ecs_task_definition.beekeeper_scheduler.*.arn[0]
+  task_definition = aws_ecs_task_definition.beekeeper_scheduler_apiary.*.arn[0]
   desired_count   = 1
   launch_type     = "FARGATE"
 
@@ -38,16 +38,16 @@ resource "aws_ecs_service" "beekeeper_path_cleanup" {
   }
 }
 
-resource "aws_ecs_task_definition" "beekeeper_scheduler" {
+resource "aws_ecs_task_definition" "beekeeper_scheduler_apiary" {
   count                    = var.instance_type == "ecs" ? 1 : 0
   family                   = local.instance_alias
   execution_role_arn       = aws_iam_role.beekeeper_ecs_task_exec.*.arn[0]
-  task_role_arn            = aws_iam_role.beekeeper_scheduler_ecs_task.*.arn[0]
-  container_definitions    = data.template_file.beekeeper_scheduler_container_definition.*.rendered[0]
+  task_role_arn            = aws_iam_role.beekeeper_scheduler_apiary_ecs_task.*.arn[0]
+  container_definitions    = data.template_file.beekeeper_scheduler_apiary_container_definition.*.rendered[0]
   network_mode             = "awsvpc"
   requires_compatibilities = ["EC2", "FARGATE"]
-  cpu                      = var.scheduler_ecs_cpu
-  memory                   = var.scheduler_ecs_memory
+  cpu                      = var.scheduler_apiary_ecs_cpu
+  memory                   = var.scheduler_apiary_ecs_memory
   tags                     = var.beekeeper_tags
 }
 
@@ -64,9 +64,9 @@ resource "aws_ecs_task_definition" "beekeeper_path_cleanup" {
   tags                     = var.beekeeper_tags
 }
 
-resource "aws_cloudwatch_log_group" "beekeeper_scheduler" {
+resource "aws_cloudwatch_log_group" "beekeeper_scheduler_apiary" {
   count = var.instance_type == "ecs" ? 1 : 0
-  name  = "${local.instance_alias}-scheduler"
+  name  = "${local.instance_alias}-scheduler-apiary"
   tags  = var.beekeeper_tags
 }
 

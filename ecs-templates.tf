@@ -4,19 +4,19 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 
-data "template_file" "beekeeper_scheduler_container_definition" {
+data "template_file" "beekeeper_scheduler_apiary_container_definition" {
   count    = var.instance_type == "ecs" ? 1 : 0
   template = file("${path.module}/files/ecs-container-definition.json")
 
   vars = {
     db_password_strategy  = var.db_password_strategy
     db_password_key       = var.db_password_key
-    docker_image          = var.scheduler_docker_image
-    docker_image_version  = var.scheduler_docker_image_version
-    beekeeper_config_yaml = base64encode(data.template_file.beekeeper_scheduler_config.rendered)
-    log_group             = aws_cloudwatch_log_group.beekeeper_scheduler.*.name[0]
-    memory                = var.scheduler_ecs_memory
-    name                  = "${local.instance_alias}-scheduler"
+    docker_image          = var.scheduler_apiary_docker_image
+    docker_image_version  = var.scheduler_apiary_docker_image_version
+    beekeeper_config_yaml = base64encode(data.template_file.beekeeper_scheduler_apiary_config.rendered)
+    log_group             = aws_cloudwatch_log_group.beekeeper_scheduler_apiary.*.name[0]
+    memory                = var.scheduler_apiary_ecs_memory
+    name                  = "${local.instance_alias}-scheduler-apiary"
     port                  = 8080
     region                = var.aws_region
 
