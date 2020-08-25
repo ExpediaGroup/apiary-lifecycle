@@ -28,6 +28,8 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | path\_cleanup\_docker\_image\_version | Beekeeper Path Cleanup  docker image version. | `string` | `"latest"` | no |
 | path\_cleanup\_ecs\_cpu | The amount of CPU used to allocate for the Beekeeper Path Cleanup ECS task.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"2048"` | no |
 | path\_cleanup\_ecs\_memory | The amount of memory (in MiB) used to allocate for the Beekeeper Path Cleanup container.<br>Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html | `string` | `"4096"` | no |
+| metadata\_cleanup\_docker\_image | Beekeeper Metadata Cleanup  docker image. | `string` | `"expediagroup/beekeeper-metadata-cleanup"` | no |
+| metadata\_cleanup\_docker\_image\_version | Beekeeper Metadata Cleanup  docker image version. | `string` | `"latest"` | no |
 | db\_backup\_retention | The number of days to retain backups for the RDS Beekeeper DB. | `string` | `10` | no |
 | db\_backup\_window | Preferred backup window for the RDS Beekeeper DB in UTC. | `string` | `"02:00-03:00"` | no |
 | db\_maintenance\_window | Preferred maintenance window for the RDS Beekeeper DB in UTC. | `string` | `"wed:03:00-wed:04:00"` | no |

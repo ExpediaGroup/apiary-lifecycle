@@ -285,7 +285,7 @@ variable "prometheus_enabled" {
 }
 
 variable "metastore_uri" {
-  description = "Metastore URI."
+  description = "URI of the metastore where tables to be cleaned-up are located. Required for Beekeeper Metadata Cleanup"
   default     = ""
   type        = string
 }
