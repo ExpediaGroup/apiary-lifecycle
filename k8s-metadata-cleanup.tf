@@ -52,14 +52,13 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
           image_pull_policy = var.k8s_image_pull_policy
 
           port {
-            name           = local.metadata_cleanup_name
             container_port = var.k8s_metadata_cleanup_port
           }
 
           liveness_probe {
             http_get {
               path = "/actuator/health"
-              port = local.metadata_cleanup_name
+              port = var.k8s_metadata_cleanup_port
             }
             initial_delay_seconds = var.k8s_metadata_cleanup_liveness_delay
           }
@@ -116,7 +115,7 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
   spec {
     port {
       name        = local.metadata_cleanup_name
-      target_port = local.metadata_cleanup_name
+      target_port = var.k8s_metadata_cleanup_port
       port        = var.k8s_metadata_cleanup_port
     }
 

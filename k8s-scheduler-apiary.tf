@@ -52,7 +52,6 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
           image_pull_policy = var.k8s_image_pull_policy
 
           port {
-            name           = local.scheduler_apiary_name
             container_port = var.k8s_scheduler_apiary_port
           }
 
@@ -115,7 +114,7 @@ resource "kubernetes_service" "beekeeper_scheduler_apiary" {
   spec {
     port {
       name        = local.scheduler_apiary_name
-      target_port = local.scheduler_apiary_name
+      target_port = var.k8s_scheduler_apiary_port
       port        = var.k8s_scheduler_apiary_port
     }
     selector = local.scheduler_apiary_label_name_instance
