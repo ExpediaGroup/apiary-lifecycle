@@ -32,7 +32,7 @@ data "template_file" "beekeeper_path_cleanup_config" {
   vars = {
     db_endpoint        = aws_db_instance.beekeeper.endpoint
     db_username        = aws_db_instance.beekeeper.username
-    scheduler_apiary_delay_ms = var.scheduler_apiary_delay_ms
+    scheduler_delay_ms = var.scheduler_delay_ms
     dry_run_enabled    = var.dry_run_enabled
     graphite_config    = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }
@@ -44,7 +44,7 @@ data "template_file" "beekeeper_metadata_cleanup_config" {
   vars = {
     db_endpoint        = aws_db_instance.beekeeper.endpoint
     db_username        = aws_db_instance.beekeeper.username
-    scheduler_apiary_delay_ms = var.scheduler_apiary_delay_ms
+    scheduler_delay_ms = var.scheduler_delay_ms
     dry_run_enabled    = var.dry_run_enabled
     graphite_config    = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }

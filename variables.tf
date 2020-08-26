@@ -240,7 +240,7 @@ variable "allowed_s3_buckets" {
   default     = []
 }
 
-variable "scheduler_apiary_delay_ms" {
+variable "scheduler_delay_ms" {
   description = "Delay between each cleanup job that is scheduled in milliseconds."
   type        = string
   default     = "300000"
