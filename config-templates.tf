@@ -46,6 +46,7 @@ data "template_file" "beekeeper_metadata_cleanup_config" {
     db_username        = aws_db_instance.beekeeper.username
     scheduler_delay_ms = var.scheduler_delay_ms
     dry_run_enabled    = var.dry_run_enabled
+    metastore_uri      = var.metastore_uri
     graphite_config    = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }
 }
