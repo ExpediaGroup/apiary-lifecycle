@@ -3,9 +3,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-resource "aws_iam_role" "beekeeper_path_scheduler_ecs_task" {
+resource "aws_iam_role" "beekeeper_scheduler_apiary_ecs_task" {
   count = var.instance_type == "ecs" ? 1 : 0
-  name  = "${local.instance_alias}-path-scheduler-ecs-task-${var.aws_region}"
+  name  = "${local.instance_alias}-scheduler-apiary-ecs-task-${var.aws_region}"
 
   assume_role_policy = <<EOF
 {
@@ -24,14 +24,14 @@ resource "aws_iam_role" "beekeeper_path_scheduler_ecs_task" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_path_scheduler_secrets" {
+resource "aws_iam_role_policy_attachment" "beekeeper_scheduler_apiary_secrets" {
   count      = var.instance_type == "ecs" ? 1 : 0
-  role       = aws_iam_role.beekeeper_path_scheduler_ecs_task.*.id[0]
+  role       = aws_iam_role.beekeeper_scheduler_apiary_ecs_task.*.id[0]
   policy_arn = aws_iam_policy.beekeeper_secrets.arn
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_path_scheduler_sqs" {
+resource "aws_iam_role_policy_attachment" "beekeeper_scheduler_apiary_sqs" {
   count      = var.instance_type == "ecs" ? 1 : 0
-  role       = aws_iam_role.beekeeper_path_scheduler_ecs_task.*.id[0]
+  role       = aws_iam_role.beekeeper_scheduler_apiary_ecs_task.*.id[0]
   policy_arn = aws_iam_policy.beekeeper_sqs.arn
 }

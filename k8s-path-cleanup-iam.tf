@@ -3,10 +3,10 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-
-resource "aws_iam_role" "beekeeper_k8s_role_scheduler_iam" {
+ 
+resource "aws_iam_role" "beekeeper_k8s_role_path_cleanup_iam" {
   count = var.instance_type == "k8s" ? 1 : 0
-  name  = "${local.instance_alias}-path-scheduler-${var.aws_region}"
+  name  = "${local.instance_alias}-path-cleanup-${var.aws_region}"
 
   assume_role_policy = <<EOF
 {
@@ -33,14 +33,14 @@ resource "aws_iam_role" "beekeeper_k8s_role_scheduler_iam" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_k8s_scheduler_sqs" {
+resource "aws_iam_role_policy_attachment" "beekeeper_k8s_path_cleanup_s3" {
   count      = var.instance_type == "k8s" ? 1 : 0
-  role       = aws_iam_role.beekeeper_k8s_role_scheduler_iam[count.index].id
-  policy_arn = aws_iam_policy.beekeeper_sqs.arn
+  role       = aws_iam_role.beekeeper_k8s_role_path_cleanup_iam[count.index].id
+  policy_arn = aws_iam_policy.beekeeper_s3.arn
 }
 
-resource "aws_iam_role_policy_attachment" "beekeeper_k8s_scheduler_secrets" {
+resource "aws_iam_role_policy_attachment" "beekeeper_k8s_path_cleanup_secrets" {
   count      = var.instance_type == "k8s" ? 1 : 0
-  role       = aws_iam_role.beekeeper_k8s_role_scheduler_iam[count.index].id
+  role       = aws_iam_role.beekeeper_k8s_role_path_cleanup_iam[count.index].id
   policy_arn = aws_iam_policy.beekeeper_secrets.arn
 }
