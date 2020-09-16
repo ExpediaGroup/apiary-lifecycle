@@ -246,8 +246,14 @@ variable "scheduler_delay_ms" {
   default     = "300000"
 }
 
-variable "dry_run_enabled" {
-  description = "Enable to perform dry runs of deletions only."
+variable "path_cleanup_dry_run_enabled" {
+  description = "Enable Path Cleanup to perform dry runs of deletions only."
+  default     = "false"
+  type        = string
+}
+
+variable "metadata_cleanup_dry_run_enabled" {
+  description = "Enable Metadata Cleanup to perform dry runs of deletions only."
   default     = "false"
   type        = string
 }
