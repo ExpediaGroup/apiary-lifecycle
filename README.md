@@ -37,7 +37,8 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | db\_password\_strategy | Strategy to acquire the password for the RDS instance. Supported strategies: aws-secrets-manager. | `string` | `"aws-secrets-manager"` | no |
 | db\_username | Username for the master DB user. | `string` | `"beekeeper"` | no |
 | docker\_registry\_auth\_secret\_name | Docker Registry authentication SecretManager secret name. | `string` | `""` | no |
-| dry\_run\_enabled | Enable to perform dry runs of deletions only. | `string` | `"false"` | no |
+| path\_cleanup\_dry\_run\_enabled | Enable Path Cleanup to perform dry runs of deletions only. | `string` | `"false"` | no |
+| metadata\_cleanup\_dry\_run\_enabled | Enable Metadata Cleanup to perform dry runs of deletions only. | `string` | `"false"` | no |
 | graphite\_enabled | Enable to produce Graphite metrics - true or false. | `string` | `"false"` | no |
 | graphite\_host | Graphite metrics host. | `string` | `"localhost"` | no |
 | graphite\_port | Graphite port. | `string` | `"2003"` | no |
