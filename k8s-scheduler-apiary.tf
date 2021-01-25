@@ -99,6 +99,9 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
             value = base64encode(data.template_file.beekeeper_scheduler_apiary_config.rendered)
           }
         }
+        image_pull_secrets {
+          name = var.docker_registry_auth_secret_name
+        }
       }
     }
   }
