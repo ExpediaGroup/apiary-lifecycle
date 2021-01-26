@@ -229,7 +229,7 @@ variable "metadata_cleanup_docker_image_version" {
 variable "docker_registry_auth_secret_name" {
   description = "Docker Registry authentication SecretManager secret name."
   type        = string
-  default     = "hub-docker-remote.artylab.expedia.biz"
+  default     = ""
 }
 
 # Application specific
