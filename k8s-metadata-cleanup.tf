@@ -64,11 +64,11 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
           }
 
           resources {
-            limits {
+            limits = {
               memory = var.k8s_metadata_cleanup_memory
               cpu    = var.k8s_metadata_cleanup_cpu
             }
-            requests {
+            requests = {
               memory = var.k8s_metadata_cleanup_memory
               cpu    = var.k8s_metadata_cleanup_cpu
             }
