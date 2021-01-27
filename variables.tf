@@ -226,7 +226,7 @@ variable "metadata_cleanup_docker_image_version" {
 }
 
 variable "docker_registry_secret_name" {
-  description = "Docker Registry secret name."
+  description = "Docker Registry authentication K8S secret name."
   type        = string
   default     = ""
 }
