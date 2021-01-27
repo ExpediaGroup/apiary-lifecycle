@@ -225,6 +225,11 @@ variable "metadata_cleanup_docker_image_version" {
   default     = "latest"
 }
 
+variable "docker_registry_secret_name" {
+  description = "Docker Registry secret name."
+  type        = string
+  default     = ""
+}
 
 variable "docker_registry_auth_secret_name" {
   description = "Docker Registry authentication SecretManager secret name."

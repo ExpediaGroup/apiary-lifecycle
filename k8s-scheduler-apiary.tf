@@ -100,7 +100,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
           }
         }
         image_pull_secrets {
-          name = var.docker_registry_auth_secret_name
+          name = var.docker_registry_secret_name
         }
       }
     }
