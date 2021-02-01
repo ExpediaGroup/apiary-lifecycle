@@ -6,8 +6,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [3.0.2] - 2021-02-01
 ### Added
 - Added variable `docker_registry_secret_name` to pull docker images from a private registry.
-### Fixed
-- Updated terraform scripts to new Kubernetes provider syntax.
 
 ## [3.0.1] - 2020-09-18
 ### Changed
