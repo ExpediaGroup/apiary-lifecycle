@@ -64,11 +64,11 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
           }
 
           resources {
-            limits {
+            limits = {
               memory = var.k8s_metadata_cleanup_memory
               cpu    = var.k8s_metadata_cleanup_cpu
             }
-            requests {
+            requests = {
               memory = var.k8s_metadata_cleanup_memory
               cpu    = var.k8s_metadata_cleanup_cpu
             }
@@ -98,6 +98,9 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
             name  = "BEEKEEPER_CONFIG"
             value = base64encode(data.template_file.beekeeper_metadata_cleanup_config.rendered)
           }
+        }
+        image_pull_secrets {
+          name = var.docker_registry_secret_name
         }
       }
     }
