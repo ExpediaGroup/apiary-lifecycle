@@ -8,6 +8,10 @@ locals {
   instance_alias = var.instance_name == "" ? "beekeeper" : format("beekeeper-%s", var.instance_name)
   queue_alias = var.instance_name == "" ? var.queue_name : "${var.queue_name}-${var.instance_name}"
   k8s_app_alias = var.k8s_app_name == "" ? "beekeeper" : format("beekeeper-%s", var.k8s_app_name)
+
+  db_connection_key = "SPRING_DATASOURCE_URL"
+  db_username_key   = "SPRING_DATASOURCE_USERNAME"
+  db_password_key   = "SPRING_DATASOURCE_PASSWORD"
 }
 
 data "aws_iam_account_alias" "current" {}

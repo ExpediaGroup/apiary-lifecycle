@@ -85,13 +85,13 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
           }
 
           env {
-            name  = "DB_PASSWORD_STRATEGY"
-            value = var.db_password_strategy
-          }
-
-          env {
-            name  = "DB_PASSWORD_KEY"
-            value = var.db_password_key
+            name  = local.db_password_key
+            value_from {
+              secret_key_ref {
+                name  = var.k8s_cloverleaf_api_service_name
+                key   = local.db_password_key
+              }
+            }
           }
 
           env {

@@ -87,15 +87,16 @@ variable "db_username" {
   type        = string
 }
 
-variable "db_password_strategy" {
-  description = "Strategy to acquire the password for the RDS instance. Supported strategies: aws-secrets-manager."
-  default     = "aws-secrets-manager"
+variable "k8s_cloverleaf_api_service_name" {
+  description = "Name of the service, must be unique."
   type        = string
+  default     = ""
 }
 
-variable "db_password_key" {
-  description = "Key to acquire the database password for the strategy specified."
+variable "k8s_cloverleaf_api_service_namespace" {
+  description = "Namespace to deploy the service to."
   type        = string
+  default     = ""
 }
 
 variable "db_backup_retention" {
