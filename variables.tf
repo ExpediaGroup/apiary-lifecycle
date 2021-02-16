@@ -304,10 +304,10 @@ variable "k8s_kiam_role_arn" {
   type        = string
 }
 
-variable "k8s_api_service_name" {
-  description = "Name of the service, must be unique."
+variable "k8s_db_password_secret" {
+  description = "Name of the Kubernetes secret that would store the db password for beekeeper."
+  default     = "beekeeper-db-password"
   type        = string
-  default     = ""
 }
 
 variable "k8s_namespace" {

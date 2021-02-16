@@ -75,12 +75,12 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
           }
 
           env {
-            name  = "AWS_REGION"
+            name  = local.aws_region_key
             value = var.aws_region
           }
 
           env {
-            name  = "AWS_DEFAULT_REGION"
+            name  = local.aws_default_region_key
             value = var.aws_region
           }
 
@@ -88,7 +88,7 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
             name  = local.db_password_key
             value_from {
               secret_key_ref {
-                name  = var.k8s_api_service_name
+                name  = var.k8s_db_password_secret
                 key   = local.db_password_key
               }
             }
