@@ -87,6 +87,11 @@ variable "db_username" {
   type        = string
 }
 
+variable "db_password_key" {
+  description = "Key to acquire the database password for the strategy specified."
+  type        = string
+}
+
 variable "db_backup_retention" {
   description = "The number of days to retain backups for the RDS Beekeeper DB."
   type        = string
