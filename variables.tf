@@ -87,18 +87,6 @@ variable "db_username" {
   type        = string
 }
 
-variable "k8s_cloverleaf_api_service_name" {
-  description = "Name of the service, must be unique."
-  type        = string
-  default     = ""
-}
-
-variable "k8s_cloverleaf_api_service_namespace" {
-  description = "Namespace to deploy the service to."
-  type        = string
-  default     = ""
-}
-
 variable "db_backup_retention" {
   description = "The number of days to retain backups for the RDS Beekeeper DB."
   type        = string
@@ -314,6 +302,12 @@ variable "k8s_kiam_role_arn" {
   description = "KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions."
   default     = ""
   type        = string
+}
+
+variable "k8s_api_service_name" {
+  description = "Name of the service, must be unique."
+  type        = string
+  default     = ""
 }
 
 variable "k8s_namespace" {
