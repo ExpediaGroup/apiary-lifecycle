@@ -63,6 +63,7 @@ A database password defined in in `aws-secrets-manager`. The terraform module wi
 | k8s\_ingress\_tls\_hosts | List of hosts for TLS configuration of a Kubernetes ingress. | `list(string)` | `[]` | no |
 | k8s\_ingress\_tls\_secret | Secret name for TLS configuration of a Kubernetes ingress. | `string` | `""` | no |
 | k8s\_kiam\_role\_arn | KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions. | `string` | `""` | no |
+| k8s\_db\_password\_secret | Name of the Kubernetes secret that would store the db password for beekeeper. | `string` | `"beekeeper-db-password"` | no |
 | k8s\_namespace | Namespace to deploy all Kubernetes resources to. | `string` | `"beekeeper"` | no |
 | k8s\_node\_affinity | Full node\_affinity object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_node\_selector | Full node\_selector object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
