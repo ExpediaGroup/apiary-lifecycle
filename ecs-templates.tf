@@ -9,8 +9,6 @@ data "template_file" "beekeeper_scheduler_apiary_container_definition" {
   template = file("${path.module}/files/ecs-container-definition.json")
 
   vars = {
-    db_password_strategy  = var.db_password_strategy
-    db_password_key       = var.db_password_key
     docker_image          = var.scheduler_apiary_docker_image
     docker_image_version  = var.scheduler_apiary_docker_image_version
     beekeeper_config_yaml = base64encode(data.template_file.beekeeper_scheduler_apiary_config.rendered)
