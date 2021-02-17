@@ -5,7 +5,7 @@
  */
 
 data "template_file" "beekeeper_graphite_config" {
-  template = file("${path.module}/files/beekeeper-graphite-config.yml")
+  template = file("${path.module}/files/beekeeper-graphite-config.json")
 
   vars = {
     graphite_enabled = var.graphite_enabled
@@ -16,7 +16,7 @@ data "template_file" "beekeeper_graphite_config" {
 }
 
 data "template_file" "beekeeper_scheduler_apiary_config" {
-  template = file("${path.module}/files/beekeeper-scheduler-apiary-config.yml")
+  template = file("${path.module}/files/beekeeper-scheduler-apiary-config.json")
 
   vars = {
     db_endpoint      = aws_db_instance.beekeeper.endpoint
@@ -28,7 +28,7 @@ data "template_file" "beekeeper_scheduler_apiary_config" {
 }
 
 data "template_file" "beekeeper_path_cleanup_config" {
-  template = file("${path.module}/files/beekeeper-path-cleanup-config.yml")
+  template = file("${path.module}/files/beekeeper-path-cleanup-config.json")
 
   vars = {
     db_endpoint        = aws_db_instance.beekeeper.endpoint
@@ -41,7 +41,7 @@ data "template_file" "beekeeper_path_cleanup_config" {
 }
 
 data "template_file" "beekeeper_metadata_cleanup_config" {
-  template = file("${path.module}/files/beekeeper-metadata-cleanup-config.yml")
+  template = file("${path.module}/files/beekeeper-metadata-cleanup-config.json")
 
   vars = {
     db_endpoint        = aws_db_instance.beekeeper.endpoint

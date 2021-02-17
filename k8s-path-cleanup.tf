@@ -96,8 +96,8 @@ resource "kubernetes_deployment" "beekeeper_path_cleanup" {
           }
 
           env {
-            name  = "BEEKEEPER_CONFIG"
-            value = base64encode(data.template_file.beekeeper_path_cleanup_config.rendered)
+            name  = local.spring_application_json_key
+            value = data.template_file.beekeeper_path_cleanup_config.rendered
           }
         }
         image_pull_secrets {

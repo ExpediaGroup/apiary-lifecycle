@@ -95,8 +95,8 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
           }
 
           env {
-            name  = "BEEKEEPER_CONFIG"
-            value = base64encode(data.template_file.beekeeper_scheduler_apiary_config.rendered)
+            name  = local.spring_application_json_key
+            value = data.template_file.beekeeper_scheduler_apiary_config.rendered
           }
         }
         image_pull_secrets {

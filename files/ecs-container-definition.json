@@ -20,8 +20,8 @@
         ],
         "environment":  [
             {
-                "name": "BEEKEEPER_CONFIG",
-                "value": "${beekeeper_config_yaml}"
+                "name": "SPRING_APPLICATION_JSON",
+                "value": "${spring_application_json}"
             }
         ],
         "secrets": [
