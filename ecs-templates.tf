@@ -19,6 +19,8 @@ data "template_file" "beekeeper_scheduler_apiary_container_definition" {
     name                  = "${local.instance_alias}-scheduler-apiary"
     port                  = 8080
     region                = var.aws_region
+    db_password_key       = local.db_password_key
+    db_password_arn       = data.aws_secretsmanager_secret_version.beekeeper_db.arn
 
     #to instruct ECS to use repositoryCredentials for private docker registry
     docker_auth = var.docker_registry_auth_secret_name == "" ? "" : format("\"repositoryCredentials\" :{\n \"credentialsParameter\":\"%s\"\n},", join("", data.aws_secretsmanager_secret.docker_registry.*.arn))
@@ -30,8 +32,6 @@ data "template_file" "beekeeper_path_cleanup_container_definition" {
   template = file("${path.module}/files/ecs-container-definition.json")
 
   vars = {
-    db_password_strategy  = var.db_password_strategy
-    db_password_key       = var.db_password_key
     docker_image          = var.path_cleanup_docker_image
     docker_image_version  = var.path_cleanup_docker_image_version
     beekeeper_config_yaml = base64encode(data.template_file.beekeeper_path_cleanup_config.rendered)
@@ -40,6 +40,8 @@ data "template_file" "beekeeper_path_cleanup_container_definition" {
     name                  = "${local.instance_alias}-path-cleanup"
     port                  = 8008
     region                = var.aws_region
+    db_password_key       = local.db_password_key
+    db_password_arn       = data.aws_secretsmanager_secret_version.beekeeper_db.arn
 
     #to instruct ECS to use repositoryCredentials for private docker registry
     docker_auth = var.docker_registry_auth_secret_name == "" ? "" : format("\"repositoryCredentials\" :{\n \"credentialsParameter\":\"%s\"\n},", join("", data.aws_secretsmanager_secret.docker_registry.*.arn))
