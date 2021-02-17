@@ -5,7 +5,7 @@
  */
 
 data "template_file" "beekeeper_graphite_config" {
-  template = file("${path.module}/files/beekeeper-graphite-config.json")
+  template = file("${path.module}/files/beekeeper-graphite-config-segment.json")
 
   vars = {
     graphite_enabled = var.graphite_enabled
