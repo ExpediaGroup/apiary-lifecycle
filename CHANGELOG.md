@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [3.1.2] - 2021-02-22
+## [3.1.0] - 2021-02-22
 ### Changed
 - Removed variable `DB_PASSWORD_STRATEGY`.
 - Securely injecting `db_password_key` in k8s and ecs instead of pulling these credentials from AWS Secret Manager in Beekeeper.
