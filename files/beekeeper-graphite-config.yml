@@ -1,5 +1,0 @@
-graphite:
-  enabled: ${graphite_enabled}
-  host: ${graphite_host}
-  prefix: ${graphite_prefix}
-  port: ${graphite_port}

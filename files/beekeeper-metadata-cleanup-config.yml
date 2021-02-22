@@ -1,8 +1,0 @@
-spring.datasource:
-  url: jdbc:mysql://${db_endpoint}/beekeeper?useSSL=false
-  username: ${db_username}
-properties:
-  scheduler-delay-ms: ${scheduler_delay_ms}
-  dry-run-enabled: ${dry_run_enabled}
-  metastore-uri: ${metastore_uri}
-${graphite_config}

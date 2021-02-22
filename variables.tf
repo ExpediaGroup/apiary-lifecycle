@@ -87,12 +87,6 @@ variable "db_username" {
   type        = string
 }
 
-variable "db_password_strategy" {
-  description = "Strategy to acquire the password for the RDS instance. Supported strategies: aws-secrets-manager."
-  default     = "aws-secrets-manager"
-  type        = string
-}
-
 variable "db_password_key" {
   description = "Key to acquire the database password for the strategy specified."
   type        = string
@@ -312,6 +306,12 @@ variable "k8s_app_name" {
 variable "k8s_kiam_role_arn" {
   description = "KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions."
   default     = ""
+  type        = string
+}
+
+variable "k8s_db_password_secret" {
+  description = "Name of the Kubernetes secret that would store the db password for beekeeper."
+  default     = "beekeeper-db-password"
   type        = string
 }
 

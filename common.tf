@@ -8,6 +8,11 @@ locals {
   instance_alias = var.instance_name == "" ? "beekeeper" : format("beekeeper-%s", var.instance_name)
   queue_alias = var.instance_name == "" ? var.queue_name : "${var.queue_name}-${var.instance_name}"
   k8s_app_alias = var.k8s_app_name == "" ? "beekeeper" : format("beekeeper-%s", var.k8s_app_name)
+
+  aws_region_key              = "AWS_REGION"
+  aws_default_region_key      = "AWS_DEFAULT_REGION"
+  db_password_key             = "SPRING_DATASOURCE_PASSWORD"
+  spring_application_json_key = "SPRING_APPLICATION_JSON"
 }
 
 data "aws_iam_account_alias" "current" {}

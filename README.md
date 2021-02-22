@@ -4,7 +4,8 @@ Terraform deployment scripts for [Beekeeper](https://github.com/ExpediaGroup/bee
 Includes support for deploying Beekeeper on ECS and Kubernetes. Also includes deployment scripts for a Lambda which notifies Slack when Beekeeper's dead letter queue receives a message (this module is not required to run Beekeeper).
 
 ## Dependencies
-If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform module will not create the database password automatically. The secret will need to be created in Secrets Manager separately with the specified `db_password_key`.
+A database password is defined in `aws-secrets-manager`. The terraform module will use that password for the database (see property `k8s_db_password_secret `).
+
 
 ## Providers
 
@@ -34,7 +35,6 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | db\_backup\_window | Preferred backup window for the RDS Beekeeper DB in UTC. | `string` | `"02:00-03:00"` | no |
 | db\_maintenance\_window | Preferred maintenance window for the RDS Beekeeper DB in UTC. | `string` | `"wed:03:00-wed:04:00"` | no |
 | db\_password\_key | Key to acquire the database password for the strategy specified. | `string` | n/a | yes |
-| db\_password\_strategy | Strategy to acquire the password for the RDS instance. Supported strategies: aws-secrets-manager. | `string` | `"aws-secrets-manager"` | no |
 | db\_username | Username for the master DB user. | `string` | `"beekeeper"` | no |
 | docker\_registry\_auth\_secret\_name | Docker Registry authentication SecretManager secret name. | `string` | `""` | no |
 | path\_cleanup\_dry\_run\_enabled | Enable Path Cleanup to perform dry runs of deletions only. | `string` | `"false"` | no |
@@ -64,6 +64,7 @@ If the chosen `db_password_strategy` is `aws-secrets-manager`, this terraform mo
 | k8s\_ingress\_tls\_hosts | List of hosts for TLS configuration of a Kubernetes ingress. | `list(string)` | `[]` | no |
 | k8s\_ingress\_tls\_secret | Secret name for TLS configuration of a Kubernetes ingress. | `string` | `""` | no |
 | k8s\_kiam\_role\_arn | KIAM role arn to use for creating a K8S IAM role with the correct assume role permissions. | `string` | `""` | no |
+| k8s\_db\_password\_secret | Name of the Kubernetes secret that would store the db password for beekeeper. | `string` | `"beekeeper-db-password"` | no |
 | k8s\_namespace | Namespace to deploy all Kubernetes resources to. | `string` | `"beekeeper"` | no |
 | k8s\_node\_affinity | Full node\_affinity object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |
 | k8s\_node\_selector | Full node\_selector object as per terraform/Kubernetes docs. | `object({})` | `{}` | no |

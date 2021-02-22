@@ -20,16 +20,14 @@
         ],
         "environment":  [
             {
-                "name": "BEEKEEPER_CONFIG",
-                "value": "${beekeeper_config_yaml}"
-            },
+                "name": "SPRING_APPLICATION_JSON",
+                "value": "${spring_application_json}"
+            }
+        ],
+        "secrets": [
             {
-                "name": "DB_PASSWORD_STRATEGY",
-                "value": "${db_password_strategy}"
-            },
-            {
-                "name": "DB_PASSWORD_KEY",
-                "value": "${db_password_key}"
+                "name": "${db_password_key}",
+                "valueFrom": "${db_password_arn}"
             }
         ]
     }
