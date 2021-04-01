@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-18.04
     timeout-minutes: 5
     container:
-      image: hashicorp/terraform:0.12.19
+      image: hashicorp/terraform:0.12.29
     env:
       AWS_DEFAULT_REGION: us-east-1
 
