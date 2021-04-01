@@ -39,9 +39,9 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
         labels = local.scheduler_apiary_label_name_instance
         annotations = {
           "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_scheduler_apiary_iam[count.index].arn
-          "prometheus.io/scrape": var.prometheus_enabled
-          "prometheus.io/port": var.k8s_scheduler_apiary_port
-          "prometheus.io/path": "/actuator/prometheus"
+          "prometheus.io/scrape" : var.prometheus_enabled
+          "prometheus.io/port" : var.k8s_scheduler_apiary_port
+          "prometheus.io/path" : "/actuator/prometheus"
         }
       }
 
@@ -64,11 +64,11 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
           }
 
           resources {
-            limits = {
+            limits {
               memory = var.k8s_scheduler_apiary_memory
               cpu    = var.k8s_scheduler_apiary_cpu
             }
-            requests = {
+            requests {
               memory = var.k8s_scheduler_apiary_memory
               cpu    = var.k8s_scheduler_apiary_cpu
             }
@@ -85,11 +85,11 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
           }
 
           env {
-            name  = local.db_password_key
+            name = local.db_password_key
             value_from {
               secret_key_ref {
-                name  = var.k8s_db_password_secret
-                key   = local.db_password_key
+                name = var.k8s_db_password_secret
+                key  = local.db_password_key
               }
             }
           }
