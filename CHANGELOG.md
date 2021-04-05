@@ -22,6 +22,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Renamed `Cleanup` to `Path Cleanup`, and `Path Scheduler` to `Scheduler Apiary` to match name changes in Beekeeper.
 
+## [2.1.4] - 2021-04-06
+### Changed
+- Pin K8S provider version to `1.x` for compatibility with other Apiary components deployed in the same Terraform state file.
+- Don't use instance alias as part of default DB name since all the Flyway scripts expect "beekeeper" as the db name.
+
 ## [2.1.3] - 2020-08-07
 ### Changed
 - Fix multi instance deployment resource names.
