@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
- 
+
 locals {
   path_cleanup_name      = "path-cleanup"
   path_cleanup_full_name = "${local.k8s_app_alias}-path-cleanup"
@@ -39,9 +39,9 @@ resource "kubernetes_deployment" "beekeeper_path_cleanup" {
         labels = local.path_cleanup_label_name_instance
         annotations = {
           "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_path_cleanup_iam[count.index].arn
-          "prometheus.io/scrape": var.prometheus_enabled
-          "prometheus.io/port": var.k8s_path_cleanup_port
-          "prometheus.io/path": "/actuator/prometheus"
+          "prometheus.io/scrape" : var.prometheus_enabled
+          "prometheus.io/port" : var.k8s_path_cleanup_port
+          "prometheus.io/path" : "/actuator/prometheus"
         }
       }
 
@@ -65,11 +65,11 @@ resource "kubernetes_deployment" "beekeeper_path_cleanup" {
           }
 
           resources {
-            limits = {
+            limits {
               memory = var.k8s_path_cleanup_memory
               cpu    = var.k8s_path_cleanup_cpu
             }
-            requests = {
+            requests {
               memory = var.k8s_path_cleanup_memory
               cpu    = var.k8s_path_cleanup_cpu
             }
@@ -86,11 +86,11 @@ resource "kubernetes_deployment" "beekeeper_path_cleanup" {
           }
 
           env {
-            name  = local.db_password_key
+            name = local.db_password_key
             value_from {
               secret_key_ref {
-                name  = var.k8s_db_password_secret
-                key   = local.db_password_key
+                name = var.k8s_db_password_secret
+                key  = local.db_password_key
               }
             }
           }

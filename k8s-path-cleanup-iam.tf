@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
- 
+
 resource "aws_iam_role" "beekeeper_k8s_role_path_cleanup_iam" {
   count = var.instance_type == "k8s" ? 1 : 0
   name  = "${local.instance_alias}-path-cleanup-${var.aws_region}"

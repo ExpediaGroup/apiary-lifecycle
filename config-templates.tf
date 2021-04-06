@@ -19,11 +19,11 @@ data "template_file" "beekeeper_scheduler_apiary_config" {
   template = file("${path.module}/files/beekeeper-scheduler-apiary-config.json")
 
   vars = {
-    db_endpoint      = aws_db_instance.beekeeper.endpoint
-    db_name          = aws_db_instance.beekeeper.name
-    db_username      = aws_db_instance.beekeeper.username
-    queue            = aws_sqs_queue.beekeeper.id
-    graphite_config  = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
+    db_endpoint     = aws_db_instance.beekeeper.endpoint
+    db_name         = aws_db_instance.beekeeper.name
+    db_username     = aws_db_instance.beekeeper.username
+    queue           = aws_sqs_queue.beekeeper.id
+    graphite_config = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }
 }
 
