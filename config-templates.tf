@@ -53,3 +53,18 @@ data "template_file" "beekeeper_metadata_cleanup_config" {
     graphite_config    = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }
 }
+
+data "template_file" "beekeeper_api_config" {
+  template = file("${path.module}/files/beekeeper-api-config.json")
+
+  vars = {
+    db_endpoint        = aws_db_instance.beekeeper.endpoint
+    db_name            = aws_db_instance.beekeeper.name
+    db_username        = aws_db_instance.beekeeper.username
+    scheduler_delay_ms = var.scheduler_delay_ms
+    dry_run_enabled    = var.api_dry_run_enabled
+    metastore_uri      = var.metastore_uri
+    graphite_config    = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
+  }
+}
+

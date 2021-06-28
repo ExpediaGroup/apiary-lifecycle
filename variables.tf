@@ -257,6 +257,12 @@ variable "metadata_cleanup_dry_run_enabled" {
   type        = string
 }
 
+variable "api_dry_run_enabled" {
+  description = "Enable API to perform dry runs of deletions only."
+  default     = "false"
+  type        = string
+}
+
 # Monitoring
 
 variable "graphite_enabled" {
