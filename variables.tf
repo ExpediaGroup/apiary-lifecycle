@@ -439,6 +439,56 @@ variable "k8s_metadata_cleanup_ingress_path" {
   type        = string
 }
 
+# K8S - api deployment
+
+variable "k8s_api_memory" {
+  description = "Total memory to allot to the Beekeeper API pod."
+  default     = "2Gi"
+  type        = string
+}
+
+variable "k8s_api_cpu" {
+  description = "Total cpu to allot to the Beekeeper API pod."
+  default     = "500m"
+  type        = string
+}
+
+variable "k8s_api_port" {
+  description = "Internal port that the Beekeeper API service runs on."
+  default     = 9008
+  type        = number
+}
+
+variable "api_docker_image_version" {
+  description = "Beekeeper API docker image version."
+  type        = string
+  default     = "latest"
+}
+
+variable "k8s_api_liveness_delay" {
+  description = "Liveness delay (in seconds) for the Beekeeper API service."
+  default     = 60
+  type        = number
+}
+
+variable "k8s_api_ingress_host" {
+  description = "Ingress host name for Beekeeper API."
+  default     = ""
+  type        = string
+}
+
+variable "k8s_api_ingress_path" {
+  description = "Ingress path regex for Beekeeper API."
+  default     = ""
+  type        = string
+}
+
+variable "api_docker_image" {
+  description = "Beekeeper API image."
+  type        = string
+  default     = "expediagroup/beekeeper-api"
+}
+
 # K8S - Scheduler Apiary deployment
 
 variable "k8s_scheduler_apiary_memory" {
