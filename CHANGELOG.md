@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - TBD
+### Added
+- Terraform files for `beekeeper-api` module.
+
 ## [3.1.1] - 2021-04-06
 ### Changed
 - Pin K8S provider version to `1.x` for compatibility with other Apiary components deployed in the same Terraform state file.
