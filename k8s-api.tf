@@ -8,14 +8,14 @@ locals {
   api_name      = "api"
   api_full_name = "${local.k8s_app_alias}-api"
   api_labels = {
-    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-path-cleanup"
-    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-path-cleanup"
+    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-api"
+    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-api"
     "app.kubernetes.io/version"    = var.api_docker_image_version
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   api_label_name_instance = {
-    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-path-cleanup"
-    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-path-cleanup"
+    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-path-api"
+    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-path-api"
   }
 }
 
@@ -109,21 +109,21 @@ resource "kubernetes_deployment" "beekeeper_api" {
 
 }
 
-resource "kubernetes_service" "beekeeper_path_cleanup" {
+resource "kubernetes_service" "beekeeper_api" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
-    name   = local.path_cleanup_full_name
+    name   = local.api_full_name
     labels = local.api_labels
   }
 
   spec {
     port {
-      name        = local.path_cleanup_name
-      target_port = local.path_cleanup_name
-      port        = var.k8s_path_cleanup_port
+      name        = local.api_name
+      target_port = local.api_name
+      port        = var.k8s_api_port
     }
 
-    selector = local.path_cleanup_label_name_instance
+    selector = local.api_label_name_instance
     type     = "ClusterIP"
   }
 }
