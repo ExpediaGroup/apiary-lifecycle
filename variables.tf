@@ -231,6 +231,18 @@ variable "docker_registry_auth_secret_name" {
   default     = ""
 }
 
+variable "api_docker_image" {
+  description = "Beekeeper API image."
+  type        = string
+  default     = "expediagroup/beekeeper-api"
+}
+
+variable "api_docker_image_version" {
+  description = "Beekeeper API docker image version."
+  type        = string
+  default     = "latest"
+}
+
 # Application specific
 
 variable "allowed_s3_buckets" {
@@ -445,7 +457,7 @@ variable "k8s_metadata_cleanup_ingress_path" {
   type        = string
 }
 
-# K8S - api deployment
+# K8S - API deployment
 
 variable "k8s_api_memory" {
   description = "Total memory to allot to the Beekeeper API pod."
@@ -465,12 +477,6 @@ variable "k8s_api_port" {
   type        = number
 }
 
-variable "api_docker_image_version" {
-  description = "Beekeeper API docker image version."
-  type        = string
-  default     = "latest"
-}
-
 variable "k8s_api_liveness_delay" {
   description = "Liveness delay (in seconds) for the Beekeeper API service."
   default     = 60
@@ -487,12 +493,6 @@ variable "k8s_api_ingress_path" {
   description = "Ingress path regex for Beekeeper API."
   default     = ""
   type        = string
-}
-
-variable "api_docker_image" {
-  description = "Beekeeper API image."
-  type        = string
-  default     = "expediagroup/beekeeper-api"
 }
 
 # K8S - Scheduler Apiary deployment
