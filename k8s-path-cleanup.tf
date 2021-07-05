@@ -24,7 +24,7 @@ resource "kubernetes_deployment" "beekeeper_path_cleanup" {
   metadata {
     name      = local.path_cleanup_full_name
     namespace = var.k8s_namespace
-    labels    = local.api_labels
+    labels = local.path_cleanup_labels
   }
 
   spec {
@@ -113,7 +113,7 @@ resource "kubernetes_service" "beekeeper_path_cleanup" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
     name   = local.path_cleanup_full_name
-    labels = local.api_labels
+    labels = local.path_cleanup_labels
   }
 
   spec {
