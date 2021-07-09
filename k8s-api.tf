@@ -141,7 +141,7 @@ resource "kubernetes_ingress" "beekeeper" {
       http {
         path {
           backend {
-            service_name = local.instance_alias
+            service_name = local.api_full_name
             service_port = var.k8s_beekeeper_port
           }
           path = "/"
