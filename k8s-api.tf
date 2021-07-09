@@ -114,6 +114,7 @@ resource "kubernetes_service" "beekeeper_api" {
   metadata {
     name   = local.api_full_name
     labels = local.api_labels
+    namespace = var.k8s_namespace
   }
 
   spec {
