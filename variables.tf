@@ -495,6 +495,12 @@ variable "k8s_api_ingress_path" {
   type        = string
 }
 
+variable "k8s_beekeeper_port" {
+  description = "Internal port that the Beekeeper API runs on."
+  type        = number
+  default     = 8008
+}
+
 # K8S - Scheduler Apiary deployment
 
 variable "k8s_scheduler_apiary_memory" {

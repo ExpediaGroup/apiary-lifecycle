@@ -58,7 +58,7 @@ resource "kubernetes_deployment" "beekeeper_api" {
 
           liveness_probe {
             http_get {
-              path = "/actuator/health"
+              path = "/actuator/health/liveness"
               port = local.api_name
             }
             initial_delay_seconds = var.k8s_api_liveness_delay
@@ -125,5 +125,28 @@ resource "kubernetes_service" "beekeeper_api" {
 
     selector = local.api_label_name_instance
     type     = "ClusterIP"
+  }
+}
+
+
+resource "kubernetes_ingress" "beekeeper" {
+  metadata {
+    name = local.instance_alias
+    namespace = var.k8s_namespace
+  }
+
+  spec {
+    rule {
+      host = "${local.instance_alias}-beekeeper.${local.dnsname}.${local.dnsdomain}"
+      http {
+        path {
+          backend {
+            service_name = local.instance_alias
+            service_port = var.k8s_beekeeper_port
+          }
+          path = "/"
+        }
+      }
+    }
   }
 }
