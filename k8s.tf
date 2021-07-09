@@ -64,18 +64,5 @@ resource "kubernetes_ingress" "beekeeper" {
         }
       }
     }
-
-    rule {
-      host = var.k8s_api_ingress_host
-      http {
-        path {
-          path = var.k8s_api_ingress_path
-          backend {
-            service_name = kubernetes_service.beekeeper_api[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_api[count.index].spec.port.target_port
-          }
-        }
-      }
-    }
   }
 }
