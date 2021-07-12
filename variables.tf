@@ -473,7 +473,7 @@ variable "k8s_api_cpu" {
 
 variable "k8s_beekeeper_api_port" {
   description = "Internal port that the Beekeeper API service runs on."
-  default     = 8080
+  default     = 7008
   type        = number
 }
 
