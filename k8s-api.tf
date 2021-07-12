@@ -138,7 +138,7 @@ resource "kubernetes_ingress" "beekeeper-api" {
 
   spec {
     rule {
-      host = "${local.api_full_name}${local.dnsname}.${local.dnsdomain}"
+      host = "${local.api_full_name}.${local.dnsname}.${local.dnsdomain}"
       http {
         path {
           backend {
