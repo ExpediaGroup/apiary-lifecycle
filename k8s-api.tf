@@ -132,13 +132,13 @@ resource "kubernetes_service" "beekeeper_api" {
 
 resource "kubernetes_ingress" "beekeeper-api" {
   metadata {
-    name = local.instance_alias
+    name = local.api_full_name
     namespace = var.k8s_namespace
   }
 
   spec {
     rule {
-      host = "${local.instance_alias}-api.${local.dnsname}.${local.dnsdomain}"
+      host = "${local.api_full_name}${local.dnsname}.${local.dnsdomain}"
       http {
         path {
           backend {
