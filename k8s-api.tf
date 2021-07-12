@@ -14,8 +14,8 @@ locals {
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   api_label_name_instance = {
-    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-path-api"
-    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-path-api"
+    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-api"
+    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-api"
   }
 }
 
@@ -143,7 +143,7 @@ resource "kubernetes_ingress" "beekeeper-api" {
         path {
           backend {
             service_name = local.api_full_name
-            service_port = var.k8s_beekeeper_port
+            service_port = var.k8s_beekeeper_api_port
           }
           path = "/"
         }

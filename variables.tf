@@ -495,7 +495,7 @@ variable "k8s_api_ingress_path" {
   type        = string
 }
 
-variable "k8s_beekeeper_port" {
+variable "k8s_beekeeper_api_port" {
   description = "Internal port that the Beekeeper API runs on."
   type        = number
   default     = 7008
