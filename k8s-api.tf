@@ -52,7 +52,6 @@ resource "kubernetes_deployment" "beekeeper_api" {
           image_pull_policy = var.k8s_image_pull_policy
 
           port {
-            name           = local.api_name
             container_port = var.k8s_beekeeper_api_port
           }
 
@@ -61,7 +60,9 @@ resource "kubernetes_deployment" "beekeeper_api" {
               path = "/actuator/health"
               port = var.k8s_beekeeper_api_port
             }
-            initial_delay_seconds = var.k8s_api_liveness_delay
+            failure_threshold     = 11
+            initial_delay_seconds = 60
+            period_seconds        = 30
           }
 
           resources {
@@ -119,7 +120,6 @@ resource "kubernetes_service" "beekeeper_api" {
 
   spec {
     port {
-      name        = local.api_name
       target_port = var.k8s_beekeeper_api_port
       port        = var.k8s_beekeeper_api_port
     }
