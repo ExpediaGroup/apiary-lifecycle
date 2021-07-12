@@ -471,7 +471,7 @@ variable "k8s_api_cpu" {
   type        = string
 }
 
-variable "k8s_api_port" {
+variable "k8s_beekeeper_api_port" {
   description = "Internal port that the Beekeeper API service runs on."
   default     = 7008
   type        = number
@@ -493,12 +493,6 @@ variable "k8s_api_ingress_path" {
   description = "Ingress path regex for Beekeeper API."
   default     = ""
   type        = string
-}
-
-variable "k8s_beekeeper_api_port" {
-  description = "Internal port that the Beekeeper API runs on."
-  type        = number
-  default     = 7008
 }
 
 # K8S - Scheduler Apiary deployment

@@ -40,7 +40,7 @@ resource "kubernetes_deployment" "beekeeper_api" {
         annotations = {
           "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_api_iam[count.index].arn
           "prometheus.io/scrape" : var.prometheus_enabled
-          "prometheus.io/port" : var.k8s_api_port
+          "prometheus.io/port" : var.k8s_beekeeper_api_port
           "prometheus.io/path" : "/actuator/prometheus"
         }
       }
@@ -53,13 +53,13 @@ resource "kubernetes_deployment" "beekeeper_api" {
 
           port {
             name           = local.api_name
-            container_port = var.k8s_api_port
+            container_port = var.k8s_beekeeper_api_port
           }
 
           liveness_probe {
             http_get {
               path = "/actuator/health/liveness"
-              port = var.k8s_api_port
+              port = var.k8s_beekeeper_api_port
             }
             initial_delay_seconds = var.k8s_api_liveness_delay
           }
@@ -120,8 +120,8 @@ resource "kubernetes_service" "beekeeper_api" {
   spec {
     port {
       name        = local.api_name
-      target_port = var.k8s_api_port
-      port        = var.k8s_api_port
+      target_port = var.k8s_beekeeper_api_port
+      port        = var.k8s_beekeeper_api_port
     }
 
     selector = local.api_label_name_instance
