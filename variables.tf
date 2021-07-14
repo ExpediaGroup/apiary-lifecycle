@@ -240,7 +240,7 @@ variable "api_docker_image" {
 variable "api_docker_image_version" {
   description = "Beekeeper API docker image version."
   type        = string
-  default     = "3.2.0-SNAPSHOT"
+  default     = "latest"
 }
 
 # Application specific
