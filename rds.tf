@@ -5,7 +5,7 @@
  */
 
 resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
-  name        = "${local.instance_alias}-db-subnet-group-old"
+  name        = "${local.instance_alias}-db-subnet-group"
   subnet_ids  = ["subnet-04d1dfd4bffc19a49", "subnet-038f7e56308dc7107", "subnet-0f74dab012a4e5d46"]
   description = "Beekeeper DB Subnet Group for ${local.instance_alias}"
 
@@ -14,7 +14,7 @@ resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
 }
 
 resource "aws_db_subnet_group" "beekeeper_db_subnet_group_new" {
-  name        = "${local.instance_alias}-db-subnet-group"
+  name        = "${local.instance_alias}-db-subnet-group-new"
   subnet_ids  = var.rds_subnets
   description = "Beekeeper DB Subnet Group for ${local.instance_alias}"
 
