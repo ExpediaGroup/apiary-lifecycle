@@ -6,22 +6,12 @@
 
 resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
   name        = "${local.instance_alias}-db-subnet-group"
-  subnet_ids  = ["subnet-04d1dfd4bffc19a49", "subnet-038f7e56308dc7107", "subnet-0f74dab012a4e5d46"]
-  description = "Beekeeper DB Subnet Group for ${local.instance_alias}"
-
-  tags = merge(var.beekeeper_tags,
-  map("Name", "Beekeeper DB Subnet Group"))
-}
-
-resource "aws_db_subnet_group" "beekeeper_db_subnet_group_new" {
-  name        = "${local.instance_alias}-db-subnet-group-new"
   subnet_ids  = var.rds_subnets
   description = "Beekeeper DB Subnet Group for ${local.instance_alias}"
 
   tags = merge(var.beekeeper_tags,
   map("Name", "Beekeeper DB Subnet Group"))
 }
-
 
 resource "aws_security_group" "beekeeper_db_sg" {
   name   = "${local.instance_alias}-db"
@@ -58,7 +48,7 @@ resource "random_id" "snapshot_id" {
 
 resource "aws_db_instance" "beekeeper" {
   identifier             = local.instance_alias
-  db_subnet_group_name   = aws_db_subnet_group.beekeeper_db_subnet_group_new.name
+  db_subnet_group_name   = aws_db_subnet_group.beekeeper_db_subnet_group.name
   vpc_security_group_ids = [aws_security_group.beekeeper_db_sg.id]
   allocated_storage      = var.rds_allocated_storage
   max_allocated_storage  = var.rds_max_allocated_storage
