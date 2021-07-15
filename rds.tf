@@ -58,7 +58,7 @@ resource "random_id" "snapshot_id" {
 
 resource "aws_db_instance" "beekeeper" {
   identifier             = local.instance_alias
-  db_subnet_group_name   = aws_db_subnet_group.beekeeper_db_subnet_group.name
+  db_subnet_group_name   = aws_db_subnet_group.beekeeper_db_subnet_group_new.name
   vpc_security_group_ids = [aws_security_group.beekeeper_db_sg.id]
   allocated_storage      = var.rds_allocated_storage
   max_allocated_storage  = var.rds_max_allocated_storage
