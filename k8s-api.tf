@@ -8,14 +8,14 @@ locals {
   api_name      = "api"
   api_full_name = "${local.k8s_app_alias}-api"
   api_labels = {
-    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-api"
-    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-api"
+    "app.kubernetes.io/name"       = local.api_full_name
+    "app.kubernetes.io/instance"   = local.api_full_name
     "app.kubernetes.io/version"    = var.api_docker_image_version
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   api_label_name_instance = {
-    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-api"
-    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-api"
+    "app.kubernetes.io/name"     = local.api_full_name
+    "app.kubernetes.io/instance" = local.api_full_name
   }
 }
 
