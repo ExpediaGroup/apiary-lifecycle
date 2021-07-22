@@ -5,7 +5,6 @@
   },
   "properties": {
     "scheduler-delay-ms": "${scheduler_delay_ms}",
-    "dry-run-enabled": "${dry_run_enabled}",
     "metastore-uri": "${metastore_uri}"
   }${graphite_config}
 }
