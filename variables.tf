@@ -455,7 +455,7 @@ variable "k8s_metadata_cleanup_ingress_path" {
 
 variable "k8s_api_memory" {
   description = "Total memory to allot to the Beekeeper API pod."
-  default     = "0.5Gi"
+  default     = "2Gi"
   type        = string
 }
 
