@@ -14,7 +14,7 @@ data "template_file" "beekeeper_scheduler_apiary_container_definition" {
     log_group                   = aws_cloudwatch_log_group.beekeeper_scheduler_apiary.*.name[0]
     memory                      = var.scheduler_apiary_ecs_memory
     name                        = "${local.instance_alias}-scheduler-apiary"
-    port                        = 6008
+    port                        = 8080
     region                      = var.aws_region
     spring_application_json_key = local.spring_application_json_key
     spring_application_json     = data.template_file.beekeeper_scheduler_apiary_config.rendered
