@@ -505,7 +505,7 @@ variable "k8s_scheduler_apiary_cpu" {
 
 variable "k8s_scheduler_apiary_port" {
   description = "Internal port that the Beekeeper Scheduler Apiary service runs on."
-  default     = 6008
+  default     = 8080
   type        = number
 }
 
