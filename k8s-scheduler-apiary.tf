@@ -57,7 +57,7 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
 
           liveness_probe {
             http_get {
-              path = "/actuator/health"
+              path = "/actuator/health/liveness"
               port = var.k8s_scheduler_apiary_port
             }
             initial_delay_seconds = var.k8s_scheduler_apiary_liveness_delay
