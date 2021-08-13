@@ -38,7 +38,6 @@ resource "kubernetes_deployment" "beekeeper_api" {
       metadata {
         labels = local.api_label_name_instance
         annotations = {
-          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_api_iam[count.index].arn
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_beekeeper_api_port
           "prometheus.io/path" : "/actuator/prometheus"
