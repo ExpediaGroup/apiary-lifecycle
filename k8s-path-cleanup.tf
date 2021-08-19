@@ -59,7 +59,7 @@ resource "kubernetes_deployment" "beekeeper_path_cleanup" {
           liveness_probe {
             http_get {
               path = "/actuator/health"
-              port = local.path_cleanup_name
+              port = var.k8s_path_cleanup_port
             }
             initial_delay_seconds = var.k8s_path_cleanup_liveness_delay
           }
@@ -119,7 +119,7 @@ resource "kubernetes_service" "beekeeper_path_cleanup" {
   spec {
     port {
       name        = local.path_cleanup_name
-      target_port = local.path_cleanup_name
+      target_port = var.k8s_path_cleanup_port
       port        = var.k8s_path_cleanup_port
     }
 
