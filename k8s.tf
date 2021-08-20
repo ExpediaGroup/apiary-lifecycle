@@ -18,6 +18,7 @@ resource "kubernetes_ingress" "beekeeper" {
     name        = local.k8s_app_alias
     labels      = local.labels
     annotations = {}
+    namespace = var.k8s_namespace
   }
 
   spec {
