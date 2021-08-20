@@ -41,7 +41,7 @@ resource "kubernetes_ingress" "beekeeper" {
     }
 
     rule {
-      host = var.k8s_metadata_cleanup_ingress_host
+      host = "${local.metadata_cleanup_full_name}.${local.dnsname}.${local.dnsdomain}"
       http {
         path {
           path = var.k8s_metadata_cleanup_ingress_path
