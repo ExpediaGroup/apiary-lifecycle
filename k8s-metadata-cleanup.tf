@@ -38,7 +38,6 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
       metadata {
         labels = local.metadata_cleanup_label_name_instance
         annotations = {
-          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_metadata_cleanup_iam[count.index].arn
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_metadata_cleanup_port
           "prometheus.io/path" : "/actuator/prometheus"
@@ -60,7 +59,9 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
               path = "/actuator/health"
               port = var.k8s_metadata_cleanup_port
             }
-            initial_delay_seconds = var.k8s_metadata_cleanup_liveness_delay
+            failure_threshold     = 11
+            initial_delay_seconds = 60
+            period_seconds        = 30
           }
 
           resources {
@@ -118,7 +119,6 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
 
   spec {
     port {
-      name        = local.metadata_cleanup_name
       target_port = var.k8s_metadata_cleanup_port
       port        = var.k8s_metadata_cleanup_port
     }
