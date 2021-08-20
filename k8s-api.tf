@@ -130,10 +130,6 @@ resource "kubernetes_service" "beekeeper_api" {
 
 
 resource "kubernetes_ingress" "beekeeper-api" {
-  metadata {
-    name = local.api_full_name
-    namespace = var.k8s_namespace
-  }
 
   spec {
     rule {
