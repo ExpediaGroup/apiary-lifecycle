@@ -113,6 +113,7 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
   metadata {
     name   = local.metadata_cleanup_full_name
     labels = local.metadata_cleanup_labels
+    namespace = var.k8s_namespace
   }
 
   spec {

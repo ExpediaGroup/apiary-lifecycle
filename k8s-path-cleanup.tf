@@ -114,6 +114,7 @@ resource "kubernetes_service" "beekeeper_path_cleanup" {
   metadata {
     name   = local.path_cleanup_full_name
     labels = local.path_cleanup_labels
+    namespace = var.k8s_namespace
   }
 
   spec {
