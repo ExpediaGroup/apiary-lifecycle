@@ -14,8 +14,8 @@ locals {
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   metadata_cleanup_label_name_instance = {
-    "app.kubernetes.io/name"     = metadata_cleanup_full_name
-    "app.kubernetes.io/instance" = metadata_cleanup_full_name
+    "app.kubernetes.io/name"     = local.metadata_cleanup_full_name
+    "app.kubernetes.io/instance" = local.metadata_cleanup_full_name
   }
 }
 
