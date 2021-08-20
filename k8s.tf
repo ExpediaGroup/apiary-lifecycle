@@ -13,7 +13,6 @@ locals {
 }
 
 resource "kubernetes_ingress" "beekeeper" {
-  count = var.instance_type == "k8s" && var.k8s_ingress_enabled == 1 ? 1 : 0
   metadata {
     name        = local.k8s_app_alias
     labels      = local.labels
