@@ -15,7 +15,7 @@ variable "instance_name" {
 variable "instance_type" {
   description = "Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxiliary components (e.g. RDS, SQS etc.)."
   type        = string
-  default     = "k8s"
+  default     = "ecs"
 }
 
 variable "aws_region" {
