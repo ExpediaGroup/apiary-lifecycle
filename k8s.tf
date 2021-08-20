@@ -13,6 +13,7 @@ locals {
 }
 
 resource "kubernetes_ingress" "beekeeper" {
+  count = var.instance_type == "k8s" && var.k8s_ingress_enabled == 1 ? 1 : 0
   metadata {
     name        = local.k8s_app_alias
     labels      = local.labels
@@ -45,8 +46,8 @@ resource "kubernetes_ingress" "beekeeper" {
         path {
           path = var.k8s_scheduler_apiary_ingress_path
           backend {
-            service_name = local.scheduler_apiary_full_name
-            service_port = var.k8s_scheduler_apiary_port
+            service_name = kubernetes_service.beekeeper_scheduler_apiary[count.index].metadata.name
+            service_port = kubernetes_service.beekeeper_scheduler_apiary[count.index].spec.port.target_port
           }
         }
       }
