@@ -8,14 +8,14 @@ locals {
   metadata_cleanup_name      = "metadata-cleanup"
   metadata_cleanup_full_name = "${local.k8s_app_alias}-metadata-cleanup"
   metadata_cleanup_labels = {
-    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-metadata-cleanup"
-    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-metadata-cleanup"
+    "app.kubernetes.io/name"       = local.metadata_cleanup_full_name
+    "app.kubernetes.io/instance"   = local.metadata_cleanup_full_name
     "app.kubernetes.io/version"    = var.metadata_cleanup_docker_image_version
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   metadata_cleanup_label_name_instance = {
-    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-metadata-cleanup"
-    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-metadata-cleanup"
+    "app.kubernetes.io/name"     = metadata_cleanup_full_name
+    "app.kubernetes.io/instance" = metadata_cleanup_full_name
   }
 }
 
@@ -125,5 +125,27 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
 
     selector = local.metadata_cleanup_label_name_instance
     type     = "ClusterIP"
+  }
+}
+
+resource "kubernetes_ingress" "beekeeper-metadata-cleanup" {
+  metadata {
+    name = local.metadata_cleanup_full_name
+    namespace = var.k8s_namespace
+  }
+
+  spec {
+    rule {
+      host = "${local.metadata_cleanup_full_name}.${local.dnsname}.${local.dnsdomain}"
+      http {
+        path {
+          backend {
+            service_name = local.metadata_cleanup_full_name
+            service_port = var.k8s_metadata_cleanup_port
+          }
+          path = "/"
+        }
+      }
+    }
   }
 }
