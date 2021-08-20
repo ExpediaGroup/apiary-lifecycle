@@ -107,3 +107,20 @@ resource "kubernetes_deployment" "beekeeper_scheduler_apiary" {
   }
 
 }
+
+resource "kubernetes_service" "beekeeper_scheduler_apiary" {
+  count = var.instance_type == "k8s" ? 1 : 0
+  metadata {
+    name   = local.scheduler_apiary_full_name
+    labels = local.scheduler_apiary_labels
+  }
+  spec {
+    port {
+      name        = local.scheduler_apiary_name
+      target_port = var.k8s_scheduler_apiary_port
+      port        = var.k8s_scheduler_apiary_port
+    }
+    selector = local.scheduler_apiary_label_name_instance
+    type     = "ClusterIP"
+  }
+}

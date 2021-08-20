@@ -447,7 +447,7 @@ variable "k8s_metadata_cleanup_ingress_host" {
 
 variable "k8s_metadata_cleanup_ingress_path" {
   description = "Ingress path regex for Beekeeper Metadata Cleanup."
-  default     = "/"
+  default     = ""
   type        = string
 }
 
