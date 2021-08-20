@@ -128,25 +128,3 @@ resource "kubernetes_service" "beekeeper_path_cleanup" {
     type     = "ClusterIP"
   }
 }
-
-resource "kubernetes_ingress" "beekeeper-path-cleanup" {
-  metadata {
-    name = local.path_cleanup_full_name
-    namespace = var.k8s_namespace
-  }
-
-  spec {
-    rule {
-      host = "${local.path_cleanup_full_name}.${local.dnsname}.${local.dnsdomain}"
-      http {
-        path {
-          backend {
-            service_name = local.path_cleanup_full_name
-            service_port = var.k8s_path_cleanup_port
-          }
-          path = "/"
-        }
-      }
-    }
-  }
-}
