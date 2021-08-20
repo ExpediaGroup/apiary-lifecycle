@@ -31,7 +31,7 @@ resource "kubernetes_ingress" "beekeeper" {
       host = var.k8s_path_cleanup_ingress_host
       http {
         path {
-          path = var.k8s_path_cleanup_ingress_path
+          host = "${local.path_cleanup_full_name}.${local.dnsname}.${local.dnsdomain}"
           backend {
             service_name = local.path_cleanup_full_name
             service_port = var.k8s_path_cleanup_port
