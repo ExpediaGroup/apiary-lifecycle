@@ -28,13 +28,13 @@ resource "kubernetes_ingress" "beekeeper" {
     }
 
     rule {
-      host = var.k8s_path_cleanup_ingress_host
+      host = "${local.path_cleanup_full_name}.${local.dnsname}.${local.dnsdomain}"
       http {
         path {
-          path = var.k8s_path_cleanup_ingress_path
+          path = "/"
           backend {
-            service_name = kubernetes_service.beekeeper_path_cleanup[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_path_cleanup[count.index].spec.port.target_port
+            service_name = local.path_cleanup_full_name
+            service_port = var.k8s_path_cleanup_port
           }
         }
       }
