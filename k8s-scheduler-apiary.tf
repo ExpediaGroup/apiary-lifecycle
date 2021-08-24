@@ -113,6 +113,7 @@ resource "kubernetes_service" "beekeeper_scheduler_apiary" {
   metadata {
     name   = local.scheduler_apiary_full_name
     labels = local.scheduler_apiary_labels
+    namespace = var.k8s_namespace
   }
   spec {
     port {
