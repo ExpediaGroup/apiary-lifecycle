@@ -15,7 +15,7 @@ variable "instance_name" {
 variable "instance_type" {
   description = "Service to run Beekeeper on. Supported services: `ecs` (default), `k8s`. Leaving this blank will still deploy auxiliary components (e.g. RDS, SQS etc.)."
   type        = string
-  default     = "ecs"
+  default     = "k8s"
 }
 
 variable "aws_region" {
@@ -359,7 +359,7 @@ variable "k8s_node_tolerations" {
 
 variable "k8s_ingress_enabled" {
   description = "Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on)."
-  default     = 0
+  default     = 1
   type        = number
 }
 
