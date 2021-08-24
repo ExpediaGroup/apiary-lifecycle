@@ -127,26 +127,3 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
     type     = "ClusterIP"
   }
 }
-
-resource "kubernetes_ingress" "beekeeper-metadata-cleanup" {
-  count =  var.k8s_ingress_enabledd == 1 ? 1 : 0
-  metadata {
-    name = local.metadata_cleanup_full_name
-    namespace = var.k8s_namespace
-  }
-
-  spec {
-    rule {
-      host = "${local.metadata_cleanup_full_name}.${local.dnsname}.${local.dnsdomain}"
-      http {
-        path {
-          path = var.k8s_metadata_cleanup_ingress_path
-          backend {
-            service_name = kubernetes_service.beekeeper_metadata_cleanup[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_metadata_cleanup[count.index].spec.port.target_port
-          }
-        }
-      }
-    }
-  }
-}

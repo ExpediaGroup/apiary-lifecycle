@@ -363,12 +363,6 @@ variable "k8s_ingress_enabled" {
   type        = number
 }
 
-variable "k8s_ingress_enabledd" {
-  description = "Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on)."
-  default     = 1
-  type        = number
-}
-
 variable "k8s_ingress_tls_hosts" {
   description = "List of hosts for TLS configuration of a Kubernetes ingress."
   default     = []
