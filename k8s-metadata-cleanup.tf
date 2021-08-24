@@ -38,6 +38,7 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
       metadata {
         labels = local.metadata_cleanup_label_name_instance
         annotations = {
+          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_metadata_cleanup_iam[count.index].arn
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_metadata_cleanup_port
           "prometheus.io/path" : "/actuator/prometheus"
@@ -59,9 +60,7 @@ resource "kubernetes_deployment" "beekeeper_metadata_cleanup" {
               path = "/actuator/health"
               port = var.k8s_metadata_cleanup_port
             }
-            failure_threshold     = 11
-            initial_delay_seconds = 60
-            period_seconds        = 30
+            initial_delay_seconds = var.k8s_metadata_cleanup_liveness_delay
           }
 
           resources {
@@ -114,38 +113,16 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
   metadata {
     name   = local.metadata_cleanup_full_name
     labels = local.metadata_cleanup_labels
-    namespace = var.k8s_namespace
   }
 
   spec {
     port {
+      name = local.metadata_cleanup_name
       target_port = var.k8s_metadata_cleanup_port
       port        = var.k8s_metadata_cleanup_port
     }
 
     selector = local.metadata_cleanup_label_name_instance
     type     = "ClusterIP"
-  }
-}
-
-resource "kubernetes_ingress" "beekeeper-metadata-cleanup" {
-  metadata {
-    name = local.metadata_cleanup_full_name
-    namespace = var.k8s_namespace
-  }
-
-  spec {
-    rule {
-      host = "${local.metadata_cleanup_full_name}.${local.dnsname}.${local.dnsdomain}"
-      http {
-        path {
-          backend {
-            service_name = local.metadata_cleanup_full_name
-            service_port = var.k8s_metadata_cleanup_port
-          }
-          path = "/"
-        }
-      }
-    }
   }
 }
