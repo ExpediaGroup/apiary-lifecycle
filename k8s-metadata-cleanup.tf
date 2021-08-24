@@ -143,7 +143,8 @@ resource "kubernetes_ingress" "beekeeper-metadata-cleanup" {
           path = var.k8s_metadata_cleanup_ingress_path
           backend {
             service_name = kubernetes_service.beekeeper_metadata_cleanup[1].metadata[1].name
-            service_port = kubernetes_service.beekeeper_metadata_cleanup[1].spec[1].port[1].target_port}
+            service_port = kubernetes_service.beekeeper_metadata_cleanup[1].spec[1].port[1].target_port
+          }
         }
       }
     }
