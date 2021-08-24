@@ -259,22 +259,22 @@ variable "scheduler_delay_ms" {
 
 variable "path_cleanup_dry_run_enabled" {
   description = "Enable Path Cleanup to perform dry runs of deletions only."
-  default     = "false"
-  type        = string
+  default     = false
+  type        = bool
 }
 
 variable "metadata_cleanup_dry_run_enabled" {
   description = "Enable Metadata Cleanup to perform dry runs of deletions only."
-  default     = "false"
-  type        = string
+  default     = false
+  type        = bool
 }
 
 # Monitoring
 
 variable "graphite_enabled" {
   description = "Enable to produce Graphite metrics - true or false."
-  default     = "false"
-  type        = string
+  default     = false
+  type        = bool
 }
 
 variable "graphite_host" {
@@ -297,8 +297,8 @@ variable "graphite_port" {
 
 variable "prometheus_enabled" {
   description = "Enable to pull metrics using Prometheus - true or false."
-  default     = "false"
-  type        = string
+  default     = false
+  type        = bool
 }
 
 variable "metastore_uri" {
