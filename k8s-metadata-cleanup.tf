@@ -117,7 +117,7 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
 
   spec {
     port {
-      name = local.metadata_cleanup_name
+      name        = local.metadata_cleanup_name
       target_port = var.k8s_metadata_cleanup_port
       port        = var.k8s_metadata_cleanup_port
     }
