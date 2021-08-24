@@ -52,7 +52,7 @@ resource "kubernetes_ingress" "beekeeper" {
         }
       }
     }
-    
+
     rule {
       host = var.k8s_scheduler_apiary_ingress_host
       http {
