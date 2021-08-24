@@ -129,7 +129,7 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
 }
 
 resource "kubernetes_ingress" "beekeeper-metadata-cleanup" {
-  count = var.instance_type == "k8s" && var.k8s_ingress_enabledd == 1 ? 1 : 0
+  count =  var.k8s_ingress_enabledd == 1 ? 1 : 0
   metadata {
     name = local.metadata_cleanup_full_name
     namespace = var.k8s_namespace
