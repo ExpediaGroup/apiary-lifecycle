@@ -359,7 +359,7 @@ variable "k8s_node_tolerations" {
 
 variable "k8s_ingress_enabled" {
   description = "Boolean flag to determine if we should create an ingress or not. (0 = off, 1 = on)."
-  default     = 1
+  default     = 0
   type        = number
 }
 

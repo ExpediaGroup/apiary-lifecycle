@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 - Changed the service namespace from `default` to `beekeeper` in `beekeeper-metadata-cleanup`, `beekeeper-path-cleanup` and `beekeeper-scheduler-apiary`.
 - Changed some variables from type `string` to `number`.
+- Fixed the `beekeeper` ingress so that the `k8s_ingress_enabled` variable works.
 
 ## [3.2.0] - 2021-08-13
 ### Added
