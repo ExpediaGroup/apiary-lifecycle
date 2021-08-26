@@ -33,8 +33,8 @@ resource "kubernetes_ingress" "beekeeper" {
         path {
           path = var.k8s_path_cleanup_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_path_cleanup[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_path_cleanup[count.index].spec.port.target_port
+            service_name = kubernetes_service.beekeeper_path_cleanup.metadata.name
+            service_port = kubernetes_service.beekeeper_path_cleanup.spec.port.target_port
           }
         }
       }
@@ -46,8 +46,8 @@ resource "kubernetes_ingress" "beekeeper" {
         path {
           path = var.k8s_metadata_cleanup_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_metadata_cleanup[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_metadata_cleanup[count.index].spec.port.target_port
+            service_name = kubernetes_service.beekeeper_metadata_cleanup.metadata.name
+            service_port = kubernetes_service.beekeeper_metadata_cleanup.spec.port.target_port
           }
         }
       }
@@ -59,8 +59,8 @@ resource "kubernetes_ingress" "beekeeper" {
         path {
           path = var.k8s_scheduler_apiary_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_scheduler_apiary[count.index].metadata.name
-            service_port = kubernetes_service.beekeeper_scheduler_apiary[count.index].spec.port.target_port
+            service_name = kubernetes_service.beekeeper_scheduler_apiary.metadata.name
+            service_port = kubernetes_service.beekeeper_scheduler_apiary.spec.port.target_port
           }
         }
       }
