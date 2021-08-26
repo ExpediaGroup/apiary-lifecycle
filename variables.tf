@@ -94,7 +94,7 @@ variable "db_password_key" {
 
 variable "db_backup_retention" {
   description = "The number of days to retain backups for the RDS Beekeeper DB."
-  type        = string
+  type        = number
   default     = 10
 }
 
@@ -120,14 +120,14 @@ variable "queue_name" {
 
 variable "message_retention_seconds" {
   description = "SQS message retention (s)."
-  type        = string
-  default     = "604800"
+  type        = number
+  default     = 604800
 }
 
 variable "receive_wait_time_seconds" {
   description = "SQS receive wait time (s)."
-  type        = string
-  default     = "20"
+  type        = number
+  default     = 20
 }
 
 variable "apiary_metastore_listener_arn" {
@@ -137,8 +137,8 @@ variable "apiary_metastore_listener_arn" {
 
 variable "queue_stale_messages_timeout" {
   description = "Beekeeper SQS Queue Cloudwatch Alert timeout for messages older than this number of seconds."
-  type        = string
-  default     = "1209600"
+  type        = number
+  default     = 1209600
 }
 
 # ECS specific
@@ -161,8 +161,8 @@ The amount of CPU used to allocate for the Beekeeper Scheduler Apiary ECS task.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
-  default = "2048"
-  type    = string
+  default = 2048
+  type    = number
 }
 
 variable "scheduler_apiary_ecs_memory" {
@@ -171,8 +171,8 @@ The amount of memory (in MiB) used to allocate for the Beekeeper Scheduler Apiar
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
-  default = "4096"
-  type    = string
+  default = 4096
+  type    = number
 }
 
 variable "path_cleanup_docker_image" {
@@ -193,8 +193,8 @@ The amount of CPU used to allocate for the Beekeeper Path Cleanup ECS task.
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
-  default = "2048"
-  type    = string
+  default = 2048
+  type    = number
 }
 
 variable "path_cleanup_ecs_memory" {
@@ -203,8 +203,8 @@ The amount of memory (in MiB) used to allocate for the Beekeeper Path Cleanup co
 Valid values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
 EOF
 
-  default = "4096"
-  type    = string
+  default = 4096
+  type    = number
 }
 
 variable "metadata_cleanup_docker_image" {
@@ -253,8 +253,8 @@ variable "allowed_s3_buckets" {
 
 variable "scheduler_delay_ms" {
   description = "Delay between each cleanup job that is scheduled in milliseconds."
-  type        = string
-  default     = "300000"
+  type        = number
+  default     = 300000
 }
 
 variable "path_cleanup_dry_run_enabled" {
@@ -291,8 +291,8 @@ variable "graphite_prefix" {
 
 variable "graphite_port" {
   description = "Graphite port."
-  default     = "2003"
-  type        = string
+  default     = 2003
+  type        = number
 }
 
 variable "prometheus_enabled" {
