@@ -1,8 +1,9 @@
 /**
- * Copyright (C) 2019-2020 Expedia, Inc.
+ * Copyright (C) 2019-2021Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
+
 resource "aws_iam_role" "beekeeper_ecs_task_exec" {
   count = var.instance_type == "ecs" ? 1 : 0
   name  = "${local.instance_alias}-ecs-task-exec-${var.aws_region}"
