@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2019-2020 Expedia, Inc.
+ * Copyright (C) 2019-2021 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
@@ -59,7 +59,7 @@ resource "kubernetes_deployment" "beekeeper_path_cleanup" {
           liveness_probe {
             http_get {
               path = "/actuator/health"
-              port = local.path_cleanup_name
+              port = var.k8s_path_cleanup_port
             }
             initial_delay_seconds = var.k8s_path_cleanup_liveness_delay
           }
@@ -114,12 +114,13 @@ resource "kubernetes_service" "beekeeper_path_cleanup" {
   metadata {
     name   = local.path_cleanup_full_name
     labels = local.path_cleanup_labels
+    namespace = var.k8s_namespace
   }
 
   spec {
     port {
       name        = local.path_cleanup_name
-      target_port = local.path_cleanup_name
+      target_port = var.k8s_path_cleanup_port
       port        = var.k8s_path_cleanup_port
     }
 

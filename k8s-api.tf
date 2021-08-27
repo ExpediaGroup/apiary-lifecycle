@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2019-2020 Expedia, Inc.
+ * Copyright (C) 2019-2021 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
@@ -127,7 +127,6 @@ resource "kubernetes_service" "beekeeper_api" {
     type     = "ClusterIP"
   }
 }
-
 
 resource "kubernetes_ingress" "beekeeper-api" {
   metadata {

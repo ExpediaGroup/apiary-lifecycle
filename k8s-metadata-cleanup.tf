@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2019-2020 Expedia, Inc.
+ * Copyright (C) 2019-2021 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
@@ -8,14 +8,14 @@ locals {
   metadata_cleanup_name      = "metadata-cleanup"
   metadata_cleanup_full_name = "${local.k8s_app_alias}-metadata-cleanup"
   metadata_cleanup_labels = {
-    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-metadata-cleanup"
-    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-metadata-cleanup"
+    "app.kubernetes.io/name"       = local.metadata_cleanup_full_name
+    "app.kubernetes.io/instance"   = local.metadata_cleanup_full_name
     "app.kubernetes.io/version"    = var.metadata_cleanup_docker_image_version
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   metadata_cleanup_label_name_instance = {
-    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-metadata-cleanup"
-    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-metadata-cleanup"
+    "app.kubernetes.io/name"     = local.metadata_cleanup_full_name
+    "app.kubernetes.io/instance" = local.metadata_cleanup_full_name
   }
 }
 
@@ -113,6 +113,7 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
   metadata {
     name   = local.metadata_cleanup_full_name
     labels = local.metadata_cleanup_labels
+    namespace = var.k8s_namespace
   }
 
   spec {

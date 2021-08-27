@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2019-2020 Expedia, Inc.
+ * Copyright (C) 2019-2021 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
@@ -8,14 +8,14 @@ locals {
   scheduler_apiary_name      = "scheduler-apiary"
   scheduler_apiary_full_name = "${local.k8s_app_alias}-scheduler-apiary"
   scheduler_apiary_labels = {
-    "app.kubernetes.io/name"       = "${local.k8s_app_alias}-scheduler-apiary"
-    "app.kubernetes.io/instance"   = "${local.k8s_app_alias}-scheduler-apiary"
+    "app.kubernetes.io/name"       = local.scheduler_apiary_full_name
+    "app.kubernetes.io/instance"   = local.scheduler_apiary_full_name
     "app.kubernetes.io/version"    = var.scheduler_apiary_docker_image_version
     "app.kubernetes.io/managed-by" = local.k8s_app_alias
   }
   scheduler_apiary_label_name_instance = {
-    "app.kubernetes.io/name"     = "${local.k8s_app_alias}-scheduler-apiary"
-    "app.kubernetes.io/instance" = "${local.k8s_app_alias}-scheduler-apiary"
+    "app.kubernetes.io/name"     = local.scheduler_apiary_full_name
+    "app.kubernetes.io/instance" = local.scheduler_apiary_full_name
   }
 }
 
@@ -113,6 +113,7 @@ resource "kubernetes_service" "beekeeper_scheduler_apiary" {
   metadata {
     name   = local.scheduler_apiary_full_name
     labels = local.scheduler_apiary_labels
+    namespace = var.k8s_namespace
   }
   spec {
     port {

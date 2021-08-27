@@ -1,9 +1,8 @@
 /**
- * Copyright (C) 2019-2020 Expedia, Inc.
+ * Copyright (C) 2019-2021 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-
 
 resource "aws_iam_role" "beekeeper_slack_notifier_lambda" {
   count              = var.slack_lambda_enabled == 1 ? 1 : 0
