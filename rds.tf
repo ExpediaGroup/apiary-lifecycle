@@ -53,6 +53,7 @@ resource "aws_db_instance" "beekeeper" {
   allocated_storage      = var.rds_allocated_storage
   max_allocated_storage  = var.rds_max_allocated_storage
   storage_type           = var.rds_storage_type
+  iops                   = var.rds_iops
   engine                 = "mysql"
   engine_version         = var.rds_engine_version
   instance_class         = var.rds_instance_class
