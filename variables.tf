@@ -59,7 +59,7 @@ variable "rds_max_allocated_storage" {
 
 variable "rds_storage_type" {
   description = "RDS storage type."
-  default     = "gp2"
+  default     = "gp3"
   type        = string
 }
 
