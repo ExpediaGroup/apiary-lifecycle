@@ -96,7 +96,8 @@ A database password is defined in `aws-secrets-manager`. The terraform module wi
 | rds\_instance\_class | RDS instance class. | `string` | `"db.t2.micro"` | no |
 | rds\_max\_allocated\_storage | RDS max allocated storage (autoscaling) in GBs. | `string` | `100` | no |
 | rds\_parameter\_group\_name | RDS parameter group. | `string` | `"default.mysql8.0"` | no |
-| rds\_storage\_type | RDS storage type. | `string` | `"gp2"` | no |
+| rds\_storage\_type | RDS storage type. | `string` | `"gp3"` | no |
+| rds\_iops | RDS IOPS. | `number` | `3000` | no |
 | rds\_subnets | Subnets in which to provision Beekeeper RDS DB. | `list(string)` | n/a | yes |
 | receive\_wait\_time\_seconds | SQS receive wait time (s). | `number` | `20` | no |
 | scheduler\_apiary\_delay\_ms | Delay between each cleanup job that is scheduled in milliseconds. | `number` | `300000` | no |
