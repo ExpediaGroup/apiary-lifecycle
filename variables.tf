@@ -119,7 +119,7 @@ variable "db_maintenance_window" {
 variable "db_apply_immediately" {
   description = "Specifies whether any database modifications are applied immediately, or during the next maintenance window."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "db_performance_insights_enabled" {
