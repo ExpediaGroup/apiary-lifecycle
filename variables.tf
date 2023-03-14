@@ -47,7 +47,7 @@ variable "rds_subnets" {
 
 variable "rds_allocated_storage" {
   description = "RDS allocated storage in GBs."
-  default     = 10
+  default     = 20
   type        = string
 }
 
@@ -114,6 +114,18 @@ variable "db_maintenance_window" {
   description = "Preferred maintenance window for the RDS Beekeeper DB in UTC."
   type        = string
   default     = "wed:03:00-wed:04:00"
+}
+
+variable "db_apply_immediately" {
+  description = "Specifies whether any database modifications are applied immediately, or during the next maintenance window."
+  type        = bool
+  default     = false
+}
+
+variable "db_performance_insights_enabled" {
+  description = "Specifies whether Performance Insights are enabled."
+  type        = bool
+  default     = true
 }
 
 # SQS specific
