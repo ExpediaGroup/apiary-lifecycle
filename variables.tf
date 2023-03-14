@@ -63,12 +63,6 @@ variable "rds_storage_type" {
   type        = string
 }
 
-variable "rds_iops" {
-  description = "IO per seconds: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-storage-gp3-migration-selection.html"
-  default     = 3000
-  type        = number
-}
-
 variable "rds_instance_class" {
   description = "RDS instance class."
   default     = "db.t2.micro"
