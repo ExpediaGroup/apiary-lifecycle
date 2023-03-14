@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [3.4.0] - 2023-03-14
 ### Added
-- Added variables `db_apply_immediately` and `db_performance_insights_enabled` set to `true`.
+- Added variables `db_apply_immediately`(default `false`) and `db_performance_insights_enabled` (default `true`).
 
 ## [3.3.0] - 2023-03-10
 ### Changed
