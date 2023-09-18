@@ -65,11 +65,11 @@ resource "kubernetes_deployment" "beekeeper_api" {
           }
 
           resources {
-            limits {
+            limits = {
               memory = var.k8s_api_memory
               cpu    = var.k8s_api_cpu
             }
-            requests {
+            requests = {
               memory = var.k8s_api_memory
               cpu    = var.k8s_api_cpu
             }
@@ -143,7 +143,7 @@ resource "kubernetes_ingress_v1" "beekeeper-api" {
             service {
               name = local.api_full_name
               port {
-                port = var.k8s_beekeeper_api_port
+                number = var.k8s_beekeeper_api_port
               }
             }
           }
