@@ -128,7 +128,7 @@ resource "kubernetes_service" "beekeeper_api" {
   }
 }
 
-resource "kubernetes_ingress" "beekeeper-api" {
+resource "kubernetes_ingress_v1" "beekeeper-api" {
   metadata {
     name = local.api_full_name
     namespace = var.k8s_namespace
