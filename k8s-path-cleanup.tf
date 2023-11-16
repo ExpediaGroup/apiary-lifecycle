@@ -19,7 +19,7 @@ locals {
   }
 }
 
-resource "kubernetes_deployment" "beekeeper_path_cleanup" {
+resource "kubernetes_deployment_v1" "beekeeper_path_cleanup" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
     name      = local.path_cleanup_full_name
