@@ -19,7 +19,7 @@ locals {
   }
 }
 
-resource "kubernetes_deployment" "beekeeper_api" {
+resource "kubernetes_deployment_v1" "beekeeper_api" {
   count = var.instance_type == "k8s" ? 1 : 0
   metadata {
     name      = local.api_full_name
