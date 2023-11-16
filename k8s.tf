@@ -12,7 +12,7 @@ locals {
   }
 }
 
-resource "kubernetes_ingress" "beekeeper" {
+resource "kubernetes_ingress_v1" "beekeeper" {
   count = var.instance_type == "k8s" && var.k8s_ingress_enabled == 1 ? 1 : 0
   metadata {
     name        = local.k8s_app_alias
@@ -33,8 +33,10 @@ resource "kubernetes_ingress" "beekeeper" {
         path {
           path = var.k8s_path_cleanup_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_path_cleanup[0].metadata[0].name
-            service_port = kubernetes_service.beekeeper_path_cleanup[0].spec[0].port[0].target_port
+            name = kubernetes_service.beekeeper_path_cleanup[0].metadata[0].name
+            port {
+                number = kubernetes_service.beekeeper_path_cleanup[0].spec[0].port[0].target_port
+            }
           }
         }
       }
@@ -46,8 +48,10 @@ resource "kubernetes_ingress" "beekeeper" {
         path {
           path = var.k8s_metadata_cleanup_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_metadata_cleanup[0].metadata[0].name
-            service_port = kubernetes_service.beekeeper_metadata_cleanup[0].spec[0].port[0].target_port
+            name = kubernetes_service.beekeeper_metadata_cleanup[0].metadata[0].name
+            port {
+                number = kubernetes_service.beekeeper_metadata_cleanup[0].spec[0].port[0].target_port
+            }
           }
         }
       }
@@ -59,8 +63,10 @@ resource "kubernetes_ingress" "beekeeper" {
         path {
           path = var.k8s_scheduler_apiary_ingress_path
           backend {
-            service_name = kubernetes_service.beekeeper_scheduler_apiary[0].metadata[0].name
-            service_port = kubernetes_service.beekeeper_scheduler_apiary[0].spec[0].port[0].target_port
+            name = kubernetes_service.beekeeper_scheduler_apiary[0].metadata[0].name
+            port {
+                number = kubernetes_service.beekeeper_scheduler_apiary[0].spec[0].port[0].target_port
+            }
           }
         }
       }

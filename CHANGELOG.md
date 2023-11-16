@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2023-11-16
+### Changed
+- Upgdate k8s API to work with 2.x version:
+  - `kubernetes_deployment` to `kubernetes_deployment_v1`
+  - `kubernetes_ingress` to `kubernetes_ingress_v1`
+- Update terrafrom `map` function to `tomap`(`map` function has been deprecated in `0.12` version).
+
 ## [4.0.1] - 2023-09-18
 ### Changed
 - Increase k8s provider version to `~>2.7.0` (was `~>1.0.0`). Fixes issue with K8S upgrade and error: 'Failed to create Ingress'.

@@ -9,8 +9,7 @@ resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
   subnet_ids  = var.rds_subnets
   description = "Beekeeper DB Subnet Group for ${local.instance_alias}"
 
-  tags = merge(var.beekeeper_tags,
-  map("Name", "Beekeeper DB Subnet Group"))
+  tags = merge(var.beekeeper_tags,tomap({"Name"="Beekeeper DB Subnet Group"}))
 }
 
 resource "aws_security_group" "beekeeper_db_sg" {

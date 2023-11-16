@@ -17,6 +17,8 @@ resource "aws_ecs_service" "beekeeper_scheduler_apiary" {
   task_definition = aws_ecs_task_definition.beekeeper_scheduler_apiary.*.arn[0]
   desired_count   = 1
   launch_type     = "FARGATE"
+  propagate_tags  = "SERVICE"
+  tags            = var.beekeeper_tags
 
   network_configuration {
     security_groups = [aws_security_group.beekeeper_sg.id]
@@ -31,6 +33,8 @@ resource "aws_ecs_service" "beekeeper_path_cleanup" {
   task_definition = aws_ecs_task_definition.beekeeper_path_cleanup.*.arn[0]
   desired_count   = 1
   launch_type     = "FARGATE"
+  propagate_tags  = "SERVICE"
+  tags            = var.beekeeper_tags
 
   network_configuration {
     security_groups = [aws_security_group.beekeeper_sg.id]
