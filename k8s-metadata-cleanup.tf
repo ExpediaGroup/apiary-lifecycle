@@ -98,6 +98,11 @@ resource "kubernetes_deployment_v1" "beekeeper_metadata_cleanup" {
             name  = local.spring_application_json_key
             value = data.template_file.beekeeper_metadata_cleanup_config.rendered
           }
+
+          env {
+            name = "HADOOP_USER_NAME"
+            value = "beekeeper"
+          }
         }
         image_pull_secrets {
           name = var.docker_registry_secret_name
