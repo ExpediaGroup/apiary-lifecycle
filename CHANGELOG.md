@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [5.0.1] - 2023-12-04
 ### Added
-- Added HADOOP_USER_NAME environment variable and set it to `beekeeper` 
+- Added `HADOOP_USER_NAME` environment variable and set it to `beekeeper` 
 
 ## [5.0.0] - 2023-11-16
 ### Changed
