@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.0.2] - 2023-12-15
+### Added
+- Updating `beekeeper_slack_notifier`  Lambda function in `lambda.tf` that is currently using the deprecated Python 3.7 runtime to the Python 3.9 runtime
+
+### Changed
+- Updated hosted runner from the deprecated `ubuntu-18.04` to `ubuntu-22.04` to fix failing GitHub Actions
+
 ## [5.0.1] - 2023-12-05
 ### Added
 - Added `HADOOP_USER_NAME` environment variable and set it to `beekeeper` 

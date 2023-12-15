@@ -11,7 +11,7 @@ resource "aws_lambda_function" "beekeeper_slack_notifier" {
   function_name    = "${local.instance_alias}-slack-notifier"
   role             = aws_iam_role.beekeeper_slack_notifier_lambda[count.index].arn
   handler          = "slack-notifier.lambda_handler"
-  runtime          = "python3.7"
+  runtime          = "python3.9"
   timeout          = 20
   tags             = var.beekeeper_tags
 
