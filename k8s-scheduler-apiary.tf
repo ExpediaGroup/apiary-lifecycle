@@ -45,7 +45,7 @@ resource "kubernetes_deployment_v1" "beekeeper_scheduler_apiary" {
       }
 
       spec {
-        service_account_name            = kubernetes_service_account_v1.beekeeper_scheduler-apiary.metadata.0.name
+        service_account_name            = kubernetes_service_account_v1.beekeeper_scheduler_apiary.metadata.0.name
         automount_service_account_token = true
         container {
           name              = local.scheduler_apiary_full_name
