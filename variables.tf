@@ -333,6 +333,12 @@ variable "k8s_kiam_role_arn" {
   type        = string
 }
 
+variable "oidc_provider" {
+  description = "EKS cluster OIDC provider name, required for configuring IAM using IRSA."
+  type        = string
+  default     = ""
+}
+
 variable "k8s_db_password_secret" {
   description = "Name of the Kubernetes secret that would store the db password for beekeeper."
   default     = "beekeeper-db-password"

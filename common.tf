@@ -17,7 +17,6 @@ locals {
   aws_default_region_key      = "AWS_DEFAULT_REGION"
   db_password_key             = "SPRING_DATASOURCE_PASSWORD"
   spring_application_json_key = "SPRING_APPLICATION_JSON"
-  oidc_provider               = replace(data.aws_ecs_cluster.beekeeper.identity[0].oidc[0].issuer, "https://", "")
 }
 
 data "aws_caller_identity" "current" {}
