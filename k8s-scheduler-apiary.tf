@@ -142,7 +142,7 @@ resource "kubernetes_service_account_v1" "beekeeper_scheduler_apiary" {
   }
 }
 
-resource "kubernetes_secret_v1" "beekeeper_path_cleanup" {
+resource "kubernetes_secret_v1" "beekeeper_scheduler_apiary" {
   metadata {
     name        = "beekeeper-scheduler-apiary"
     namespace   = var.k8s_namespace
