@@ -29,7 +29,7 @@ resource "aws_iam_role" "beekeeper_k8s_role_scheduler_apiary_iam" {
       "Action": "sts:AssumeRoleWithWebIdentity",
        "Condition": {
          "StringEquals": {
-           "${var.oidc_provider}:sub": "system:serviceaccount:${var.k8s_namespace}:beekeeper-scheduler-apiary"
+           "${var.oidc_provider}:sub": "system:serviceaccount:${var.k8s_namespace}:${local.scheduler_apiary_full_name}"
          }
        }
     }

@@ -134,7 +134,7 @@ resource "kubernetes_service" "beekeeper_scheduler_apiary" {
 
 resource "kubernetes_service_account_v1" "beekeeper_scheduler_apiary" {
   metadata {
-    name        = "beekeeper-scheduler-apiary"
+    name        = local.scheduler_apiary_full_name
     namespace   = var.k8s_namespace
     annotations = {
       "eks.amazonaws.com/role-arn" = aws_iam_role.beekeeper_k8s_role_scheduler_apiary_iam[0].arn
@@ -144,10 +144,10 @@ resource "kubernetes_service_account_v1" "beekeeper_scheduler_apiary" {
 
 resource "kubernetes_secret_v1" "beekeeper_scheduler_apiary" {
   metadata {
-    name        = "beekeeper-scheduler-apiary"
+    name        = local.scheduler_apiary_full_name
     namespace   = var.k8s_namespace
     annotations = {
-      "kubernetes.io/service-account.name" = "beekeeper-scheduler-apiary"
+      "kubernetes.io/service-account.name" = local.scheduler_apiary_full_name
       "kubernetes.io/service-account.namespace" = var.k8s_namespace
     }
   }

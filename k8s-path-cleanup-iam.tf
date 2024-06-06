@@ -29,7 +29,7 @@ resource "aws_iam_role" "beekeeper_k8s_role_path_cleanup_iam" {
        "Action": "sts:AssumeRoleWithWebIdentity",
        "Condition": {
          "StringEquals": {
-           "${var.oidc_provider}:sub": "system:serviceaccount:${var.k8s_namespace}:beekeeper-path-cleanup"
+           "${var.oidc_provider}:sub": "system:serviceaccount:${var.k8s_namespace}:${local.path_cleanup_full_name}"
          }
        }
     }

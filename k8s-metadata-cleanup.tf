@@ -136,7 +136,7 @@ resource "kubernetes_service" "beekeeper_metadata_cleanup" {
 
 resource "kubernetes_service_account_v1" "beekeeper_metadata_cleanup" {
   metadata {
-    name        = "beekeeper-metadata-cleanup"
+    name        = local.metadata_cleanup_full_name
     namespace   = var.k8s_namespace
     annotations = {
       "eks.amazonaws.com/role-arn" = aws_iam_role.beekeeper_k8s_role_metadata_cleanup_iam[0].arn
@@ -146,10 +146,10 @@ resource "kubernetes_service_account_v1" "beekeeper_metadata_cleanup" {
 
 resource "kubernetes_secret_v1" "beekeeper_metadata_cleanup" {
   metadata {
-    name        = "beekeeper-metadata-cleanup"
+    name        = local.metadata_cleanup_full_name
     namespace   = var.k8s_namespace
     annotations = {
-      "kubernetes.io/service-account.name" = "beekeeper-metadata-cleanup"
+      "kubernetes.io/service-account.name" = local.metadata_cleanup_full_name
       "kubernetes.io/service-account.namespace" = var.k8s_namespace
     }
   }
