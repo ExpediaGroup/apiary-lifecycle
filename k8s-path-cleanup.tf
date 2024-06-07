@@ -38,7 +38,6 @@ resource "kubernetes_deployment_v1" "beekeeper_path_cleanup" {
       metadata {
         labels = local.path_cleanup_label_name_instance
         annotations = {
-          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_path_cleanup_iam[count.index].arn
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_path_cleanup_port
           "prometheus.io/path" : "/actuator/prometheus"
@@ -46,6 +45,8 @@ resource "kubernetes_deployment_v1" "beekeeper_path_cleanup" {
       }
 
       spec {
+        service_account_name            = kubernetes_service_account_v1.beekeeper_path_cleanup.metadata.0.name
+        automount_service_account_token = true
         container {
           name              = local.path_cleanup_full_name
           image             = "${var.path_cleanup_docker_image}:${var.path_cleanup_docker_image_version}"
@@ -132,4 +133,30 @@ resource "kubernetes_service" "beekeeper_path_cleanup" {
     selector = local.path_cleanup_label_name_instance
     type     = "ClusterIP"
   }
+}
+
+resource "kubernetes_service_account_v1" "beekeeper_path_cleanup" {
+  metadata {
+    name        = local.path_cleanup_full_name
+    namespace   = var.k8s_namespace
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.beekeeper_k8s_role_path_cleanup_iam[0].arn
+    }
+  }
+}
+
+resource "kubernetes_secret_v1" "beekeeper_path_cleanup" {
+  metadata {
+    name        = local.path_cleanup_full_name
+    namespace   = var.k8s_namespace
+    annotations = {
+      "kubernetes.io/service-account.name" = local.path_cleanup_full_name
+      "kubernetes.io/service-account.namespace" = var.k8s_namespace
+    }
+  }
+  type = "kubernetes.io/service-account-token"
+
+  depends_on = [
+    kubernetes_service_account_v1.beekeeper_path_cleanup
+  ]
 }

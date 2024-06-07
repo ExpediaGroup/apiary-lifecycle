@@ -19,6 +19,7 @@ locals {
   spring_application_json_key = "SPRING_APPLICATION_JSON"
 }
 
+data "aws_caller_identity" "current" {}
 data "aws_iam_account_alias" "current" {}
 
 data "aws_vpc" "vpc" {

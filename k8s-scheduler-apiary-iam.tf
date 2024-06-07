@@ -24,9 +24,14 @@ resource "aws_iam_role" "beekeeper_k8s_role_scheduler_apiary_iam" {
       "Sid": "",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "${var.k8s_kiam_role_arn}"
+        "Federated": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${var.oidc_provider}"
       },
-      "Action": "sts:AssumeRole"
+      "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+         "StringEquals": {
+           "${var.oidc_provider}:sub": "system:serviceaccount:${var.k8s_namespace}:${local.scheduler_apiary_full_name}"
+         }
+       }
     }
   ]
 }

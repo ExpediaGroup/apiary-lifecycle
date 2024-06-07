@@ -38,7 +38,6 @@ resource "kubernetes_deployment_v1" "beekeeper_scheduler_apiary" {
       metadata {
         labels = local.scheduler_apiary_label_name_instance
         annotations = {
-          "iam.amazonaws.com/role" = aws_iam_role.beekeeper_k8s_role_scheduler_apiary_iam[count.index].arn
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_scheduler_apiary_port
           "prometheus.io/path" : "/actuator/prometheus"
@@ -46,6 +45,8 @@ resource "kubernetes_deployment_v1" "beekeeper_scheduler_apiary" {
       }
 
       spec {
+        service_account_name            = kubernetes_service_account_v1.beekeeper_scheduler_apiary.metadata.0.name
+        automount_service_account_token = true
         container {
           name              = local.scheduler_apiary_full_name
           image             = "${var.scheduler_apiary_docker_image}:${var.scheduler_apiary_docker_image_version}"
@@ -129,4 +130,30 @@ resource "kubernetes_service" "beekeeper_scheduler_apiary" {
     selector = local.scheduler_apiary_label_name_instance
     type     = "ClusterIP"
   }
+}
+
+resource "kubernetes_service_account_v1" "beekeeper_scheduler_apiary" {
+  metadata {
+    name        = local.scheduler_apiary_full_name
+    namespace   = var.k8s_namespace
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.beekeeper_k8s_role_scheduler_apiary_iam[0].arn
+    }
+  }
+}
+
+resource "kubernetes_secret_v1" "beekeeper_scheduler_apiary" {
+  metadata {
+    name        = local.scheduler_apiary_full_name
+    namespace   = var.k8s_namespace
+    annotations = {
+      "kubernetes.io/service-account.name" = local.scheduler_apiary_full_name
+      "kubernetes.io/service-account.namespace" = var.k8s_namespace
+    }
+  }
+  type = "kubernetes.io/service-account-token"
+
+  depends_on = [
+    kubernetes_service_account_v1.beekeeper_scheduler_apiary
+  ]
 }
