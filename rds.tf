@@ -67,5 +67,6 @@ resource "aws_db_instance" "beekeeper" {
   apply_immediately            = var.db_apply_immediately
   performance_insights_enabled = var.db_performance_insights_enabled
   final_snapshot_identifier    = "${local.instance_alias}-final-snapshot-${random_id.snapshot_id.hex}"
+  copy_tags_to_snapshot        = var.db_copy_tags_to_snapshot
   tags                         = var.beekeeper_tags
 }
