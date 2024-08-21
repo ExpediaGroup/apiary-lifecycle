@@ -564,3 +564,9 @@ variable "slack_webhook_url" {
   default     = ""
   type        = string
 }
+
+variable "db_copy_tags_to_snapshot" {
+    description = "Copy all Cluster tags to snapshots."
+    type        = bool
+    default     = true
+}
