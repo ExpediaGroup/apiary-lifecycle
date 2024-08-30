@@ -38,6 +38,9 @@ resource "kubernetes_deployment_v1" "beekeeper_metadata_cleanup" {
       metadata {
         labels = local.metadata_cleanup_label_name_instance
         annotations = {
+          "ad.datadoghq.com/beekeeper-metadata-cleanup.check_names": "[\"openmetrics\"]"
+          "ad.datadoghq.com/beekeeper-metadata-cleanup.init_configs": "[{}]"
+          "ad.datadoghq.com/beekeeper-metadata-cleanup.instances": "[{ \"prometheus_url\": \"http://%%host%%:9008/actuator/prometheus\", \"namespace\": \"beekeeper\", \"metrics\": [\"s3_bytes_deleted_bytes_total*\", \"hive_table_metadata_deleted_total*\",\"hive_partition_metadata_deleted_total*\",\"s3_paths_deleted_seconds_sum*\", \"s3_paths_deleted_seconds_count*\", \"metadata_cleanup_job_seconds_sum*\", \"hive_table_deleted_seconds_count*\", \"disk_*\", \"jvm*\", \"hikaricp*\"] }]"
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_metadata_cleanup_port
           "prometheus.io/path" : "/actuator/prometheus"
