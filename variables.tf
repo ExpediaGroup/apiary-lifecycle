@@ -571,8 +571,8 @@ variable "db_copy_tags_to_snapshot" {
     default     = true
 }
 
-variable "beekeeper_metrics" {
-  description = "WaggleDance metrics to be sent to Datadog."
+variable "beekeeper_metadata_cleanup_metrics" {
+  description = "Beekeeper metrics to be sent to Datadog."
   type        = list(string)
   default = [
     "s3_bytes_deleted_bytes_total*",
@@ -585,5 +585,21 @@ variable "beekeeper_metrics" {
     "disk_*",
     "jvm*",
     "hikaricp*"
+  ]
+}
+
+variable "beekeeper_scheduler_apiary_metrics" {
+  description = "Beekeeper metrics to be sent to Datadog."
+  type        = list(string)
+  default = [
+    "path_cleanup_job_seconds_sum*"
+  ]
+}
+
+variable "beekeeper_path_cleanup_metrics" {
+  description = "Beekeeper metrics to be sent to Datadog."
+  type        = list(string)
+  default = [
+    "path_cleanup_job_seconds_sum*"
   ]
 }

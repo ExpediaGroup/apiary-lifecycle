@@ -40,7 +40,7 @@ resource "kubernetes_deployment_v1" "beekeeper_metadata_cleanup" {
         annotations = {
           "ad.datadoghq.com/${local.metadata_cleanup_full_name}.check_names": "[\"openmetrics\"]"
           "ad.datadoghq.com/${local.metadata_cleanup_full_name}.init_configs": "[{}]"
-          "ad.datadoghq.com/${local.metadata_cleanup_full_name}.instances": "[{ \"prometheus_url\": \"http://%%host%%:9008/actuator/prometheus\", \"namespace\": \"${local.instance_alias}\", \"metrics\": [ \"${join("\",\"", var.beekeeper_metrics)}\" ]}]"
+          "ad.datadoghq.com/${local.metadata_cleanup_full_name}.instances": "[{ \"prometheus_url\": \"http://%%host%%:9008/actuator/prometheus\", \"namespace\": \"${local.instance_alias}\", \"metrics\": [ \"${join("\",\"", var.beekeeper_metadata_cleanup_metrics)}\"] }]"
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_metadata_cleanup_port
           "prometheus.io/path" : "/actuator/prometheus"
