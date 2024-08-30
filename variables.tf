@@ -570,3 +570,20 @@ variable "db_copy_tags_to_snapshot" {
     type        = bool
     default     = true
 }
+
+variable "beekeeper_metrics" {
+  description = "WaggleDance metrics to be sent to Datadog."
+  type        = list(string)
+  default = [
+    "s3_bytes_deleted_bytes_total*",
+    "hive_table_metadata_deleted_total*",
+    "hive_partition_metadata_deleted_total*",
+    "s3_paths_deleted_seconds_sum*",
+    "s3_paths_deleted_seconds_count*",
+    "metadata_cleanup_job_seconds_sum*",
+    "hive_table_deleted_seconds_count*",
+    "disk_*",
+    "jvm*",
+    "hikaricp*"
+  ]
+}
