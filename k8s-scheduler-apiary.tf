@@ -38,6 +38,9 @@ resource "kubernetes_deployment_v1" "beekeeper_scheduler_apiary" {
       metadata {
         labels = local.scheduler_apiary_label_name_instance
         annotations = {
+          "ad.datadoghq.com/${local.scheduler_apiary_full_name}.check_names": "[\"openmetrics\"]"
+          "ad.datadoghq.com/${local.scheduler_apiary_full_name}.init_configs": "[{}]"
+          "ad.datadoghq.com/${local.scheduler_apiary_full_name}.instances": "[{ \"prometheus_url\": \"http://%%host%%:8080/actuator/prometheus\", \"namespace\": \"${local.instance_alias}\", \"metrics\": [ \"${join("\",\"", var.beekeeper_scheduler_apiary_metrics)}\"]  }]"
           "prometheus.io/scrape" : var.prometheus_enabled
           "prometheus.io/port" : var.k8s_scheduler_apiary_port
           "prometheus.io/path" : "/actuator/prometheus"
