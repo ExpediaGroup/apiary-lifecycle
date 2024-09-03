@@ -592,7 +592,7 @@ variable "beekeeper_scheduler_apiary_metrics" {
   description = "Beekeeper metrics to be sent to Datadog."
   type        = list(string)
   default = [
-    "path_cleanup_job_seconds_sum*"
+    "paths_scheduled_seconds_count*"
   ]
 }
 
@@ -601,5 +601,13 @@ variable "beekeeper_path_cleanup_metrics" {
   type        = list(string)
   default = [
     "path_cleanup_job_seconds_sum*"
+  ]
+}
+
+variable "beekeeper_perf_scheduler_apiary_metrics" {
+  description = "Beekeeper metrics to be sent to Datadog."
+  type        = list(string)
+  default = [
+    "metadata_scheduled_seconds_count*"
   ]
 }
