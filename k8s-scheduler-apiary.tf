@@ -29,7 +29,7 @@ resource "kubernetes_deployment_v1" "beekeeper_scheduler_apiary" {
 
   spec {
     # setting the number of replicas to greater than 1 is currently untested
-    replicas = 1
+    replicas = var.k8s_scheduler_apiary_replicas
     selector {
       match_labels = local.scheduler_apiary_label_name_instance
     }
