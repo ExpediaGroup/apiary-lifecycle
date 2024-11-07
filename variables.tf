@@ -395,6 +395,12 @@ variable "k8s_ingress_tls_secret" {
 
 # K8S - path cleanup deployment
 
+variable "k8s_path_cleanup_replicas" {
+  description = "Replicas for k8s-path-cleanup deployment."
+  default     = 1
+  type        = number
+}
+
 variable "k8s_path_cleanup_memory" {
   description = "Total memory to allot to the Beekeeper Path Cleanup pod."
   default     = "2Gi"
@@ -432,6 +438,12 @@ variable "k8s_path_cleanup_ingress_path" {
 }
 
 # K8S - metadata cleanup deployment
+
+variable "k8s_metadata_cleanup_replicas" {
+  description = "Replicas for k8s-metadata-cleanup deployment."
+  default     = 1
+  type        = number
+}
 
 variable "k8s_metadata_cleanup_memory" {
   description = "Total memory to allot to the Beekeeper Metadata Cleanup pod."
@@ -508,6 +520,12 @@ variable "k8s_api_ingress_path" {
 }
 
 # K8S - Scheduler Apiary deployment
+
+variable "k8s_scheduler_apiary_replicas" {
+  description = "Replicas for k8s-scheduler-apiary deployment."
+  default     = 1
+  type        = number
+}
 
 variable "k8s_scheduler_apiary_memory" {
   description = "Total memory to allot to the Beekeeper Scheduler Apiary pod."

@@ -29,7 +29,7 @@ resource "kubernetes_deployment_v1" "beekeeper_metadata_cleanup" {
 
   spec {
     # setting the number of replicas to greater than 1 is currently untested
-    replicas = 1
+    replicas = var.k8s_metadata_cleanup_replicas
     selector {
       match_labels = local.metadata_cleanup_label_name_instance
     }
