@@ -5,6 +5,7 @@
  */
 
 resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
+  count       = var.beekeeper_db_external_hostname == "" ? 1 : 0
   name        = "${local.instance_alias}-db-subnet-group"
   subnet_ids  = var.rds_subnets
   description = "Beekeeper DB Subnet Group for ${local.instance_alias}"
@@ -13,6 +14,7 @@ resource "aws_db_subnet_group" "beekeeper_db_subnet_group" {
 }
 
 resource "aws_security_group" "beekeeper_db_sg" {
+  count       = var.beekeeper_db_external_hostname == "" ? 1 : 0
   name   = "${local.instance_alias}-db"
   vpc_id = var.vpc_id
   tags   = var.beekeeper_tags
@@ -46,9 +48,10 @@ resource "random_id" "snapshot_id" {
 }
 
 resource "aws_db_instance" "beekeeper" {
+  count                        = var.beekeeper_db_external_hostname == "" ? 1 : 0
   identifier                   = local.instance_alias
-  db_subnet_group_name         = aws_db_subnet_group.beekeeper_db_subnet_group.name
-  vpc_security_group_ids       = [aws_security_group.beekeeper_db_sg.id]
+  db_subnet_group_name         = aws_db_subnet_group.beekeeper_db_subnet_group[0].name
+  vpc_security_group_ids       = [aws_security_group.beekeeper_db_sg[0].id]
   allocated_storage            = var.rds_allocated_storage
   max_allocated_storage        = var.rds_max_allocated_storage
   storage_type                 = var.rds_storage_type
@@ -57,7 +60,7 @@ resource "aws_db_instance" "beekeeper" {
   instance_class               = var.rds_instance_class
   // Don't use instance alias as part of default DB name since all the Flyway scripts expect "beekeeper" as the db name.
   // No reason to parameterize the db name anyway, since we have a different RDS instance per Beekeeper instance.
-  db_name                      = "beekeeper"
+  db_name                      = var.beekeeper_db_name
   username                     = var.db_username
   password                     = chomp(data.aws_secretsmanager_secret_version.beekeeper_db.secret_string)
   parameter_group_name         = var.rds_parameter_group_name

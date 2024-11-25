@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.2.0] - 2024-11-25
+### Added
+- Added new variable `beekeeper_db_external_hostname` to support external DB host.
+
 ## [5.1.1] - 2024-11-07
 ### Added
 - Kubernetes variables to adjust number replicas on deployments.
