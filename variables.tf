@@ -43,6 +43,7 @@ variable "beekeeper_tags" {
 variable "rds_subnets" {
   description = "Subnets in which to provision Beekeeper RDS DB."
   type        = list(string)
+  default     = []
 }
 
 variable "rds_allocated_storage" {
