@@ -622,10 +622,14 @@ variable "beekeeper_path_cleanup_metrics" {
   ]
 }
 
-variable "beekeeper_perf_scheduler_apiary_metrics" {
-  description = "Beekeeper metrics to be sent to Datadog."
-  type        = list(string)
-  default = [
-    "metadata_scheduled_seconds_count*"
-  ]
+variable "beekeeper_db_external_hostname" {
+  description = "Hostname of the background Database. When not null, RDS DB wont be created."
+  type        = string
+  default     = ""
+}
+
+variable "beekeeper_db_name" {
+  description = "Name of the beekeeper background Database"
+  type        = string
+  default     = "beekeeper"
 }
