@@ -19,7 +19,7 @@ data "template_file" "beekeeper_scheduler_apiary_config" {
   template = file("${path.module}/files/beekeeper-scheduler-apiary-config.json")
 
   vars = {
-    db_endpoint     = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : var.beekeeper_db_external_hostname
+    db_endpoint     = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : "${var.beekeeper_db_external_hostname}:${var.beekeeper_db_port}"
     db_name         = var.beekeeper_db_name
     db_username     = var.db_username
     queue           = aws_sqs_queue.beekeeper.id
@@ -31,7 +31,7 @@ data "template_file" "beekeeper_path_cleanup_config" {
   template = file("${path.module}/files/beekeeper-path-cleanup-config.json")
 
   vars = {
-    db_endpoint        = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : var.beekeeper_db_external_hostname
+    db_endpoint        = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : "${var.beekeeper_db_external_hostname}:${var.beekeeper_db_port}"
     db_name            = var.beekeeper_db_name
     db_username        = var.db_username
     scheduler_delay_ms = var.scheduler_delay_ms
@@ -44,7 +44,7 @@ data "template_file" "beekeeper_metadata_cleanup_config" {
   template = file("${path.module}/files/beekeeper-metadata-cleanup-config.json")
 
   vars = {
-    db_endpoint        = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : var.beekeeper_db_external_hostname
+    db_endpoint        = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : "${var.beekeeper_db_external_hostname}:${var.beekeeper_db_port}"
     db_name            = var.beekeeper_db_name
     db_username        = var.db_username
     scheduler_delay_ms = var.scheduler_delay_ms
@@ -58,7 +58,7 @@ data "template_file" "beekeeper_api_config" {
   template = file("${path.module}/files/beekeeper-api-config.json")
 
   vars = {
-    db_endpoint        = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : var.beekeeper_db_external_hostname
+    db_endpoint        = var.beekeeper_db_external_hostname == "" ? aws_db_instance.beekeeper[0].endpoint : "${var.beekeeper_db_external_hostname}:${var.beekeeper_db_port}"
     db_name            = var.beekeeper_db_name
     db_username        = var.db_username
     scheduler_delay_ms = var.scheduler_delay_ms

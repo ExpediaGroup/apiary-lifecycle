@@ -634,3 +634,9 @@ variable "beekeeper_db_name" {
   type        = string
   default     = "beekeeper"
 }
+
+variable "beekeeper_db_port" {
+  description = "Port number of the beekeeper background Database"
+  type        = number
+  default     = 3306
+}
