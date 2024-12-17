@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [TBD]
+### Added
+- Added `dry-run-enabled` and `metastore-uri` properties to `beekeeper-scheduler-apiary-config.json`. 
+
 ## [5.2.0] - 2024-11-25
 ### Added
 - Added new variable `beekeeper_db_external_hostname` to support external DB host.
