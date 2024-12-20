@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [TBD]
 ### Added
-- Added `dry-run-enabled` and `metastore-uri` properties to `beekeeper-scheduler-apiary-config.json`. 
+- Added `metastore-uri` properties to `beekeeper-scheduler-apiary-config.json`. 
 
 ## [5.2.0] - 2024-11-25
 ### Added

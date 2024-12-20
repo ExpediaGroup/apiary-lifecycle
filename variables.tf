@@ -282,12 +282,6 @@ variable "metadata_cleanup_dry_run_enabled" {
   type        = string
 }
 
-variable "scheduler_dry_run_enabled" {
-  description = "Enable Metadata Cleanup to perform dry runs of deletions only."
-  default     = "false"
-  type        = string
-}
-
 # Monitoring
 
 variable "graphite_enabled" {

@@ -5,7 +5,6 @@
   },
   "properties": {
     "apiary.queue-url": "${queue}",
-    "dry-run-enabled": "${dry_run_enabled}",
     "metastore-uri": "${metastore_uri}"
   }${graphite_config}
 }

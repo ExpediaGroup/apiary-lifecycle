@@ -23,7 +23,6 @@ data "template_file" "beekeeper_scheduler_apiary_config" {
     db_name         = var.beekeeper_db_name
     db_username     = var.db_username
     queue           = aws_sqs_queue.beekeeper.id
-    dry_run_enabled = var.scheduler_dry_run_enabled
     metastore_uri   = var.metastore_uri
     graphite_config = var.graphite_enabled == "false" ? "" : data.template_file.beekeeper_graphite_config.rendered
   }
