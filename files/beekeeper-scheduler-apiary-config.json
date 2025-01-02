@@ -4,6 +4,7 @@
     "username": "${db_username}"
   },
   "properties": {
-    "apiary.queue-url": "${queue}"
+    "apiary.queue-url": "${queue}",
+    "metastore-uri": "${metastore_uri}"
   }${graphite_config}
 }
