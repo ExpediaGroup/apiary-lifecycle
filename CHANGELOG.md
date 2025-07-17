@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.3.1] - 2025-07-17
+### Changed
+- Update aws provider version to 5.17.0
+
 ## [5.3.0] - 2025-01-02
 ### Added
 - Added `metastore-uri` properties to `beekeeper-scheduler-apiary-config.json`. 
