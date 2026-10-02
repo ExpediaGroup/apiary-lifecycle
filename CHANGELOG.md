@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.3.2] - 2026-10-02
+### Changed
+- Added `path_repository_cleanup_job_seconds_sum*`, `s3_bytes_deleted_bytes_total*`, `s3_paths_deleted_seconds_sum*`, and `s3_paths_deleted_seconds_count*` to `beekeeper_path_cleanup_metrics` allowlist default.
+
 ## [5.3.1] - 2025-07-17
 ### Changed
 - Update aws provider version to 5.17.0
