@@ -619,7 +619,11 @@ variable "beekeeper_path_cleanup_metrics" {
   description = "Beekeeper metrics to be sent to Datadog."
   type        = list(string)
   default = [
-    "path_cleanup_job_seconds_sum*"
+    "path_cleanup_job_seconds_sum*",
+    "path_repository_cleanup_job_seconds_sum*",
+    "s3_bytes_deleted_bytes_total*",
+    "s3_paths_deleted_seconds_sum*",
+    "s3_paths_deleted_seconds_count*"
   ]
 }
 
